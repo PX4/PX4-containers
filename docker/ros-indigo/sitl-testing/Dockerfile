@@ -1,0 +1,16 @@
+#
+# PX4 full ROS container, ready for SITL tests
+#
+# License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+
+FROM px4io/px4-ros-full:latest
+MAINTAINER Andreas Antener <andreas@uaventure.com>
+
+# FIXME: this doesn't work when building from vagrant
+COPY scripts/testing/* /sitl/testing/
+RUN chmod +x -R /sitl/testing/*
+RUN chown -R root:root /sitl/testing/*
+
+RUN bash /sitl/testing/setup-workspace.bash
+
+CMD ["/usr/bin/bash"]
