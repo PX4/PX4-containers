@@ -34,7 +34,7 @@ RUN echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
 RUN apt-get -y install python-rosinstall
 
 ## additional dependencies
-RUN apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy
+RUN apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-mavros ros-indigo-mavros-extras
 
 ## install drcsim
 RUN echo "deb http://packages.osrfoundation.org/drc/ubuntu trusty main" > /etc/apt/sources.list.d/drc-latest.list \
@@ -42,9 +42,11 @@ RUN echo "deb http://packages.osrfoundation.org/drc/ubuntu trusty main" > /etc/a
 	&& apt-get update \
 	&& apt-get -y install drcsim
 
-# Install x11-utils to get xdpyinfo, for X11 display debugging
+# Install some utilities
+# x11-utils to get xdpyinfo, for X11 display debugging
 # mesa-utils provides glxinfo, handy for understanding the 3D support
-RUN apt-get -y install x11-utils mesa-utils
+# jstest-gtk provides a graphical joystick testing and configuration tool
+RUN apt-get -y install x11-utils mesa-utils jstest-gtk
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
