@@ -5,8 +5,8 @@
 # Needs to runs inside container
 #
 
-WORKSPACE=/sitl/catkin_ws
-mkdir -p $WORKSPACE/src
+CATKIN_WS=/sitl/catkin_ws
+mkdir -p $CATKIN_WS/src
 
 echo "deleting previous test results"
 if [ -d /job/test_results ]; then
@@ -14,13 +14,13 @@ if [ -d /job/test_results ]; then
 fi
 
 echo "creating symlinks to build job sources"
-ln -s /job/Firmware $WORKSPACE/src/Firmware
-ln -s /job/euroc_simulator $WORKSPACE/src/euroc_simulator
-ln -s /job/mav_comm $WORKSPACE/src/mav_comm
+ln -s /job/Firmware $CATKIN_WS/src/Firmware
+ln -s /job/euroc_simulator $CATKIN_WS/src/euroc_simulator
+ln -s /job/mav_comm $CATKIN_WS/src/mav_comm
 
-echo "sourcing $WORKSPACE/devel/setup.bash"
-source $WORKSPACE/devel/setup.bash
-cd $WORKSPACE
+echo "sourcing $CATKIN_WS/devel/setup.bash"
+source $CATKIN_WS/devel/setup.bash
+cd $CATKIN_WS
 
 echo "compiling, without parallel builds"
 export ROS_PARALLEL_JOBS=
@@ -32,4 +32,4 @@ echo "running tests"
 catkin_make test
 
 echo "copy build test results to job directory"
-cp -r $WORKSPACE/build/test_results /job/
+cp -r $CATKIN_WS/build/test_results /job/

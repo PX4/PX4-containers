@@ -10,6 +10,7 @@ sudo apt-get update
 # A few directories
 sudo mkdir -p /build/docker
 sudo mkdir -p /build/jenkins
+sudo chmod 700 /build/docker
 
 # Install Java, only headless runtime
 sudo apt-get install default-jre-headless
@@ -28,6 +29,14 @@ sudo sh -c 'echo "deb http://pkg.jenkins-ci.org/debian binary/" > /etc/apt/sourc
 sudo apt-get update
 sudo apt-get install jenkins
 
+sudo service jenkins stop
+sudo chown jenkins /build/jenkins
+sudo chgrp jenkins /build/jenkins
+sudo sed -i.orig "s/#\?JENKINS_HOME=.*/JENKINS_HOME=\\/build\\/jenkins/" /etc/default/jenkins
+sudo sh -c 'echo JAVA_ARGS=\"\$JAVA_ARGS -Xmx256m -XX:MaxPermSize=128m\" >> /etc/default/jenkins'
+sudo service jenkins start
+sudo rm -r /var/lib/jenkins
+
 # Configure proxy
 sudo a2enmod proxy
 sudo a2enmod proxy_http
@@ -45,11 +54,19 @@ sudo apt-get install lxc-docker
 
 sudo sh -c 'echo DOCKER_OPTS=\"\${DOCKER_OPTS} -H unix:///var/run/docker.sock -g /build/docker\" >> /etc/default/docker'
 sudo service docker restart
+sudo rm -r /var/lib/docker
 
 
 ## Manual setup steps
 # Enable Jenkins security
 # > Jenkins own user DB
 # > logged in users can do anything
+# > installing and updating plugins
+	#github
+	#github pull request builder
+	#embeddable build status plugin
+	#s3 plugin
+	#notification plugin
+	#collapsing console sections
 
 
