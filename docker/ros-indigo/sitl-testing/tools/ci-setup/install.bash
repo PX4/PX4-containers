@@ -56,6 +56,8 @@ sudo sh -c 'echo DOCKER_OPTS=\"\${DOCKER_OPTS} -H unix:///var/run/docker.sock -g
 sudo service docker restart
 sudo rm -r /var/lib/docker
 
+# Allow Jenkins to execute Docker
+sudo usermod -a -G docker jenkins
 
 ## Manual setup steps
 # Enable Jenkins security
@@ -68,5 +70,4 @@ sudo rm -r /var/lib/docker
 	#s3 plugin
 	#notification plugin
 	#collapsing console sections
-
 
