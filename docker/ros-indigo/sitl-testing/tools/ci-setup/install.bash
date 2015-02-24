@@ -1,13 +1,14 @@
 #!/bin/bash
 #
-# TODO: wiki page
-# TODO: logs from px4 durign sitl tests?
-# TODO: Github auth for Jenkins?
+# Contains steps used to set-up the Jenkins/Docker CI server.
+#
+# See: https://pixhawk.org/dev/ros/sitl_ci_setup
 #
 
 sudo apt-get update
 
 # A few directories
+# > Build artifacts and images go into one place so we can move this onto another storage device if necessary
 sudo mkdir -p /build/docker
 sudo mkdir -p /build/jenkins
 sudo chmod 700 /build/docker
@@ -59,15 +60,4 @@ sudo rm -r /var/lib/docker
 # Allow Jenkins to execute Docker
 sudo usermod -a -G docker jenkins
 
-## Manual setup steps
-# Enable Jenkins security
-# > Jenkins own user DB
-# > logged in users can do anything
-# > installing and updating plugins
-	#github
-	#github pull request builder
-	#embeddable build status plugin
-	#s3 plugin
-	#notification plugin
-	#collapsing console sections
 

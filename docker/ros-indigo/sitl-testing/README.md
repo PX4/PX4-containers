@@ -4,6 +4,8 @@ Full desktop ROS container with precompiled sources for automated SITL testing.
 
 License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
-**TODO:**
+What's in here:
 
-- include more precompiled dependencies (notably euroc_simulator)
+  * Dockerfile and artifacts that go along with it (in `scripts`)
+  * `tools/ci-setup`: configurations and scripts used for CI server setup
+  * `tools/testing`: scripts to run tests on CI server
