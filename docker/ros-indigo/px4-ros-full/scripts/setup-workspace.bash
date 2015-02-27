@@ -7,6 +7,7 @@
 
 WDIR=`pwd`
 WORKSPACE=$WDIR/catkin_ws
+export ROS_PARALLEL_JOBS=
 
 # Setup workspace
 mkdir -p $WORKSPACE/src
