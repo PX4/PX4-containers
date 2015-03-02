@@ -56,4 +56,4 @@ COPY scripts/* /sitl/
 RUN chmod +x -R /sitl/*
 RUN chown -R root:root /sitl/*
 
-CMD ["/usr/bin/bash"]
+CMD ["/bin/bash"]
