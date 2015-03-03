@@ -4,6 +4,9 @@
 #
 # See: https://pixhawk.org/dev/ros/sitl_ci_setup
 #
+# Updates:
+# 20150303: switched to AUFS (https://github.com/PX4/containers/issues/6)
+#
 
 sudo apt-get update
 
@@ -59,5 +62,11 @@ sudo rm -r /var/lib/docker
 
 # Allow Jenkins to execute Docker
 sudo usermod -a -G docker jenkins
+
+
+##############################################################################
+# Update: switched to AUFS
+sudo apt-get  install linux-image-extra-`uname -r` aufs-tools
+sudo service docker restart
 
 
