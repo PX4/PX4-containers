@@ -33,3 +33,4 @@ catkin_make test
 
 echo "copy build test results to job directory"
 cp -r $CATKIN_WS/build/test_results /job/
+cp /root/.ros/*.bag /job/test_results/
