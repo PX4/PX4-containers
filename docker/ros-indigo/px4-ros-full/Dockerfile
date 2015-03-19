@@ -13,6 +13,13 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
 	&& apt-get -y install wget git mercurial
 
+# FIXME: this doesn't work when building from vagrant
+COPY scripts/* /sitl/
+RUN chmod +x -R /sitl/*
+RUN chown -R root:root /sitl/*
+
+RUN bash /sitl/install-python-tools.bash
+
 # Main ROS Setup
 # Following http://wiki.ros.org/indigo/Installation/Ubuntu
 # Also adding dependencies for gazebo http://gazebosim.org/tutorials?tut=drcsim_install
@@ -50,10 +57,5 @@ RUN apt-get -y install x11-utils mesa-utils jstest-gtk
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
-
-# FIXME: this doesn't work when building from vagrant
-COPY scripts/* /sitl/
-RUN chmod +x -R /sitl/*
-RUN chown -R root:root /sitl/*
 
 CMD ["/bin/bash"]
