@@ -12,4 +12,4 @@ docker pull px4io/sitl-testing
 # Running SITL testing container
 # Assuming that necessary source projects, including this one, are cloned in the build server workspace of this job.
 #
-docker run --rm -v "$WORKSPACE:/job:rw" px4io/sitl-testing bash "/job/containers/docker/ros-indigo/sitl-testing/tools/testing/run-tests.bash"
+docker run --rm -v "$WORKSPACE:/job:rw" px4io/sitl-testing bash "/sitl/scripts/testing/run-tests.bash"

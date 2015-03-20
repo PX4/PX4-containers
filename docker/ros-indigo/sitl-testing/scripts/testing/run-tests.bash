@@ -6,6 +6,11 @@
 #
 
 CATKIN_WS=/sitl/catkin_ws
+TEST_RESULTS=$CATKIN_WS/build/test_results
+BAGS=/root/.ros
+CHARTS=/root/.ros/charts
+EXPORT_CHARTS=/sitl/scripts/testing/export_charts.py
+
 mkdir -p $CATKIN_WS/src
 
 echo "deleting previous test results"
@@ -31,6 +36,14 @@ echo "running tests"
 #rostest px4 demo_tests.launch gui:=true headless:=false
 catkin_make test
 
+cd $BAGS
+for bag in `ls *.bag`
+do
+	echo "processing bag: $bag"
+	python $EXPORT_CHARTS $CHARTS $bag
+done
+
 echo "copy build test results to job directory"
-cp -r $CATKIN_WS/build/test_results /job/
-cp /root/.ros/*.bag /job/test_results/
+cp -r $TEST_RESULTS /job/
+cp $BAGS/*.bag /job/test_results/
+cp -r $CHARTS /job/test_results/

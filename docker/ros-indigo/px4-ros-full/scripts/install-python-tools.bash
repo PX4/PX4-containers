@@ -8,7 +8,8 @@
 #
 # Install some Python Ubuntu packages
 #
-apt-get install python-pip python-mock python-enum34 python-protobuf python-pandas python-numpy python-jinja2
+apt-get -y install python-pip python-mock python-enum34 python-protobuf \
+	python-pandas python-numpy python-jinja2
 
 #
 # Install some packages from source
