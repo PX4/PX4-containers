@@ -18,7 +18,7 @@ mkdir -p python_src
 cd python_src
 
 # Used to create graphs for web
-git clone --branch px4_plots https://github.com/UAVenture/bearcart
+git clone --branch px4_plots https://github.com/PX4/bearcart
 cd bearcart
 python setup.py install
 cd ..
