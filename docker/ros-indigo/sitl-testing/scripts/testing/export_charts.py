@@ -77,6 +77,7 @@ CHARTS = [
 def export(output_dir, bag_file):
     data = rosbag_pandas.bag_to_dataframe(bag_file)
     bag_name = os.path.splitext(os.path.basename(bag_file))[0]
+    output_dir = os.path.abspath(output_dir)
 
     # for c in data.columns:
     #     print c
