@@ -9,6 +9,7 @@ from bearcart import bearcart
 import rosbag_pandas
 import os
 import sys
+import math
 
 # apt-get install ros-indigo-geodesy
 from geodesy import utm
@@ -151,6 +152,7 @@ def export(output_dir, bag_file):
     base = utm.fromLatLong(47.3914028, 8.0509083, 407)
     chart_df = data.filter(items=KML_SERIES).dropna(axis=0, how="all").resample('100L', how="first")
     if chart_df.columns.size > 0:
+        mavros = KML_SERIES[0] in chart_df.columns
         path = os.path.join(output_dir, bag_name + '.kml')
         print "Exporting KML to %s" % (path)
 
@@ -161,12 +163,12 @@ def export(output_dir, bag_file):
             y = base.northing
             a = base.altitude
 
-            if KML_SERIES[0] in chart_df.columns:
+            if mavros and not (math.isnan(row[KML_SERIES[0]]) or math.isnan(row[KML_SERIES[1]]) or math.isnan(row[KML_SERIES[2]])):
                 x = x + row[KML_SERIES[0]]
                 y = y + row[KML_SERIES[1]]
                 a = a + row[KML_SERIES[2]]
 
-            elif KML_SERIES[3] in chart_df.columns:
+            elif not mavros and not (math.isnan(row[KML_SERIES[3]]) or math.isnan(row[KML_SERIES[4]]) or math.isnan(row[KML_SERIES[5]])):
                 x = x + row[KML_SERIES[3]]
                 y = y + row[KML_SERIES[4]]
                 a = a - row[KML_SERIES[5]]
