@@ -40,7 +40,7 @@ RUN echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
 RUN apt-get -y install python-rosinstall
 
 ## additional dependencies
-RUN apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-mavros ros-indigo-mavros-extras
+RUN apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-mavros ros-indigo-mavros-extras ros-indigo-geodesy
 
 ## install drcsim
 RUN echo "deb http://packages.osrfoundation.org/drc/ubuntu trusty main" > /etc/apt/sources.list.d/drc-latest.list \
