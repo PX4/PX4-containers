@@ -4,6 +4,7 @@
 #
 
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+set -e
 
 #
 # Install some Python Ubuntu packages
