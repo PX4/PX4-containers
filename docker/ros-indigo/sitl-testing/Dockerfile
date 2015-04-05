@@ -14,4 +14,4 @@ RUN chown -R root:root /sitl/testing/*
 
 RUN bash /sitl/testing/setup-workspace.bash
 
-CMD ["/usr/bash"]
+CMD ["/bin/bash"]
