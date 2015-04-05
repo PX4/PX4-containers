@@ -26,7 +26,7 @@ source ~/.bashrc
 sudo apt-get -y install python-rosinstall
 
 ## additional dependencies
-sudo apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-mavros ros-indigo-mavros-extras
+sudo apt-get -y install ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-mavros ros-indigo-mavros-extras ros-indigo-geodesy
 
 ## add osrf repository
 ## install drcsim
