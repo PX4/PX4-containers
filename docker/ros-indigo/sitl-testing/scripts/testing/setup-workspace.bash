@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Create testing workspace for SITL testing
 #
@@ -16,7 +16,7 @@ cd $WORKSPACE/src
 catkin_init_workspace
 cd $WORKSPACE
 catkin_make
-echo "source $WORKSPACE/devel/setup.bash" >> ~/.bashrc
+sh -c "echo 'source $WORKSPACE/devel/setup.bash' >> ~/.bashrc"
 
 # glog catkin
 cd $WORKSPACE/src

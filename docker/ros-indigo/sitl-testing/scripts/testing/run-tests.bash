@@ -32,9 +32,9 @@ echo "compiling, without parallel builds"
 export ROS_PARALLEL_JOBS=
 catkin_make
 
+# don't exit on error anymore from here on (because single tests or exports might fail)
+set +e
 echo "running tests"
-#echo "rostest px4 demo_tests.launch gui:=true headless:=false"
-#rostest px4 demo_tests.launch gui:=true headless:=false
 catkin_make test
 
 cd $BAGS

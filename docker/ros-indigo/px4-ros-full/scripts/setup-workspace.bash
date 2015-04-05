@@ -14,7 +14,7 @@ cd $WORKSPACE/src
 catkin_init_workspace
 cd $WORKSPACE
 catkin_make
-sh -c 'echo "source $WORKSPACE/devel/setup.bash" >> ~/.bashrc'
+sh -c "echo 'source $WORKSPACE/devel/setup.bash' >> ~/.bashrc"
 
 # Fetch sources
 ## PX4 firmware
