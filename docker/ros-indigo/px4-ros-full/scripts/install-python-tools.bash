@@ -1,15 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Create workspace at current location and fetch source repositories
+# Install python tools used by demo and test scripts
 #
-
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 set -e
 
 #
 # Install some Python Ubuntu packages
 #
-apt-get -y install python-pip python-mock python-enum34 python-protobuf \
+sudo apt-get -y install python-pip python-mock python-enum34 python-protobuf \
 	python-pandas python-numpy python-jinja2
 
 #
