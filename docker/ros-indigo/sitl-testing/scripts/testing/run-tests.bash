@@ -1,15 +1,16 @@
 #!/bin/bash
-
 #
 # Compiles and executes SITL tests
 # Needs to runs inside container
 #
+# License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+set -e
 
 CATKIN_WS=/sitl/catkin_ws
 TEST_RESULTS=$CATKIN_WS/build/test_results
 BAGS=/root/.ros
 CHARTS=/root/.ros/charts
-EXPORT_CHARTS=/sitl/scripts/testing/export_charts.py
+EXPORT_CHARTS=/sitl/testing/export_charts.py
 
 mkdir -p $CATKIN_WS/src
 

@@ -2,8 +2,8 @@
 #
 # Create testing workspace for SITL testing
 #
-
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+set -e
 
 WORKSPACE=/sitl/catkin_ws
 

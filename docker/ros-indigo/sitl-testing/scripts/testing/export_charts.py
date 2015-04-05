@@ -2,7 +2,6 @@
 #
 # Export web charts from rosbags generated during tets
 #
-
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
 from bearcart import bearcart
