@@ -6,6 +6,7 @@
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 set -e
 
+echo "=====> link external sources and compile"
 CATKIN_WS=/sitl/catkin_ws
 TEST_RESULTS=$CATKIN_WS/build/test_results
 BAGS=/root/.ros
@@ -31,12 +32,16 @@ cd $CATKIN_WS
 echo "compiling, without parallel builds"
 export ROS_PARALLEL_JOBS=
 catkin_make
+echo "<====="
 
 # don't exit on error anymore from here on (because single tests or exports might fail)
 set +e
+echo "=====> run tests"
 echo "running tests"
 catkin_make test
+echo "<====="
 
+echo "=====> process test results"
 cd $BAGS
 for bag in `ls *.bag`
 do
@@ -48,3 +53,4 @@ echo "copy build test results to job directory"
 cp -r $TEST_RESULTS /job/
 cp $BAGS/*.bag /job/test_results/
 cp -r $CHARTS /job/test_results/
+echo "<====="
