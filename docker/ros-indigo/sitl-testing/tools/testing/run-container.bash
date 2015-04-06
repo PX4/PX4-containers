@@ -11,10 +11,10 @@ if [ -z "$WORKSPACE" ]; then
 fi
 
 # Pulling latest image
-# TODO: remove old one to save space
-echo "====> pull latest Docker image"
-docker pull px4io/sitl-testing
-echo "<===="
+# TODO: remove old one to save space, until then, update manually
+#echo "====> pull latest Docker image"
+#docker pull px4io/sitl-testing
+#echo "<===="
 
 #
 # Running SITL testing container
