@@ -147,9 +147,10 @@ def export(output_dir, bag_file):
             vis.create_chart(html_path=HTML_FILE, data_path=DATA_FILE,
                              js_path=JS_FILE, css_path=CSS_FILE)
 
-    # KML
-    # Aarau BHF
-    base = utm.fromLatLong(47.3914028, 8.0509083, 407)
+    #
+    # KML export
+    #
+    base = utm.fromLatLong(47.388650, 8.033269, 368)
     chart_df = data.filter(items=KML_SERIES).dropna(axis=0, how="all").resample('100L', how="first")
     if chart_df.columns.size > 0:
         mavros = KML_SERIES[0] in chart_df.columns
