@@ -6,7 +6,7 @@
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 set -e
 
-echo "=====> link external sources and compile"
+echo "=====> prepare sources"
 CATKIN_WS=/sitl/catkin_ws
 TEST_RESULTS=$CATKIN_WS/build/test_results
 BAGS=/root/.ros
@@ -28,7 +28,9 @@ ln -s /job/mav_comm $CATKIN_WS/src/mav_comm
 echo "sourcing $CATKIN_WS/devel/setup.bash"
 source $CATKIN_WS/devel/setup.bash
 cd $CATKIN_WS
+echo "<====="
 
+echo "=====> compile"
 echo "compiling, without parallel builds"
 export ROS_PARALLEL_JOBS=
 catkin_make

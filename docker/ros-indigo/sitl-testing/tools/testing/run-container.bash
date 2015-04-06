@@ -12,14 +12,14 @@ fi
 
 # Pulling latest image
 # TODO: remove old one to save space
-echo "=====> pull latest Docker image"
+echo "====> pull latest Docker image"
 docker pull px4io/sitl-testing
-echo "<====="
+echo "<===="
 
 #
 # Running SITL testing container
 # Assuming that necessary source projects, including this one, are cloned in the build server workspace of this job.
 #
-echo "=====> run container"
+echo "====> run container"
 docker run --rm -v "$WORKSPACE:/job:rw" px4io/sitl-testing bash "/sitl/testing/run-tests.bash"
-echo "<====="
+echo "<===="
