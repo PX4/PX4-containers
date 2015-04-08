@@ -3,7 +3,10 @@
 # Install ROS
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+
+# Prepare for automatic execution (not necessary if you execute the commands manually one by one)
 set -e
+export DEBIAN_FRONTEND=noninteractive
 
 # Main ROS Setup
 # Following http://wiki.ros.org/indigo/Installation/Ubuntu

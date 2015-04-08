@@ -3,13 +3,20 @@
 # Install python tools used by demo and test scripts
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+
+# Prepare for automatic execution (not necessary if you execute the commands manually one by one)
 set -e
+export DEBIAN_FRONTEND=noninteractive
 
 #
 # Install some Python Ubuntu packages
 #
 sudo apt-get -y install python-pip python-mock python-enum34 python-protobuf \
 	python-pandas python-numpy python-jinja2
+
+## Install Fuse support
+sudo apt-get -y install fuse
+pip install fusepy
 
 #
 # Install some packages from source
