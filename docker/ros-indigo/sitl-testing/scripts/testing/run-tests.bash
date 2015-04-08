@@ -41,6 +41,7 @@ set +e
 echo "=====> run tests"
 echo "running tests"
 catkin_make test
+TEST_RESULT=$?
 echo "<====="
 
 echo "=====> process test results"
@@ -56,3 +57,6 @@ cp -r $TEST_RESULTS /job/
 cp $BAGS/*.bag /job/test_results/
 cp -r $CHARTS /job/test_results/
 echo "<====="
+
+# need to return error if tests failed, else Jenkins won't notice the failure
+exit $TEST_RESULT
