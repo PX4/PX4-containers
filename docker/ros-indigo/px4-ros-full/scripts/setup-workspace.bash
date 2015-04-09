@@ -23,11 +23,11 @@ git clone https://github.com/PX4/Firmware.git
 
 ## euroc simulator
 cd $WORKSPACE/src
-git clone https://github.com/PX4/euroc_simulator.git
+git clone https://github.com/ethz-asl/rotors_simulator.git
 
 ## mav comm
 cd $WORKSPACE/src
-git clone https://github.com/PX4/mav_comm.git
+git clone https://github.com/ethz-asl/mav_comm.git
 
 ## glog catkin
 cd $WORKSPACE/src
