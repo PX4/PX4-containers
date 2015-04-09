@@ -21,9 +21,9 @@ sh -c "echo 'source $WORKSPACE/devel/setup.bash' >> ~/.bashrc"
 cd $WORKSPACE/src
 git clone https://github.com/PX4/Firmware.git
 
-## euroc simulator
+## rotors simulator
 cd $WORKSPACE/src
-git clone https://github.com/PX4/euroc_simulator.git
+git clone https://github.com/PX4/rotors_simulator.git
 
 ## mav comm
 cd $WORKSPACE/src
