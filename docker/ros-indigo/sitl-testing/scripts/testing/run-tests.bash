@@ -22,7 +22,7 @@ fi
 
 echo "creating symlinks to build job sources"
 ln -s /job/Firmware $CATKIN_WS/src/Firmware
-ln -s /job/euroc_simulator $CATKIN_WS/src/euroc_simulator
+ln -s /job/rotors_simulator $CATKIN_WS/src/rotors_simulator
 ln -s /job/mav_comm $CATKIN_WS/src/mav_comm
 
 echo "sourcing $CATKIN_WS/devel/setup.bash"
