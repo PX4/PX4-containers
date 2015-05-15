@@ -31,12 +31,13 @@ CHARTS = [
     {
         "name": "mavros_local_position",
         "series": [
-            "mavros_setpoint_local_position__pose_position_x",
-            "mavros_setpoint_local_position__pose_position_y",
-            "mavros_setpoint_local_position__pose_position_z",
-            "mavros_position_local__pose_position_x",
-            "mavros_position_local__pose_position_y",
-            "mavros_position_local__pose_position_z"
+            # topic names for MAVROS >= 0.11
+            "mavros_setpoint_position_local__pose_position_x",
+            "mavros_setpoint_position_local__pose_position_y",
+            "mavros_setpoint_position_local__pose_position_z",
+            "mavros_local_position_local__pose_position_x",
+            "mavros_local_position_local__pose_position_y",
+            "mavros_local_position_local__pose_position_z"
         ]
     },
     {
@@ -64,25 +65,27 @@ CHARTS = [
     {
         "name": "mavros_attitude",
         "series": [
-            "mavros_setpoint_att_throttle__data",
-            "mavros_setpoint_attitude__pose_orientation_w",
-            "mavros_setpoint_attitude__pose_orientation_x",
-            "mavros_setpoint_attitude__pose_orientation_y",
-            "mavros_setpoint_attitude__pose_orientation_z",
-            "mavros_position_local__pose_orientation_w",
-            "mavros_position_local__pose_orientation_x",
-            "mavros_position_local__pose_orientation_y",
-            "mavros_position_local__pose_orientation_z",
+            # topic names for MAVROS >= 0.11
+            "mavros_setpoint_attitude_att_throttle__data",
+            "mavros_setpoint_attitude_attitude__pose_orientation_w",
+            "mavros_setpoint_attitude_attitude__pose_orientation_x",
+            "mavros_setpoint_attitude_attitude__pose_orientation_y",
+            "mavros_setpoint_attitude_attitude__pose_orientation_z",
+            "mavros_local_position_local__pose_orientation_w",
+            "mavros_local_position_local__pose_orientation_x",
+            "mavros_local_position_local__pose_orientation_y",
+            "mavros_local_position_local__pose_orientation_z",
         ]
     },
 ]
 
-KML_SERIES = ["mavros_position_local__pose_position_x",
-              "mavros_position_local__pose_position_y",
-              "mavros_position_local__pose_position_z",
+KML_SERIES = ["mavros_local_position_local__pose_position_x",
+              "mavros_local_position_local__pose_position_y",
+              "mavros_local_position_local__pose_position_z",
               "px4_vehicle_local_position__x",
               "px4_vehicle_local_position__y",
-              "px4_vehicle_local_position__z"]
+              "px4_vehicle_local_position__z",
+             ]
 
 
 
