@@ -69,4 +69,13 @@ sudo usermod -a -G docker jenkins
 sudo apt-get  install linux-image-extra-`uname -r` aufs-tools
 sudo service docker restart
 
+# Update 2015-06-13: let Jenkins change permissions in workspace
+## script
+sudo sh -c 'echo chown -R jenkins * >> /build/jenkins/workspace/fix_permissions.sh'
+sudo chown jenkins /build/jenkins/workspace/fix_permissions.sh
+sudo chmod 544 /build/jenkins/workspace/fix_permissions.sh
+
+## /etc/sudoers
+sudo sh -c 'echo jenkins    ALL = NOPASSWD: /build/jenkins/workspace/fix_permissions.sh >> /etc/sudoers'
+
 
