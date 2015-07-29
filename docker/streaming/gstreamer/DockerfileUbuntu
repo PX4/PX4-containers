@@ -1,0 +1,27 @@
+#
+# Container with tools for video streaming.
+#
+# License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+
+FROM ubuntu:14.04.2
+MAINTAINER Andreas Antener <andreas@uaventure.com>
+
+# Install basics
+## Use the "noninteractive" debconf frontend
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y install wget git mercurial sudo build-essential
+
+# Install video tools
+COPY scripts/install-video-ubuntu.bash /scripts/install-video-ubuntu.bash
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+RUN bash /scripts/install-video-ubuntu.bash
+
+# Start-up
+COPY tools/start.bash /scripts/start.bash
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+
+ENTRYPOINT ["/bin/bash", "/scripts/start.bash"]
+CMD [""]

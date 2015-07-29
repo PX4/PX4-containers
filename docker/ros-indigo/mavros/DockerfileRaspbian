@@ -1,0 +1,40 @@
+#
+# Container with tools for onboard computer connection to PX4 via MAVROS.
+#
+# License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+
+FROM resin/rpi-raspbian:wheezy
+MAINTAINER Andreas Antener <andreas@uaventure.com>
+
+# Install basics
+## Use the "noninteractive" debconf frontend
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y install wget git mercurial sudo build-essential
+
+# Main ROS Setup
+# Split up in 3 parts to make rebuild faster
+COPY scripts/install-ros-base-src_1.bash /scripts/install-ros-base-src_1.bash
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+RUN bash /scripts/install-ros-base-src_1.bash
+
+COPY scripts/install-ros-base-src_2.bash /scripts/install-ros-base-src_2.bash
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+RUN bash /scripts/install-ros-base-src_2.bash
+
+COPY scripts/install-ros-base-src_3.bash /scripts/install-ros-base-src_3.bash
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+RUN bash /scripts/install-ros-base-src_3.bash
+
+# Incomming MAVLink port
+EXPOSE 14555/udp
+
+# Start-up
+COPY tools/mavros.launch /scripts/
+COPY tools/start.bash /scripts/
+RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
+
+ENTRYPOINT ["/bin/bash", "/scripts/start.bash"]
+CMD ["/scripts/mavros.launch", "gcs_url:=udp://:14555@:14550", "fcu_url:=/dev/ttyAMA0:921600"]
