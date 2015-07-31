@@ -16,10 +16,10 @@ export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-key 0xB01FA116
 sudo apt-get update
-sudo apt-get -y install ros-indigo-ros-base
+sudo apt-get -y --no-install-recommends install ros-indigo-ros-base
 
 ## get rodep, rosinstall and some additional dependencies
-sudo apt-get -y install python-rosdep python-rosinstall ros-indigo-geodesy
+sudo apt-get -y --no-install-recommends install python-rosdep python-rosinstall ros-indigo-geodesy
 sudo rosdep init
 rosdep update
 
@@ -28,5 +28,8 @@ sudo sh -c 'echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc'
 #source ~/.bashrc
 
 ## install mavros
-sudo apt-get -y install ros-indigo-mavros
+sudo apt-get -y --no-install-recommends install ros-indigo-mavros
 #sudo apt-get -y install ros-indigo-mavros ros-indigo-mavros-extras
+
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

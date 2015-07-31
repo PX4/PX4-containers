@@ -3,7 +3,7 @@
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
-FROM resin/rpi-raspbian:wheezy
+FROM resin/rpi-raspbian:jessie
 MAINTAINER Andreas Antener <andreas@uaventure.com>
 
 # Install basics
@@ -11,22 +11,15 @@ MAINTAINER Andreas Antener <andreas@uaventure.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get -y install wget git mercurial sudo build-essential
+    && apt-get -y --no-install-recommends upgrade \
+    && apt-get -y --no-install-recommends install wget sudo openssl ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Main ROS Setup
-# Split up in 3 parts to make rebuild faster
-COPY scripts/install-ros-base-src_1.bash /scripts/install-ros-base-src_1.bash
+COPY scripts/install-ros-base-src.bash /scripts/install-ros-base-src.bash
 RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
-RUN bash /scripts/install-ros-base-src_1.bash
-
-COPY scripts/install-ros-base-src_2.bash /scripts/install-ros-base-src_2.bash
-RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
-RUN bash /scripts/install-ros-base-src_2.bash
-
-COPY scripts/install-ros-base-src_3.bash /scripts/install-ros-base-src_3.bash
-RUN chmod +x -R /scripts/* && chown -R root:root /scripts/*
-RUN bash /scripts/install-ros-base-src_3.bash
+RUN bash /scripts/install-ros-base-src.bash
 
 # Incomming MAVLink port
 EXPOSE 14555/udp

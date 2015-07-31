@@ -18,10 +18,10 @@ sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
 wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 sudo apt-get update
-sudo apt-get -y install ros-indigo-ros-base
+sudo apt-get -y --no-install-recommends install ros-indigo-ros-base
 
 ## get rodep, rosinstall and some additional dependencies
-sudo apt-get -y install python-rosdep python-rosinstall ros-indigo-geodesy
+sudo apt-get -y --no-install-recommends install python-rosdep python-rosinstall ros-indigo-geodesy
 sudo rosdep init
 rosdep update
 
@@ -32,5 +32,8 @@ sudo sh -c 'echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc'
 ## install mavros but from shadow repo to get latest version earlier
 sudo sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu/ trusty main" > /etc/apt/sources.list.d/ros-shadow.list'
 sudo apt-get update
-sudo apt-get -y install ros-indigo-mavros
+sudo apt-get -y --no-install-recommends install ros-indigo-mavros
 #sudo apt-get -y install ros-indigo-mavros ros-indigo-mavros-extras
+
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

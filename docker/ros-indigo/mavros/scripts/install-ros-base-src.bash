@@ -8,6 +8,29 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
+# Main ROS Setup (source install for Raspbian base OS)
+# Following http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi
+
+## add ROS repository and key
+## install main ROS pacakges
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu wheezy main" > /etc/apt/sources.list.d/ros-latest.list'
+wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+
+echo "*** Update the base ***"
+sudo apt-get update
+sudo apt-get -y --no-install-recommends upgrade
+
+echo "*** Install required OS packages ***"
+sudo apt-get -y --no-install-recommends install pkg-config git mercurial build-essential
+sudo apt-get -y --no-install-recommends install python-setuptools python-pip python-yaml python-argparse python-distribute python-docutils python-dateutil python-setuptools python-six
+
+echo "*** Install required ROS packages ***"
+sudo pip install rosdep rosinstall_generator wstool rosinstall
+
+echo "*** ROSDEP ***"
+sudo rosdep init
+rosdep update
+
 mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
@@ -27,7 +50,7 @@ set -e
 
 echo "*** Install cmake and update sources.list ***"
 mkdir ~/ros_catkin_ws/external_src
-sudo apt-get -y install checkinstall cmake
+sudo apt-get -y --no-install-recommends install checkinstall cmake
 sudo sh -c 'echo "deb-src http://mirrordirector.raspbian.org/raspbian/ testing main contrib non-free rpi" >> /etc/apt/sources.list'
 sudo sh -c 'echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list'
 sudo apt-get -y update
@@ -46,6 +69,21 @@ cd ~/ros_catkin_ws
 set +e
 #  Python errors after the following command are normal.
 rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
+set -e
 
-# overwrite the exit code from before because it usually has errors
-exit 0
+echo "*** Building ROS ***"
+cd ~/ros_catkin_ws
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -DMAVLINK_DIALECT=pixhawk --install-space /home/ros/indigo
+
+sudo ln -sf /home/ros /opt/
+
+echo "*** Updating .profile and .bashrc ***"
+echo "source /home/ros/indigo/setup.bash" >> ~/.profile
+echo "source ~/ros_catkin_ws/devel_isolated/setup.bash" >> ~/.bashrc
+
+echo "*** Cleaning up ***"
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+sudo rm -rf ~/ros_catkin_ws/external_src
+sudo rm -rf ~/ros_catkin_ws/src
+# TBD: can we also remove ros build folders?

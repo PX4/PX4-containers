@@ -6,16 +6,11 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
 There multiple Docker images built from this [repository](https://github.com/PX4/containers/tree/master/docker/ros-indigo/mavros):
 
-For ARM hardware:
+For ARM hardware: `px4io/mavros:armhf-ubuntu-trusty`
 
-- for Raspbian: `px4io/mavros:raspbian-wheezy`
-- for Ubuntu (Trusty): `px4io/mavros:armhf-ubuntu-trusty`
+This should run on any `armhf` computer with compatible kernel.
 
-They should run on any `armhf` computer with Ubuntu (tag armhf-ubuntu-trusty) or Raspbian (tag raspbian-wheezy).
-
-For x64 hardware:
-
-- for Ubuntu (Trusty): `px4io/mavros:ubuntu-trusty`
+For x64 hardware: `px4io/mavros:ubuntu-trusty`
 
 ## Tested hardware ##
 
@@ -42,8 +37,10 @@ The containers were built with the following commands:
 
 ```
 docker build -t px4io/mavros:armhf-ubuntu-trusty -f DockerfileArmhfUbuntu .
-docker build -t px4io/mavros:raspbian-wheezy -f DockerfileRaspbian .
 docker build -t px4io/mavros:ubuntu-trusty -f DockerfileUbuntu .
+
+# There would be a source build based on raspbian-jessie but it needs to be built on an actual ARM device (or a decent cross-compiler setup).
+#docker build -t px4io/mavros:raspbian-jessie -f DockerfileRaspbian .
 ```
 
 Notes:

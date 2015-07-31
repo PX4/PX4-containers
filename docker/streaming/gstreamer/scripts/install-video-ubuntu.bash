@@ -9,7 +9,7 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
-# Install gstreamer
+# Install gstreamer and v4l tools
 sudo sh -c 'echo "deb http://ppa.launchpad.net/ddalex/gstreamer/ubuntu trusty main" > /etc/apt/sources.list.d/ddalex-gstreamer.list'
 echo "-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: SKS 1.1.5
@@ -40,7 +40,17 @@ WQT5KkEjhqyVqbQMN2BWPq1IY5orNQnAdi8TH4d0IMh/8jZT4VyLzMbQQ5UR
 -----END PGP PUBLIC KEY BLOCK-----" | sudo apt-key add -;
 
 sudo apt-get update
-sudo apt-get -y install gstreamer1.0* libmjpegutils-2.1-0 libmpeg2encpp-2.1-0 libmplex2-2.1-0 libnettle4
+#sudo apt-get -y --no-install-recommends install gstreamer1.0* libmjpegutils-2.1-0 libmpeg2encpp-2.1-0 libmplex2-2.1-0 libnettle4
+apt-get -y --no-install-recommends install \
+	gstreamer1.0-plugins-bad \
+	gstreamer1.0-plugins-ugly \
+	gstreamer1.0-plugins-base \
+	gstreamer1.0-plugins-base-apps \
+	gstreamer1.0-plugins-good \
+	gstreamer1.0-tools \
+	gir1.2-gst-plugins-base-1.0 \
+	gir1.2-gstreamer-1.0 \
+	v4l-utils
 
-# Install v4l tools for C920 support
-sudo apt-get -y install libv4l-dev v4l-utils
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
