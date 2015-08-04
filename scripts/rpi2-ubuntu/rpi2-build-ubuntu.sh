@@ -145,8 +145,16 @@ EOM
 chroot $R adduser --gecos "Ubuntu user" --add_extra_groups --disabled-password ubuntu
 chroot $R usermod -a -G sudo,adm -p '$6$iTPEdlv4$HSmYhiw2FmvQfueq32X30NqsYKpGDoTAUV2mzmHEgP/1B7rV3vfsjZKnAWn6M2d.V2UsPuZ2nWHg1iqzIu/nF/' ubuntu
 
-# Install Docker and SSH server
-chroot $R apt-get -y install openssh-server lxc aufs-tools docker.io
+# Install additional things we want:
+# - Docker
+# - SSH server
+# - Drivers (used for wifi)
+chroot $R apt-get -y install \
+	openssh-server \
+	lxc aufs-tools \
+	docker.io \
+	linux-firmware \
+	wpasupplicant wireless-tools hostapd udhcpd
 # Update Docker to a recent version from here:
 # https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-%28ARMv7%29-devices
 wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.7.1
