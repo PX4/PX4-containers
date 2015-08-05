@@ -28,8 +28,7 @@ sudo sh -c 'echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc'
 #source ~/.bashrc
 
 ## install mavros
-sudo apt-get -y --no-install-recommends install ros-indigo-mavros
-#sudo apt-get -y install ros-indigo-mavros ros-indigo-mavros-extras
+sudo apt-get -y --no-install-recommends install ros-indigo-mavros ros-indigo-mavros-extras
 
 sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

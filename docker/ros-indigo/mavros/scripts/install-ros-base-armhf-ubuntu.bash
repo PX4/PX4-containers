@@ -32,8 +32,7 @@ sudo sh -c 'echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc'
 ## install mavros but from shadow repo to get latest version earlier
 sudo sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu/ trusty main" > /etc/apt/sources.list.d/ros-shadow.list'
 sudo apt-get update
-sudo apt-get -y --no-install-recommends install ros-indigo-mavros
-#sudo apt-get -y install ros-indigo-mavros ros-indigo-mavros-extras
+sudo apt-get -y --no-install-recommends install ros-indigo-mavros ros-indigo-mavros-extras
 
 sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

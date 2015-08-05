@@ -35,8 +35,7 @@ mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
 echo "*** rosinstall ***"
-#   This will install only mavros and not mavros-extras (no image
-#   support which the Edison can’t really handle well anyway).
+# TODO: check if we can install mavros-extras
 rosinstall_generator ros_comm mavros --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-ros_comm-wet.rosinstall
 
 echo "*** wstool ***"
