@@ -26,7 +26,13 @@ sudo sh -c 'echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc'
 source ~/.bashrc
 
 ## get rosinstall and some additional dependencies
-sudo apt-get -y install python-rosinstall ros-indigo-octomap-msgs ros-indigo-joy ros-indigo-geodesy unzip ros-indigo-octomap-ros
+sudo apt-get -y install python-rosinstall \
+	ros-indigo-octomap-msgs \
+	ros-indigo-joy \
+	ros-indigo-geodesy \
+	unzip \
+	ros-indigo-octomap-ros \
+	ros-indigo-control-toolbox
 
 ## add osrf repository
 ## install drcsim
