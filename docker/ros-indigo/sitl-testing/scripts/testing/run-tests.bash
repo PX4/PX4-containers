@@ -41,7 +41,7 @@ echo "<====="
 set +e
 echo "=====> run tests"
 echo "running tests"
-catkin_make $CATKIN_ARGS test
+catkin_make test
 TEST_RESULT=$?
 echo "<====="
 
