@@ -152,14 +152,15 @@ chroot $R usermod -a -G sudo,adm -p '$6$iTPEdlv4$HSmYhiw2FmvQfueq32X30NqsYKpGDoT
 chroot $R apt-get -y install \
 	openssh-server \
 	lxc aufs-tools \
-	docker.io \
 	linux-firmware \
 	wpasupplicant wireless-tools hostapd udhcpd
-# Update Docker to a recent version from here:
+
+# Install and update Docker to a recent version from here:
 # https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-%28ARMv7%29-devices
-wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.7.1
-mv docker-1.7.1 $R/usr/bin
-(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.7.1 docker; chmod +x docker-1.7.1)
+#chroot $R apt-get -y install docker.io
+#wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.7.1
+#mv docker-1.7.1 $R/usr/bin
+#(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.7.1 docker; chmod +x docker-1.7.1)
 
 
 # Restore standard sources.list if a local mirror was used
