@@ -8,7 +8,7 @@ set -e
 
 echo "=====> prepare sources"
 CATKIN_WS=/sitl/catkin_ws
-CATKIN_ARGS=--cmake-args -DCONFIG=ros_sitl_simple
+CATKIN_ARGS="--cmake-args -DCONFIG=ros_sitl_simple"
 TEST_RESULTS=$CATKIN_WS/build/test_results
 BAGS=/root/.ros
 CHARTS=/root/.ros/charts
