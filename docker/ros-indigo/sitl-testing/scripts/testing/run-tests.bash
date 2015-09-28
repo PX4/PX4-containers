@@ -8,6 +8,7 @@ set -e
 
 echo "=====> prepare sources"
 CATKIN_WS=/sitl/catkin_ws
+CATKIN_ARGS=--cmake-args -DCONFIG=ros_sitl_simple
 TEST_RESULTS=$CATKIN_WS/build/test_results
 BAGS=/root/.ros
 CHARTS=/root/.ros/charts
@@ -33,14 +34,14 @@ echo "<====="
 echo "=====> compile"
 echo "compiling, without parallel builds"
 export ROS_PARALLEL_JOBS=
-catkin_make
+catkin_make $CATKIN_ARGS
 echo "<====="
 
 # don't exit on error anymore from here on (because single tests or exports might fail)
 set +e
 echo "=====> run tests"
 echo "running tests"
-catkin_make test
+catkin_make $CATKIN_ARGS test
 TEST_RESULT=$?
 echo "<====="
 
