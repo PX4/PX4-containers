@@ -146,22 +146,57 @@ chroot $R adduser --gecos "Ubuntu user" --add_extra_groups --disabled-password u
 chroot $R usermod -a -G sudo,adm -p '$6$iTPEdlv4$HSmYhiw2FmvQfueq32X30NqsYKpGDoTAUV2mzmHEgP/1B7rV3vfsjZKnAWn6M2d.V2UsPuZ2nWHg1iqzIu/nF/' ubuntu
 
 # Install additional things we want:
-# - Docker
 # - SSH server
-# - Drivers (used for wifi)
+# - Drivers and Wifi tools
 chroot $R apt-get -y install \
 	openssh-server \
-	lxc aufs-tools \
 	linux-firmware \
-	wpasupplicant wireless-tools hostapd udhcpd
+	iw crda wpasupplicant wireless-tools hostapd udhcpd
 
-# Install and update Docker to a recent version from here:
-# https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-%28ARMv7%29-devices
-#chroot $R apt-get -y install docker.io
-#wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.7.1
-#mv docker-1.7.1 $R/usr/bin
-#(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.7.1 docker; chmod +x docker-1.7.1)
+# - Install Wifi driver for AWUS036AC
+KVER=$(ls $R/lib/modules/)
+cp ./drivers/AWUS036AC_ACH_Linux_v4.3.14/8812au.ko $R
+cp ./drivers/AWUS036AC_ACH_Linux_v4.3.14/hostapd_rtl $R/usr/bin
+chmod +x $R/usr/bin/hostapd_rtl
+chroot $R install -p -m 644 8812au.ko /lib/modules/$KVER/kernel/drivers/net/wireless/
+chroot $R /sbin/depmod -a $KVER
 
+# - Build essentials
+chroot $R apt-get -y install unzip build-essential linux-headers-rpi2 git-core
+# - things for wifi driver compiling
+chroot $R apt-get -y install libnfnetlink-dev libnl-dev libssl-dev
+
+# - Docker
+#   Install old Ubuntu package and replace binary and configs with latest version.
+#   Note: Hypriot bundle doesn't work, makes kernel crash.
+#   https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-%28ARMv7%29-devices
+chroot $R apt-get -y install lxc docker.io
+wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.8.2
+mv docker-1.8.2 $R/usr/bin
+(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.8.2 docker; chmod +x docker-1.8.2)
+wget https://raw.githubusercontent.com/docker/docker/master/contrib/init/upstart/docker.conf
+mv docker.conf $R/etc/init/
+rm $R/etc/init/docker.io.conf
+rm $R/etc/init.d/docker.io
+rm $R/etc/default/docker.io
+cat <<EOM >$R/etc/default/docker
+# Docker Upstart and SysVinit configuration file
+
+# Customize location of Docker binary (especially for development testing).
+#DOCKER="/usr/local/bin/docker"
+
+# Use DOCKER_OPTS to modify the daemon startup options.
+#DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+DOCKER_OPTS="--storage-driver=overlay -D"
+#DOCKER_OPTS="-D -H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375"
+
+# If you need Docker to use an HTTP proxy, it can also be specified here.
+#export http_proxy="http://127.0.0.1:3128/"
+
+# This is also a handy place to tweak where Docker's temporary files go.
+#export TMPDIR="/mnt/bigdrive/docker-tmp"
+EOM
+chroot $R usermod -a -G docker ubuntu
 
 # Restore standard sources.list if a local mirror was used
 if [ -n "$LOCAL_MIRROR" ]; then
