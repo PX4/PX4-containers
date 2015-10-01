@@ -145,6 +145,13 @@ EOM
 chroot $R adduser --gecos "Ubuntu user" --add_extra_groups --disabled-password ubuntu
 chroot $R usermod -a -G sudo,adm -p '$6$iTPEdlv4$HSmYhiw2FmvQfueq32X30NqsYKpGDoTAUV2mzmHEgP/1B7rV3vfsjZKnAWn6M2d.V2UsPuZ2nWHg1iqzIu/nF/' ubuntu
 
+# Set locale
+cat <<EOM >>$R/home/ubuntu/.profile
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+EOM
+
 # Install additional things we want:
 # - SSH server
 # - Drivers and Wifi tools
@@ -167,14 +174,16 @@ chroot $R apt-get -y install unzip build-essential linux-headers-rpi2 git-core
 chroot $R apt-get -y install libnfnetlink-dev libnl-dev libssl-dev
 
 # - Docker
-#   Install old Ubuntu package and replace binary and configs with latest version.
-#   Note: Hypriot bundle doesn't work, makes kernel crash.
+#   Install old Ubuntu package and replace binary and configs with newer version.
+#   Note: After Docker 1.6. there is a segfault happening at when loading network modules.
 #   https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-%28ARMv7%29-devices
-chroot $R apt-get -y install lxc docker.io
-wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.8.2
-mv docker-1.8.2 $R/usr/bin
-(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.8.2 docker; chmod +x docker-1.8.2)
+chroot $R apt-get -y install docker.io
+wget https://github.com/umiddelb/armhf/raw/master/bin/docker-1.6.0
+mv docker-1.6.0 $R/usr/bin
+(cd $R/usr/bin; mv docker _docker; ln -sf docker-1.6.0 docker; chmod +x docker-1.6.0)
 wget https://raw.githubusercontent.com/docker/docker/master/contrib/init/upstart/docker.conf
+# Docker 1.6 doesn't support "daemon" option yet
+sed "s/\s*exec \"\$DOCKER\" daemon \$DOCKER_OPTS/\texec \"\$DOCKER\" -d \$DOCKER_OPTS/" < docker.conf > docker.conf
 mv docker.conf $R/etc/init/
 rm $R/etc/init/docker.io.conf
 rm $R/etc/init.d/docker.io
@@ -187,8 +196,8 @@ cat <<EOM >$R/etc/default/docker
 
 # Use DOCKER_OPTS to modify the daemon startup options.
 #DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-DOCKER_OPTS="--storage-driver=overlay -D"
 #DOCKER_OPTS="-D -H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375"
+DOCKER_OPTS="--storage-driver=overlay -D"
 
 # If you need Docker to use an HTTP proxy, it can also be specified here.
 #export http_proxy="http://127.0.0.1:3128/"
