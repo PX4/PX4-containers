@@ -46,4 +46,4 @@ export ROS_PARALLEL_JOBS=
 # Compile workspace
 cd $WORKSPACE
 source devel/setup.bash
-catkin_make
+catkin_make --cmake-args -DCONFIG=ros_sitl_simple
