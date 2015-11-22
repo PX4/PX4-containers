@@ -20,6 +20,8 @@ sh -c "echo 'source $WORKSPACE/devel/setup.bash' >> ~/.bashrc"
 ## PX4 firmware
 cd $WORKSPACE/src
 git clone https://github.com/PX4/Firmware.git
+cd Firmware
+git submodule update --init --recursive
 
 ## rotors simulator
 cd $WORKSPACE/src
