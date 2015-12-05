@@ -18,6 +18,9 @@ sudo apt-get -y install python-pip python-mock python-enum34 python-protobuf \
 sudo apt-get -y install fuse
 pip install fusepy
 
+## Get add-apt-repository
+sudo apt-get install -y software-properties-common python-software-properties
+
 #
 # Install some packages from source
 #
