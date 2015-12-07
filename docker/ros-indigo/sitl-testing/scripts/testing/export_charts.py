@@ -166,15 +166,22 @@ def export(output_dir, bag_file):
             y = base.northing
             a = base.altitude
 
+            # if (math.isnan(row[KML_SERIES[0]]) or math.isnan(row[KML_SERIES[1]]) or math.isnan(row[KML_SERIES[2]])):
+            #     print "found nan"
+            #     print row
+
             if mavros and not (math.isnan(row[KML_SERIES[0]]) or math.isnan(row[KML_SERIES[1]]) or math.isnan(row[KML_SERIES[2]])):
-                x = x + row[KML_SERIES[0]]
-                y = y + row[KML_SERIES[1]]
-                a = a + row[KML_SERIES[2]]
+                x = row[KML_SERIES[0]]
+                y = row[KML_SERIES[1]]
+                a = row[KML_SERIES[2]]
 
             elif not mavros and not (math.isnan(row[KML_SERIES[3]]) or math.isnan(row[KML_SERIES[4]]) or math.isnan(row[KML_SERIES[5]])):
                 x = x + row[KML_SERIES[3]]
                 y = y + row[KML_SERIES[4]]
                 a = a - row[KML_SERIES[5]]
+
+            else:
+                continue
 
             p = utm.UTMPoint(x, y, zone=base.zone, band=base.band).toMsg()
 
