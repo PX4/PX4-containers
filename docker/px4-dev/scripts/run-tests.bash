@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Run container and start test execution
+# Starts tests from within the container
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 set -e
