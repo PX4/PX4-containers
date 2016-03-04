@@ -1,15 +1,8 @@
 # PX4 Development Container #
 
-Container with compete PX4 toolchain and STIL support.
+Containers with PX4 tool chain and SITL simulation support. With and without ROS.
 
 License: according to LICENSE.md in the root directory of the PX4 Firmware repository
-
-## Building ##
-
-```
-docker build -t px4io/px4-dev -f ./Dockerfile .
-docker build -t px4io/px4-dev-ros -f ./DockerfileRos .
-```
 
 ## Running ##
 
@@ -24,4 +17,11 @@ docker run -it --privileged \
 	-e DISPLAY=:0 \
 	--name=container_name px4io/px4-dev bash
 
+```
+
+## Building ##
+
+```
+docker build -t px4io/px4-dev -f ./Dockerfile .
+docker build -t px4io/px4-dev-ros -f ./DockerfileRos .
 ```
