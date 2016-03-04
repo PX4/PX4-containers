@@ -6,7 +6,7 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
 ## Running ##
 
-If you like to run the container and use the Firmware source from outside, use the following command and specify the right volume mapping.
+If you like to run the container and use the Firmware source from outside, use the following command and specify the appropriate volume mapping for your machine.
 
 TODO: need to add ports to connect QGC
 

@@ -1,5 +1,5 @@
 #
-# PX4 POSIX SITL container
+# PX4 DEV + SITL container
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
