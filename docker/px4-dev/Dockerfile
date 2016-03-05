@@ -28,6 +28,9 @@ RUN bash /sitl/install-python-tools.bash
 # Standalone Gazebo
 RUN bash /sitl/install-gazebo6.bash
 
+# Include Gazebo models
+RUN bash /sitl/cache-gazebo-models.bash
+
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
 
