@@ -48,8 +48,7 @@ RUN cd /home/docker1000/cross_toolchain \
     && ./trusty_sysroot.sh
 ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/ubuntu_14.04_armv7_sysroot"
 
-RUN rm /home/docker1000/cross_toolchain/downloads/qualcomm_hexagon_sdk_lnx_3_0_eval.bin \
-    && rm /home/docker1000/cross_toolchain/downloads/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf.tar.xz
+RUN rm /home/docker1000/cross_toolchain/downloads/*
 
 ENV PATH="${HEXAGON_SDK_ROOT}/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf_linux/bin":$PATH
 
