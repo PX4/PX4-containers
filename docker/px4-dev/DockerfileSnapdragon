@@ -10,6 +10,8 @@ MAINTAINER Julian Oes <julian@oes.ch>
 
 RUN apt-get update \
     && apt-get -y --quiet --no-install-recommends install \
+    binutils \
+    file \
     git \
     make \
     cmake \
@@ -45,11 +47,9 @@ ENV HEXAGON_SDK_ROOT="/home/docker1000/Qualcomm/Hexagon_SDK/3.0"
 ENV HEXAGON_TOOLS_ROOT="/home/docker1000/Qualcomm/HEXAGON_Tools/7.2.12/Tools"
 
 RUN cd /home/docker1000/cross_toolchain \
-    && ./trusty_sysroot.sh
+    && ./trusty_sysroot.sh \
+    && rm /home/docker1000/cross_toolchain/downloads/*
 ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/ubuntu_14.04_armv7_sysroot"
-
-RUN rm /home/docker1000/cross_toolchain/downloads/qualcomm_hexagon_sdk_lnx_3_0_eval.bin \
-    && rm /home/docker1000/cross_toolchain/downloads/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf.tar.xz
 
 ENV PATH="${HEXAGON_SDK_ROOT}/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf_linux/bin":$PATH
 
