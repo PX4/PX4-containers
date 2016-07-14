@@ -8,13 +8,12 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
 If you like to run the container and use the Firmware source from outside, use the following command and specify the appropriate volume mapping for your machine.
 
-TODO: need to add ports to connect QGC
-
 ```
 docker run -it --privileged \
 	-v <local_src>:<container_src>:rw \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=:0 \
+	-p 14556:14556/udp
 	--name=container_name px4io/px4-dev bash
 
 ```
