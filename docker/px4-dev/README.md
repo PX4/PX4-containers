@@ -13,7 +13,7 @@ docker run -it --privileged \
 	-v <local_src>:<container_src>:rw \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=:0 \
-	-p 14556:14556/udp
+	-p 14556:14556/udp \
 	--name=container_name px4io/px4-dev bash
 
 ```
