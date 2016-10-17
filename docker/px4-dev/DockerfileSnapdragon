@@ -44,7 +44,7 @@ ADD qualcomm_hexagon_sdk_lnx_3_0_eval.bin \
     /home/docker1000/cross_toolchain/downloads/qualcomm_hexagon_sdk_lnx_3_0_eval.bin
 
 RUN cd /home/docker1000/cross_toolchain \
-    && ./installv3.sh -trim
+    && ./installv3.sh
 ENV HEXAGON_SDK_ROOT="/home/docker1000/Qualcomm/Hexagon_SDK/3.0"
 ENV HEXAGON_TOOLS_ROOT="/home/docker1000/Qualcomm/HEXAGON_Tools/7.2.12/Tools"
 
