@@ -48,10 +48,13 @@ RUN cd /home/docker1000/cross_toolchain \
 ENV HEXAGON_SDK_ROOT="/home/docker1000/Qualcomm/Hexagon_SDK/3.0"
 ENV HEXAGON_TOOLS_ROOT="/home/docker1000/Qualcomm/HEXAGON_Tools/7.2.12/Tools"
 
+ADD Flight_3.1.1_qrlSDK.zip \
+    /home/docker1000/cross_toolchain/downloads/Flight_3.1.1_qrlSDK.zip
+
 RUN cd /home/docker1000/cross_toolchain \
-    && ./trusty_sysroot.sh \
-    && rm /home/docker1000/cross_toolchain/downloads/*
-ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/ubuntu_14.04_armv7_sysroot"
+    && ./qrlinux_sysroot.sh \
+    && rm -rf /home/docker1000/cross_toolchain/downloads/*
+ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/qrlinux_v3.1.1_sysroot"
 
 ENV PATH="${HEXAGON_SDK_ROOT}/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf_linux/bin":$PATH
 
