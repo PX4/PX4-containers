@@ -13,4 +13,4 @@ export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 sudo apt-get update
-sudo apt-get -y install gazebo6 libgazebo6-dev
+sudo apt-get -y install gazebo6 libgazebo6-dev gstreamer1.0-plugins-base
