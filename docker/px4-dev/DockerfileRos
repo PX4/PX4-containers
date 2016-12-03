@@ -3,7 +3,7 @@
 #
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Andreas Antener <andreas@uaventure.com>
 
 # Install basics
