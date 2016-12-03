@@ -1,0 +1,52 @@
+#
+# PX4 base development environment
+#
+
+FROM ubuntu:xenial
+MAINTAINER Daniel Agar <daniel@agar.ca>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+    && apt-get -y --quiet --no-install-recommends install \
+	astyle \
+	bzip2 \
+	ca-certificates \
+	ccache \
+	cmake \
+	g++ \
+	gcc \
+	genromfs \
+	git \
+	gosu \
+	make \
+	ninja-build \
+	patch \
+	python-argparse \
+	python-empy \
+	rsync \
+	unzip \
+	wget \
+	zip \
+    && apt-get -y autoremove \
+    && apt-get clean autoclean \
+    && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log}
+
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
+    && ln -s /usr/bin/ccache /usr/lib/ccache/c++ 
+
+ENV PATH "/usr/lib/ccache:$PATH"
+ENV DISPLAY :0
+ENV TERM=xterm
+ENV CCACHE_CPP2=1
+
+# SITL UDP PORTS
+EXPOSE 14556/udp
+EXPOSE 14557/udp
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
+

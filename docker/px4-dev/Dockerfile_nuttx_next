@@ -1,0 +1,26 @@
+#
+# PX4 NuttX next development environment
+#
+
+FROM px4io/px4-dev-base
+MAINTAINER Daniel Agar <daniel@agar.ca>
+
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get -y --quiet --no-install-recommends install \
+	libc6:i386 \
+	libgcc1:i386 \
+	libstdc++5:i386 \
+	libstdc++6:i386 \
+    && apt-get -y autoremove \
+    && apt-get clean autoclean \
+    && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log}
+
+RUN mkdir -p /opt/gcc && cd /opt/gcc && \
+    wget -qO- https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q2-update/+download/gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2 | tar jx --strip 1 && \
+    rm -rf /opt/gcc/share/doc
+
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
+    && ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
+
+ENV PATH "$PATH:/opt/gcc/bin"
