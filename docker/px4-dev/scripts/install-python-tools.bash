@@ -46,4 +46,7 @@ python setup.py build
 python setup.py install
 cd ..
 
+# Install px4tools
+pip install px4tools
+
 rm -rf python_src
