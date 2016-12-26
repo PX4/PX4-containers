@@ -24,8 +24,8 @@ RUN apt-get update \
 	patch \
 	python-argparse \
 	python-empy \
-	python-pip \
 	python-numpy \
+	python-pip \
 	rsync \
 	unzip \
 	wget \
