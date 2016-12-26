@@ -24,3 +24,24 @@ docker run -it --privileged \
 docker build -t px4io/px4-dev -f ./Dockerfile .
 docker build -t px4io/px4-dev-ros -f ./DockerfileRos .
 ```
+
+### Building DockerfileSnapdragon
+
+First create the trimmed SDK which is required for the install:
+
+
+Download the following:
+	"https://developer.qualcomm.com/download/hexagon/qualcomm_hexagon_sdk_lnx_3_0_eval.bin"
+	"http://support.intrinsyc.com/attachments/download/1011/qrlSDK.tgz"
+
+```
+./trimSnapdragonSDK.sh
+```
+
+This will create cross_toolchain/trimmedSDK.tgz
+
+This file is used by DockerfileSnapdragon:
+
+```
+docker build -t px4io/px4-dev-snapdragon -f ./DockerfileSnapdragon .
+```

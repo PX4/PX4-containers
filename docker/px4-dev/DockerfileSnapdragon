@@ -37,24 +37,12 @@ USER docker1000
 ENV TERM=xterm
 ENV GIT_SSL_NO_VERIFY=true
 
-RUN cd /home/docker1000 \
-    && git clone https://github.com/ATLFlight/cross_toolchain.git
+ADD cross_toolchain/trimmedSDK.tgz \
+    /home/docker1000/
 
-ADD qualcomm_hexagon_sdk_lnx_3_0_eval.bin \
-    /home/docker1000/cross_toolchain/downloads/qualcomm_hexagon_sdk_lnx_3_0_eval.bin
-
-RUN cd /home/docker1000/cross_toolchain \
-    && ./installv3.sh
 ENV HEXAGON_SDK_ROOT="/home/docker1000/Qualcomm/Hexagon_SDK/3.0"
 ENV HEXAGON_TOOLS_ROOT="/home/docker1000/Qualcomm/HEXAGON_Tools/7.2.12/Tools"
-
-ADD Flight_3.1.1_qrlSDK.zip \
-    /home/docker1000/cross_toolchain/downloads/Flight_3.1.1_qrlSDK.zip
-
-RUN cd /home/docker1000/cross_toolchain \
-    && ./qrlinux_sysroot.sh \
-    && rm -rf /home/docker1000/cross_toolchain/downloads/*
-ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/qrlinux_v3.1.1_sysroot"
+ENV HEXAGON_ARM_SYSROOT="/home/docker1000/Qualcomm/qrlinux_v4_sysroot/merged-rootfs"
 
 ENV PATH="${HEXAGON_SDK_ROOT}/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf_linux/bin":$PATH
 
