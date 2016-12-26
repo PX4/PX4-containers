@@ -8,7 +8,7 @@ MAINTAINER Daniel Agar <daniel@agar.ca>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
-    && apt-get -y --quiet --no-install-recommends install \
+	&& apt-get -y --quiet --no-install-recommends install \
 	astyle \
 	bzip2 \
 	ca-certificates \
@@ -24,21 +24,21 @@ RUN apt-get update \
 	patch \
 	python-argparse \
 	python-empy \
-    python-pip \
-    python-numpy \
+	python-pip \
+	python-numpy \
 	rsync \
 	unzip \
 	wget \
 	zip \
-    && apt-get -y autoremove \
-    && apt-get clean autoclean \
-    && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} \
-    && pip install --upgrade pip \
-    && pip install setuptools \
-    && pip install px4tools
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} \
+	&& pip install --upgrade pip \
+	&& pip install setuptools \
+	&& pip install px4tools
 
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
-    && ln -s /usr/bin/ccache /usr/lib/ccache/c++ 
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++
 
 ENV PATH "/usr/lib/ccache:$PATH"
 ENV DISPLAY :0
@@ -54,4 +54,3 @@ COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["/bin/bash"]
-
