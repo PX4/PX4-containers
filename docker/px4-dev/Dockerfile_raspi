@@ -1,0 +1,17 @@
+#
+# PX4 build for RPi and Parrot Bebop
+#
+# This contains the steps to build for the POSIX Linux running on
+# Raspberry Pi or Parrot Bebop
+#
+
+FROM px4io/px4-dev-base
+MAINTAINER Michael Schaeuble
+
+RUN mkdir -p /home/user \
+    && git clone https://github.com/pixhawk/rpi_toolchain.git /home/user/rpi_toolchain \
+    && cd /home/user/rpi_toolchain \
+    && ./install_cross.sh /home/user/rpi_toolchain_install \
+    && rm -rf /home/user/rpi_toolchain
+
+ENV RPI_TOOLCHAIN_DIR=/home/user/rpi_toolchain_install
