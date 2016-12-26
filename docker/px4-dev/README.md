@@ -13,14 +13,17 @@ docker run -it --privileged \
 	-v <local_src>:<container_src>:rw \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=:0 \
-	-p 14556:14556/udp \
-	--name=container_name px4io/px4-dev bash
+	--name=container_name px4io/px4-dev-simulation /bin/bash
 
 ```
 
 ## Building ##
 
 ```
-docker build -t px4io/px4-dev -f ./Dockerfile .
-docker build -t px4io/px4-dev-ros -f ./DockerfileRos .
+docker build -t px4io/px4-dev-base -f Dockerfile_base .
+docker build -t px4io/px4-dev-nuttx -f Dockerfile_nuttx .
+docker build -t px4io/px4-dev-raspi -f Dockerfile_raspi .
+docker build -t px4io/px4-dev-simulation -f Dockerfile_simulation .
+docker build -t px4io/px4-dev-ros -f Dockerfile_ros .
+
 ```
