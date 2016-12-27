@@ -12,6 +12,7 @@ RUN mkdir -p /home/user \
 	&& git clone https://github.com/pixhawk/rpi_toolchain.git /home/user/rpi_toolchain \
 	&& cd /home/user/rpi_toolchain \
 	&& ./install_cross.sh /home/user/rpi_toolchain_install \
-	&& rm -rf /home/user/rpi_toolchain
+	&& rm -rf /home/user/rpi_toolchain \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 ENV RPI_TOOLCHAIN_DIR=/home/user/rpi_toolchain_install
