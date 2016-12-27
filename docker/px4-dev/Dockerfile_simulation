@@ -17,6 +17,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libopencv-dev \
 		openjdk-8-jdk \
 		protobuf-compiler \
+		python-dev \
 		python-numpy \
 		python-pip \
 	&& apt-get -y autoremove \
@@ -24,7 +25,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} \
 	&& pip install --upgrade pip \
 	&& pip install setuptools \
-	&& pip install px4tools
+	&& pip install px4tools pymavlink dronekit
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
