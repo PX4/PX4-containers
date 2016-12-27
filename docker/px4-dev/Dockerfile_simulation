@@ -22,10 +22,16 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		python-pip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} \
+	# px4tools, pymavlink
 	&& pip install --upgrade pip \
 	&& pip install setuptools \
-	&& pip install px4tools pymavlink dronekit
+	&& pip install px4tools pymavlink \
+	# dronekit
+	&& git clone https://github.com/dronekit/dronekit-python.git \
+	&& cd dronekit-python && pip install -r requirements.txt \
+	&& cd .. && rm -rf dronekit-python \
+	# cleanup
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1

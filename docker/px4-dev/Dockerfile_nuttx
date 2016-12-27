@@ -14,7 +14,7 @@ RUN dpkg --add-architecture i386 \
 		libstdc++6:i386 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log}
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN mkdir -p /opt/gcc && cd /opt/gcc && \
 	wget -qO- https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q3-update/+download/gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2 | tar jx --strip 1 && \

@@ -31,9 +31,9 @@ RUN apt-get update \
 		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 ENV PATH "/usr/lib/ccache:$PATH"
 ENV DISPLAY :0
