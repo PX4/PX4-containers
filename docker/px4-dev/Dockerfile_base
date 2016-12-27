@@ -19,6 +19,7 @@ RUN apt-get update \
 		genromfs \
 		git \
 		gosu \
+		lcov \
 		make \
 		ninja-build \
 		patch \
