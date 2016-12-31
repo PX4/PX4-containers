@@ -29,6 +29,7 @@ RUN apt-get update \
 		sudo \
 		unzip \
 		wget \
+		xsltproc \
 		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
