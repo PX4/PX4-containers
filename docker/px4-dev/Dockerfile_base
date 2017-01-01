@@ -25,6 +25,7 @@ RUN apt-get update \
 		patch \
 		python-argparse \
 		python-empy \
+		python-serial \
 		rsync \
 		sudo \
 		unzip \
