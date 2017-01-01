@@ -24,7 +24,9 @@ RUN apt-get update \
 		ninja-build \
 		patch \
 		python-argparse \
+		python-dev \
 		python-empy \
+		python-pip \
 		python-serial \
 		rsync \
 		sudo \
@@ -34,9 +36,19 @@ RUN apt-get update \
 		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
+	# coveralls
+	&& pip install --upgrade pip \
+	&& pip install setuptools \
+	&& pip install cpp-coveralls \
+	# dronekit
+	&& git clone https://github.com/dronekit/dronekit-python.git \
+	&& cd dronekit-python && pip install -r requirements.txt \
+	&& cd .. && rm -rf dronekit-python \
+	# cleanup
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
+	# manual ccache setup for cc and c++
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++
 
 ENV PATH "/usr/lib/ccache:$PATH"
 ENV DISPLAY :0
