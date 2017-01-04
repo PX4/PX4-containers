@@ -38,10 +38,12 @@ RUN apt-get update \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-ENV PATH "/usr/lib/ccache:$PATH"
-ENV DISPLAY :0
-ENV TERM=xterm
 ENV CCACHE_CPP2=1
+ENV CCACHE_MAXSIZE=1G
+ENV CCACHE_TEMPDIR=/tmp/.ccache
+ENV DISPLAY :0
+ENV PATH "/usr/lib/ccache:$PATH"
+ENV TERM=xterm
 
 # SITL UDP PORTS
 EXPOSE 14556/udp
