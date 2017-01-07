@@ -19,12 +19,9 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		protobuf-compiler \
 		python-dev \
 		python-numpy \
-		python-pip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# px4tools, pymavlink
-	&& pip install --upgrade pip \
-	&& pip install setuptools \
 	&& pip install px4tools pymavlink \
 	# dronekit
 	&& git clone https://github.com/dronekit/dronekit-python.git \
