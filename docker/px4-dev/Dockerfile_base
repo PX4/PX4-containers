@@ -40,7 +40,6 @@ RUN apt-get update \
 
 ENV CCACHE_CPP2=1
 ENV CCACHE_MAXSIZE=1G
-ENV CCACHE_TEMPDIR=/tmp/.ccache
 ENV DISPLAY :0
 ENV PATH "/usr/lib/ccache:$PATH"
 ENV TERM=xterm
