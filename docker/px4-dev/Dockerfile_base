@@ -28,6 +28,7 @@ RUN apt-get update \
 		python-pip \
 		python-serial \
 		rsync \
+		s3cmd \
 		sudo \
 		unzip \
 		wget \
