@@ -21,6 +21,7 @@ RUN wget --quiet http://apt.llvm.org/llvm-snapshot.gpg.key -O - | apt-key add - 
 	&& update-alternatives --install /usr/bin/clang clang /usr/bin/clang-4.0 1 \
 	&& update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-4.0 1 \
 	&& update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-4.0 1 \
+	&& update-alternatives --install /usr/bin/run-clang-tidy.py run-clang-tidy.py /usr/bin/run-clang-tidy-4.0.py 1 \
 	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
