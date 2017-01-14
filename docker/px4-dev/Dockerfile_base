@@ -36,12 +36,17 @@ RUN apt-get update \
 		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	# coveralls
+	# pip
 	&& pip install --upgrade pip \
 	&& pip install setuptools \
+	# coveralls code coverage reporting
 	&& pip install cpp-coveralls \
+	# jinja template generation
+	&& pip install jinja2 \
+	# manual ccache setup
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
+	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 ENV CCACHE_CPP2=1
