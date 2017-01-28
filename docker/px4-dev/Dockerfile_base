@@ -9,7 +9,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
-		astyle \
 		bzip2 \
 		ca-certificates \
 		ccache \
@@ -43,6 +42,9 @@ RUN apt-get update \
 	&& pip install cpp-coveralls \
 	# jinja template generation
 	&& pip install jinja2 \
+	# astyle v2.06
+	&& wget https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz -O /tmp/astyle.tar.gz \
+	&& tar -xvf /tmp/astyle.tar.gz && cd astyle/src && make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin && cd .. && rm -rf astyle \
 	# manual ccache setup
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
