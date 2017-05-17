@@ -15,4 +15,7 @@ RUN mkdir -p /home/user \
 	&& rm -rf /home/user/rpi_toolchain \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+# TODO: Remove this line after the toolchain update PR gets merged
 ENV RPI_TOOLCHAIN_DIR=/home/user/rpi_toolchain_install
+
+ENV PATH="/home/user/rpi_toolchain_install/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH"
