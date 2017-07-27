@@ -36,6 +36,7 @@ RUN apt-get update \
 		wget \
 		xsltproc \
 		zip \
+		openjdk-8-jdk-headless \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# pip
@@ -52,12 +53,9 @@ RUN apt-get update \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
 	# cleanup
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
-
-# Add Fast-RTPS
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
-		openjdk-8-jdk-headless 
-RUN cd /tmp \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
+	# Add Fast-RTPS
+	&& cd /tmp \
 	&& cd /opt && curl http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz?format=raw | tar xz eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen \
 	&& ln -s /opt/eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
 	&& mkdir -p /usr/local/share/fastrtps && ln -s /opt/eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar
