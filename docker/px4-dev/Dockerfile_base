@@ -54,6 +54,13 @@ RUN apt-get update \
 	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+# Add Fast-RTPS
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		openjdk-8-jdk-headless \
+		gradle \
+	&& cd /tmp && git clone https://github.com/eProsima/Fast-RTPS.git && cd Fast-RTPS && mkdir build && cd build \
+	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. && make && make install
+
 ENV CCACHE_CPP2=1
 ENV CCACHE_MAXSIZE=1G
 ENV DISPLAY :0
