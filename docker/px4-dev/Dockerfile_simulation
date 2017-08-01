@@ -41,3 +41,6 @@ ENV QT_X11_NO_MITSHM 1
 # http://answers.gazebosim.org/question/13214/virtual-machine-not-launching-gazebo/
 # https://www.mesa3d.org/vmware-guest.html
 ENV SVGA_VGPU10 0
+
+# Use UTF8 encoding in java tools (needed to compile jMAVSim)
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
