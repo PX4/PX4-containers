@@ -8,15 +8,19 @@ MAINTAINER Daniel Agar <daniel@agar.ca>
 RUN dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
+		autoconf \
+		automake \
 		bison \
+		build-essential \
+		file \
 		flex \
 		genromfs \
 		gperf \
 		libc6:i386 \
 		libgcc1:i386 \
 		libncurses-dev \
-		libstdc++5:i386 \
-		libstdc++6:i386 \
+		libtool \
+		pkg-config \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# gcc-arm-embedded 5-2016-q3-update (https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads)
@@ -29,7 +33,8 @@ RUN dpkg --add-architecture i386 \
 	# nuttx tools
 	&& git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
 	&& cd /tmp/tools/kconfig-frontends \
-	&& ./configure --enable-mconf -prefix=/usr && make && make install \
+	&& autoreconf -f -i \
+	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make && make install \
 	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
