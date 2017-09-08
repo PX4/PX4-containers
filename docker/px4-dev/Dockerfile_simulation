@@ -16,6 +16,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libgazebo7-dev \
 		libopencv-dev \
 		openjdk-8-jdk \
+		pkg-config \
 		protobuf-compiler \
 		python-dev \
 		python-numpy \
