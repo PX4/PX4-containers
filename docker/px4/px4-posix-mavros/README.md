@@ -1,4 +1,7 @@
 # Mavros container
+
+This image derives from [px4-posix-ros-build](../px4-posix-ros-build) and compiles mavros from sources.
+
 ## Quick start
 
 Run mavros on the default `fcu_url` (`udp://:14540@127.0.0.1:14557`) with the following command:
