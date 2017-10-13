@@ -7,7 +7,7 @@
 # Parrot Bebop, or OcPoC-Zynq 
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:pr-jlecoeur
 
 RUN apt-get -y --quiet --no-install-recommends install \
 	gcc-arm-linux-gnueabihf \

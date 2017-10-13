@@ -2,7 +2,7 @@
 # PX4 NuttX development environment
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:pr-jlecoeur
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN dpkg --add-architecture i386 \
