@@ -1,0 +1,33 @@
+#
+# PX4 development environment based on Arch Linux
+#
+
+FROM archlinux/base:latest
+MAINTAINER Julien Lecoeur <julien.lecoeur@gmail.com>
+
+# Install required PX4 packages
+COPY scripts/archlinux_install_script.sh archlinux_install_script.sh
+RUN ./archlinux_install_script.sh
+
+RUN	\
+	# Install gosu
+	curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > /usr/sbin/gosu \
+	&& chmod +x /usr/sbin/gosu \
+	# Add group dialout
+	&& groupadd dialout
+
+ENV CCACHE_CPP2=1
+ENV CCACHE_MAXSIZE=1G
+ENV DISPLAY :0
+ENV PATH "/usr/lib/ccache:$PATH"
+ENV TERM=xterm
+
+# SITL UDP PORTS
+EXPOSE 14556/udp
+EXPOSE 14557/udp
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
