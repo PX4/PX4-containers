@@ -4,12 +4,14 @@
 # all required packages for PX4 development on 
 # posix and nuttx targets
 
-# Install required PX4 packages
+# Install required packages
 yes | pacman -Sy --noconfirm \
 		base-devel \
 		make \
 		cmake \
-		git-core \
+		ccache \
+		git \
+		ninja \
 		python-pip \
 		tar \
         unzip \
