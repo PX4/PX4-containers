@@ -15,11 +15,8 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libeigen3-dev \
 		libgazebo7-dev \
 		libopencv-dev \
-		openjdk-8-jdk \
 		pkg-config \
 		protobuf-compiler \
-		python-dev \
-		python-numpy \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# cleanup
