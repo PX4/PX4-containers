@@ -18,4 +18,8 @@ RUN mkdir -p /home/user \
 # TODO: Remove this line after the toolchain update PR gets merged
 ENV RPI_TOOLCHAIN_DIR=/home/user/rpi_toolchain_install
 
-ENV PATH="/home/user/rpi_toolchain_install/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH"
+ENV PATH="$PATH:/home/user/rpi_toolchain_install/gcc-linaro-arm-linux-gnueabihf-raspbian/bin"
+
+# manual ccache setup
+RUN	ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-gcc \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-g++
