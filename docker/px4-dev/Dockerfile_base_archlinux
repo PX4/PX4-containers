@@ -16,10 +16,12 @@ RUN	\
 	# Add group dialout
 	&& groupadd dialout
 
-ENV CCACHE_CPP2=1
+# manual ccache setup
+RUN	ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-gcc \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-g++
+
 ENV CCACHE_MAXSIZE=1G
-ENV DISPLAY :0
-ENV PATH "/usr/lib/ccache:$PATH"
+ENV PATH "/usr/lib/ccache/bin:$PATH"
 ENV TERM=xterm
 
 # SITL UDP PORTS
