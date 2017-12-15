@@ -6,20 +6,20 @@
 
 # Install required packages
 yes | pacman -Sy --noconfirm \
+		arm-none-eabi-gcc \
+		arm-none-eabi-newlib \
 		base-devel \
-		make \
-		cmake \
 		ccache \
+		cmake \
 		git \
+		make \
 		ninja \
 		python-pip \
 		tar \
-        unzip \
+		unzip \
 		vim \
 		wget \
-		zip \
-		arm-none-eabi-gcc \
-		arm-none-eabi-newlib
+		zip
 
 # Install genromfs
 wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.5.2.tar.gz
@@ -29,8 +29,8 @@ rm genromfs-0.5.2.tar.gz genromfs-0.5.2 -r
 
 # Install python dependencies
 pip install \
-		serial \
 		empy \
+		jinja2 \
 		numpy \
-		toml \
-		jinja2
+		serial \
+		toml
