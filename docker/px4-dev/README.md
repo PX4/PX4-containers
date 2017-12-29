@@ -8,8 +8,8 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
  - px4-dev-base
    - px4-dev-nuttx
-     - px4-dev-simulation
-       - px4-dev-ros
+   - px4-dev-simulation
+     - px4-dev-ros
    - px4-dev-raspi
    - px4-dev-snapdragon
    - px4-dev-clang

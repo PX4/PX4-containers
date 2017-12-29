@@ -11,7 +11,6 @@ RUN apt-get update \
 		ca-certificates \
 		ccache \
 		cmake \
-		curl \
 		default-jre-headless \
 		g++ \
 		gcc \
@@ -28,25 +27,36 @@ RUN apt-get update \
 		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	# pip
-	&& pip install --upgrade pip \
-	&& pip install setuptools && pip install argparse jinja2 empy numpy serial toml \
-	# astyle v2.06
-	&& cd /tmp && wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz && tar zxf astyle_2.06_linux.tar.gz && cd astyle/src && make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
-	# bloaty - https://github.com/google/bloaty
-	&& git clone https://github.com/google/bloaty.git /tmp/bloaty && cd /tmp/bloaty && cmake -GNinja . && ninja bloaty && cp bloaty /usr/local/bin/ \
-	# manual ccache setup
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
-	# Add Fast-RTPS
-	&& cd /opt && curl http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz?format=raw | tar xz eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen \
-	&& ln -s /opt/eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
-	&& mkdir -p /usr/local/share/fastrtps && ln -s /opt/eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
-	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-ENV CCACHE_MAXSIZE=1G
-ENV PATH "/usr/lib/ccache:$PATH"
+RUN pip install --upgrade pip \
+	&& pip install setuptools \
+	&& pip install argparse jinja2 empy numpy serial toml
+
+# manual ccache setup
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++
+
+# astyle v2.06
+RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz -O /tmp/astyle.tar.gz \
+	&& cd /tmp && tar zxf astyle.tar.gz && cd astyle/src \
+	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
+	&& rm -rf /tmp/*
+
+# bloaty - https://github.com/google/bloaty
+RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
+	&& cd /tmp/bloaty && cmake -GNinja . && ninja bloaty && cp bloaty /usr/local/bin/ \
+	&& rm -rf /tmp/*
+
+# Fast-RTPS
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& mkdir -p /usr/local/share/fastrtps \
+	&& cp eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
+	&& cp eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& rm -rf /tmp/*
+
+ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
 
 # SITL UDP PORTS

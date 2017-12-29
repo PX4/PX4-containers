@@ -5,37 +5,40 @@
 FROM px4io/px4-dev-base
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
-RUN dpkg --add-architecture i386 \
-	&& apt-get update \
-	&& apt-get -y --quiet --no-install-recommends install \
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		autoconf \
 		automake \
 		bison \
 		build-essential \
+		bzip2 \
 		file \
 		flex \
 		genromfs \
 		gperf \
-		libc6:i386 \
-		libgcc1:i386 \
 		libncurses-dev \
 		libtool \
 		pkg-config \
+		vim-common \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	# gcc-arm-embedded 5-2016-q3-update (https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads)
-	&& mkdir -p /opt/gcc && cd /opt/gcc \
-	&& wget -qO- "https://developer.arm.com/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2?product=GNU%20ARM%20Embedded%20Toolchain,32-bit,,Linux,5-2016-q3-update" | tar jx --strip 1 \
-	&& rm -rf /opt/gcc/share/doc \
-	# manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc \
-	# nuttx tools
-	&& git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# GNU Arm Embedded Toolchain: 7-2017-q4-major December 18, 2017
+RUN mkdir -p /opt/gcc && cd /opt/gcc \
+	&& wget -qO- "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2" | tar jx --strip 1 \
+	&& rm -rf /opt/gcc/share/doc
+
+ENV PATH="$PATH:/opt/gcc/bin"
+
+# manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
+
+# nuttx tools
+RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
 	&& cd /tmp/tools/kconfig-frontends \
 	&& autoreconf -f -i \
 	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make && make install \
-	# cleanup
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+	&& rm -rf /tmp/*
 
-ENV PATH "$PATH:/opt/gcc/bin"
