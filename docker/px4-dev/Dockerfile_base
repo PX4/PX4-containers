@@ -12,6 +12,7 @@ RUN apt-get update \
 		ccache \
 		cmake \
 		curl \
+		default-jre-headless \
 		g++ \
 		gcc \
 		git \
@@ -19,15 +20,9 @@ RUN apt-get update \
 		lcov \
 		make \
 		ninja-build \
-		openjdk-8-jdk-headless \
-		patch \
 		python-pip \
-		python-software-properties \
 		rsync \
-		software-properties-common \
-		sudo \
 		unzip \
-		vim-common \
 		wget \
 		xsltproc \
 		zip \
@@ -37,10 +32,9 @@ RUN apt-get update \
 	&& pip install --upgrade pip \
 	&& pip install setuptools && pip install argparse jinja2 empy numpy serial toml \
 	# astyle v2.06
-	&& wget https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz -O /tmp/astyle.tar.gz \
-	&& tar -xvf /tmp/astyle.tar.gz && cd astyle/src && make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin && cd .. && rm -rf astyle \
+	&& cd /tmp && wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz && tar zxf astyle_2.06_linux.tar.gz && cd astyle/src && make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
 	# bloaty - https://github.com/google/bloaty
-	&& git clone https://github.com/google/bloaty.git /tmp/bloaty && cd /tmp/bloaty && cmake . && make && cp bloaty /usr/local/bin/ \
+	&& git clone https://github.com/google/bloaty.git /tmp/bloaty && cd /tmp/bloaty && cmake -GNinja . && ninja bloaty && cp bloaty /usr/local/bin/ \
 	# manual ccache setup
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++ \
