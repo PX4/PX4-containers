@@ -26,3 +26,4 @@ RUN wget --quiet http://apt.llvm.org/llvm-snapshot.gpg.key -O - | apt-key add - 
 	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+ENV CCACHE_CPP2=1
