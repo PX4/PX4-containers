@@ -8,7 +8,7 @@ MAINTAINER Daniel Agar <daniel@agar.ca>
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
 	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main" > /etc/apt/sources.list.d/gazebo-stable.list' \
 	&& apt-get update \
-	&& apt-get -y --quiet --no-install-recommends install \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		ant \
 		gazebo7 \
 		gstreamer1.0-plugins-base \
@@ -17,16 +17,12 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libopencv-dev \
 		pkg-config \
 		protobuf-compiler \
-	# install MAVLink headers
-	&& git clone https://github.com/mavlink/c_library_v1.git \
-	&& git clone https://github.com/mavlink/c_library_v2.git \
-	&& mkdir -p /usr/local/mavlink/v1.0 && mkdir -p /usr/local/mavlink/v2.0 \
-	&& cp -r $PWD/c_library_v1/. /usr/local/mavlink/v1.0 && cp -r $PWD/c_library_v2/. /usr/local/mavlink/v2.0 \
-	# cleanup
-	&& rm -rf c_library_v1 && rm -rf c_library_v2 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# install MAVLink headers
+RUN	git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/include/mavlink/v2.0 && rm -rf /usr/local/include/mavlink/v2.0/.git
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
