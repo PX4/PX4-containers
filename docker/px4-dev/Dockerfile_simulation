@@ -17,9 +17,15 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libopencv-dev \
 		pkg-config \
 		protobuf-compiler \
+	# install MAVLink headers
+	&& git clone https://github.com/mavlink/c_library_v1.git \
+	&& git clone https://github.com/mavlink/c_library_v2.git \
+	&& mkdir -p /usr/local/mavlink/v1.0 && mkdir -p /usr/local/mavlink/v2.0 \
+	&& cp -r $PWD/c_library_v1/. /usr/local/mavlink/v1.0 && cp -r $PWD/c_library_v2/. /usr/local/mavlink/v2.0 \
+	# cleanup
+	&& rm -rf c_library_v1 && rm -rf c_library_v2 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	# cleanup
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 # Some QT-Apps/Gazebo don't not show controls without this
