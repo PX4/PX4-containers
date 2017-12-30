@@ -22,7 +22,7 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# pip
-	&& pip install matplotlib numpy px4tools \
+	&& pip install matplotlib numpy px4tools pymavlink \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
