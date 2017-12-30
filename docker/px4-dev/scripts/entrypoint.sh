@@ -23,4 +23,8 @@ else
 	export CCACHE_DISABLE=1
 fi
 
+if [ -f /opt/ros/kinetic/setup.bash ]; then
+	source /opt/ros/kinetic/setup.bash
+fi
+
 exec gosu user "$@"
