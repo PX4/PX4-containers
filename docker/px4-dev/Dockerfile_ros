@@ -27,4 +27,4 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 
 RUN rosdep init && rosdep update
 
-RUN source /opt/ros/kinetic/setup.bash
+RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
