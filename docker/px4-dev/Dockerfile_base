@@ -31,7 +31,7 @@ RUN apt-get update \
 
 RUN pip install --upgrade pip \
 	&& pip install setuptools \
-	&& pip install argparse jinja2 empy numpy serial toml
+	&& pip install argparse jinja2 empy numpy requests serial toml
 
 # manual ccache setup
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
