@@ -43,11 +43,6 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
-# bloaty - https://github.com/google/bloaty
-RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
-	&& cd /tmp/bloaty && cmake -GNinja . && ninja bloaty && cp bloaty /usr/local/bin/ \
-	&& rm -rf /tmp/*
-
 # Fast-RTPS
 RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
