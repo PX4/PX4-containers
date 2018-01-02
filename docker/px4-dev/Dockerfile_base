@@ -11,6 +11,7 @@ RUN apt-get update \
 		ca-certificates \
 		ccache \
 		cmake \
+		curl \
 		default-jre-headless \
 		g++ \
 		gcc \
