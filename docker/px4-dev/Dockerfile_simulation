@@ -15,6 +15,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libeigen3-dev \
 		libgazebo7-dev \
 		libopencv-dev \
+		libxml2-utils \
 		pkg-config \
 		protobuf-compiler \
 	&& apt-get -y autoremove \
