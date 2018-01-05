@@ -7,11 +7,13 @@ MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
-		python-dev \
+		python3-dev \
+		python3-pip \
+		python3-setuptools \
 		swig3.0 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
-	# pip
+	# pip3
 	&& wget -q https://raw.githubusercontent.com/PX4/ecl/master/EKF/tests/pytest/requirements.txt \
-	&& pip install -r requirements.txt && rm -rf requirements
+	&& pip3 install -r requirements.txt && rm -rf requirements.txt
