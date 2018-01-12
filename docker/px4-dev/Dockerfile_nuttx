@@ -29,7 +29,7 @@ RUN mkdir -p /opt/gcc && cd /opt/gcc \
 	&& wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2 | tar jx --strip 1 \ 
 	&& rm -rf /opt/gcc/share/doc
 
-ENV PATH="/opt/gcc/bin:$PATH"
+ENV PATH="$PATH:/opt/gcc/bin"
 
 # manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
