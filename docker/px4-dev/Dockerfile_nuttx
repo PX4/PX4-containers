@@ -26,7 +26,7 @@ RUN apt-get update \
 
 # GNU Arm Embedded Toolchain: 7-2017-q4-major December 18, 2017
 RUN mkdir -p /opt/gcc && cd /opt/gcc \
-	&& wget -qO- "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2" | tar jx --strip 1 \
+	&& wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2 | tar jx --strip 1 \ 
 	&& rm -rf /opt/gcc/share/doc
 
 ENV PATH="$PATH:/opt/gcc/bin"
