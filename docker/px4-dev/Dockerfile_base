@@ -13,6 +13,7 @@ RUN apt-get update \
 		cmake \
 		curl \
 		default-jre-headless \
+		doxygen \
 		g++ \
 		gcc \
 		git \
