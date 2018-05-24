@@ -2,7 +2,7 @@
 # PX4 base development environment
 #
 
-FROM ubuntu:xenial
+FROM ubuntu:18.04
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-get update \
@@ -11,6 +11,7 @@ RUN apt-get update \
 		ca-certificates \
 		ccache \
 		cmake \
+		cppcheck \
 		curl \
 		doxygen \
 		g++ \
