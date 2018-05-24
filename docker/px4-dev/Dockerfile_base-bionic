@@ -7,43 +7,22 @@ LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
-		bzip2 \
-		ca-certificates \
-		ccache \
-		cmake \
+ADD https://raw.githubusercontent.com/PX4/Firmware/master/Tools/setup/ubuntu.sh /tmp/ubuntu.sh
+ADD https://raw.githubusercontent.com/PX4/Firmware/master/Tools/setup/requirements.txt /tmp/requirements.txt
+
+RUN cd /tmp && bash ubuntu.sh --no-nuttx --no-sim-tools \
+	&& apt-get update && apt-get -y --quiet --no-install-recommends install \
 		cppcheck \
-		curl \
-		dirmngr \
 		doxygen \
-		file \
-		g++ \
-		gcc \
-		gdb \
-		git \
 		gnupg \
 		gosu \
 		lcov \
-		libfreetype6-dev \
 		libgtest-dev \
-		libpng-dev \
 		lsb-release \
-		make \
-		ninja-build \
-		openjdk-8-jdk \
-		openjdk-8-jre \
 		openssh-client \
-		pkg-config \
-		python-pip \
-		python-pygments \
-		python-setuptools \
-		rsync \
 		shellcheck \
 		tzdata \
-		unzip \
-		wget \
 		xsltproc \
-		zip \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
