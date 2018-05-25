@@ -13,6 +13,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -34,6 +35,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -59,6 +61,7 @@ pipeline {
               CXX = 'clang++'
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -80,6 +83,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -101,6 +105,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -122,6 +127,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -143,6 +149,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -164,6 +171,7 @@ pipeline {
             }
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
@@ -189,6 +197,7 @@ pipeline {
               CXX = 'clang++'
           }
           steps {
+            sh 'docker images'
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
