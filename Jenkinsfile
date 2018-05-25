@@ -37,7 +37,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_simulation'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
@@ -52,13 +52,13 @@ pipeline {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_ros'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
-              sh 'make posix_sitl_default'
+              sh 'make posix_sitl_default sitl_gazebo'
             }
           }
         }
