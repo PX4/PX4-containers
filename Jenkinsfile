@@ -25,6 +25,27 @@ pipeline {
           }
         }
 
+        stage('px4-dev-base_archlinux') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_base_archlinux'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make posix_sitl_default'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
         stage('px4-dev-clang') {
           agent {
             dockerfile {
@@ -65,6 +86,27 @@ pipeline {
               sh 'make clean'
               sh 'ccache -z'
               sh 'make px4fmu-v2_default'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-nuttx_clang') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_nuttx_clang'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              //sh 'make px4fmu-v2_default'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -130,6 +172,26 @@ pipeline {
               sh 'make posix_bebop_default'
               sh 'ccache -s'
               sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-ecl') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ecl'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          environment {
+              CC = 'clang'
+              CXX = 'clang++'
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
             }
           }
         }
