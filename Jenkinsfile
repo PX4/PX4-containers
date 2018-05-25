@@ -3,17 +3,49 @@ pipeline {
   stages {
     stage('Build') {
       parallel {
+
         stage('px4-dev-base') {
           agent {
             dockerfile {
-              filename 'docker/px4-dev/Dockerfile_base'
+              filename 'Dockerfile_base'
+              dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
               sh 'make posix_sitl_default'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-clang') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_clang'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          environment {
+              CC = 'clang'
+              CXX = 'clang++'
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make posix_sitl_default'
+              sh 'ccache -s'
+              sh 'make clean'
             }
           }
         }
@@ -21,14 +53,20 @@ pipeline {
         stage('px4-dev-nuttx') {
           agent {
             dockerfile {
-              filename 'docker/px4-dev/Dockerfile_nuttx'
+              filename 'Dockerfile_nuttx'
+              dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
               sh 'make px4fmu-v2_default'
+              sh 'ccache -s'
+              sh 'make clean'
             }
           }
         }
@@ -36,14 +74,20 @@ pipeline {
         stage('px4-dev-simulation') {
           agent {
             dockerfile {
-              filename 'docker/px4-dev/Dockerfile_simulation'
+              filename 'Dockerfile_simulation'
+              dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
               sh 'make posix_sitl_default sitl_gazebo'
+              sh 'ccache -s'
+              sh 'make clean'
             }
           }
         }
@@ -51,14 +95,41 @@ pipeline {
         stage('px4-dev-ros') {
           agent {
             dockerfile {
-              filename 'docker/px4-dev/Dockerfile_ros'
+              filename 'Dockerfile_ros'
+              dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
               sh 'make posix_sitl_default sitl_gazebo'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-armhf') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_armhf'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make posix_bebop_default'
+              sh 'ccache -s'
+              sh 'make clean'
             }
           }
         }
