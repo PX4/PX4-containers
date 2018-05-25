@@ -20,8 +20,6 @@ RUN apt-get update \
 		lcov \
 		make \
 		ninja-build \
-		python-gencpp \
-		python-genmsg \
 		python-pip \
 		rsync \
 		unzip \
@@ -33,7 +31,7 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN pip install --upgrade pip \
-	&& pip install setuptools \
+	&& pip install setuptools wheel \
 	&& pip install argparse jinja2 empy numpy requests serial toml
 
 # manual ccache setup

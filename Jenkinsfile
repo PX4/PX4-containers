@@ -3,15 +3,18 @@ pipeline {
   stages {
     stage('Build') {
       parallel {
-
         stage('px4-dev-base') {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_base'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
-            sh 'uname -a'
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'make posix_sitl_default'
+            }
           }
         }
 
@@ -19,10 +22,14 @@ pipeline {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_nuttx'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
-            sh 'uname -a'
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'make px4fmu-v2_default'
+            }
           }
         }
 
@@ -30,10 +37,14 @@ pipeline {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_simulation'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
-            sh 'uname -a'
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'make posix_sitl_default sitl_gazebo'
+            }
           }
         }
 
@@ -41,14 +52,28 @@ pipeline {
           agent {
             dockerfile {
               filename 'docker/px4-dev/Dockerfile_ros'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
           steps {
-            sh 'uname -a'
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'make posix_sitl_default'
+            }
           }
         }
 
       }
     }
   }
+
+  environment {
+    CCACHE_DIR = '/tmp/ccache'
+    CI = true
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactDaysToKeepStr: '30'))
+    timeout(time: 60, unit: 'MINUTES')
+  }
+
 }
