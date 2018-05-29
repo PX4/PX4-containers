@@ -14,6 +14,7 @@ RUN apt-get update \
 		curl \
 		default-jre-headless \
 		doxygen \
+		gdb \
 		g++ \
 		gcc \
 		git \
