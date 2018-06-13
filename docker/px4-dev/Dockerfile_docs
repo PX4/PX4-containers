@@ -1,0 +1,30 @@
+#
+# PX4 docs build environment
+#
+
+FROM ubuntu:18.04
+MAINTAINER Daniel Agar <daniel@agar.ca>
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		ca-certificates \
+		git \
+		gosu \
+		nodejs \
+		npm \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+RUN npm config set registry http://registry.npmjs.org/ \
+	&& npm install gitbook-cli -g \
+	&& gitbook install
+
+# TODO
+#  gem install html-proofer (needs ruby-dev, etc)
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
