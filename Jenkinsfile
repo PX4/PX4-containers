@@ -196,6 +196,26 @@ pipeline {
           }
         }
 
+        stage('px4-docs') {
+          environment {
+            HOME = "${WORKSPACE}"
+          }
+          agent {
+            dockerfile {
+              filename 'Dockerfile_docs'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Devguide.git'
+            dir(path: 'Devguide') {
+              sh 'export'
+              //sh 'gitbook build'
+            }
+          }
+        }
+
       }
     }
   }
