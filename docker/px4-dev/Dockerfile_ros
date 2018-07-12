@@ -19,6 +19,9 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 		ros-kinetic-mavros \
 		ros-kinetic-mavros-extras \
 		ros-kinetic-ros-base \
+		ros-kinetic-pcl-conversions \
+		ros-kinetic-pcl-ros \
+		ros-kinetic-pcl-msgs \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
