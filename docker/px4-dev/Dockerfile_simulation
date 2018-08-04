@@ -16,8 +16,6 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libgazebo7-dev \
 		libopencv-dev \
 		libxml2-utils \
-		openjdk-8-jdk \
-		openjdk-8-jre \
 		pkg-config \
 		protobuf-compiler \
 	&& apt-get -y autoremove \
