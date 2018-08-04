@@ -1,7 +1,7 @@
 
 .PHONY: px4-dev-base px4-dev-nuttx px4-dev-simulation px4-dev-ros
 
-all: px4-dev-base px4-dev-nuttx px4-dev-simulation px4-dev-ros px4-dev-raspi px4-dev-armhf px4-dev-clang px4-dev-nuttx-cclang px4-dev-base-archlinux
+all: px4-dev-base px4-dev-nuttx px4-dev-simulation px4-dev-ros px4-dev-raspi px4-dev-armhf px4-dev-clang px4-dev-nuttx-clang px4-dev-base-archlinux
 
 px4-dev-base:
 	docker build -t px4io/px4-dev-base . -f Dockerfile_base
