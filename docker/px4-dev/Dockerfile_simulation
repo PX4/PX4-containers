@@ -14,6 +14,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		gstreamer1.0-plugins-base \
 		libeigen3-dev \
 		libgazebo7-dev \
+		libimage-exiftool-perl \
 		libopencv-dev \
 		libxml2-utils \
 		pkg-config \
