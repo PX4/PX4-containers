@@ -13,9 +13,9 @@ RUN apt-get update \
 		cmake \
 		curl \
 		doxygen \
-		gdb \
 		g++ \
 		gcc \
+		gdb \
 		git \
 		gosu \
 		lcov \
@@ -23,6 +23,7 @@ RUN apt-get update \
 		ninja-build \
 		openjdk-8-jdk \
 		openjdk-8-jre \
+		openssh-client \
 		python-pip \
 		python-setuptools \
 		rsync \
