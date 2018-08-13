@@ -27,6 +27,7 @@ RUN apt-get update \
 		python-pip \
 		python-setuptools \
 		rsync \
+		shellcheck \
 		unzip \
 		wget \
 		xsltproc \
