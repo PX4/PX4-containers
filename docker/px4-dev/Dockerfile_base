@@ -26,6 +26,7 @@ RUN apt-get update \
 		openjdk-8-jre \
 		openssh-client \
 		python-pip \
+		python-pygments \
 		python-setuptools \
 		rsync \
 		shellcheck \
@@ -37,7 +38,7 @@ RUN apt-get update \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-RUN python -m pip install --upgrade pip==9.0.3 \
+RUN python -m pip install --upgrade \
 	&& pip install setuptools wheel \
 	&& pip install argparse coverage jinja2 empy numpy requests serial toml
 
