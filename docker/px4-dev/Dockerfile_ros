@@ -12,16 +12,16 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 	&& apt-get -y --quiet --no-install-recommends install \
 		geographiclib-tools \
 		libgeographic-dev \
-		python-tk \
 		python-catkin-tools \
+		python-tk \
 		ros-kinetic-gazebo-ros-pkgs \
 		ros-kinetic-mavlink \
 		ros-kinetic-mavros \
 		ros-kinetic-mavros-extras \
-		ros-kinetic-ros-base \
 		ros-kinetic-pcl-conversions \
-		ros-kinetic-pcl-ros \
 		ros-kinetic-pcl-msgs \
+		ros-kinetic-pcl-ros \
+		ros-kinetic-ros-base \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
