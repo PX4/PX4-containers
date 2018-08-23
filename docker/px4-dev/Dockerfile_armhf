@@ -10,10 +10,10 @@
 FROM px4io/px4-dev-base
 
 RUN apt-get update && apt-get -yy --quiet --no-install-recommends install \
-	gcc-arm-linux-gnueabihf \
 	g++-arm-linux-gnueabihf \
-	pkg-config-arm-linux-gnueabihf
+	gcc-arm-linux-gnueabihf \
+	pkg-config-arm-linux-gnueabihf \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-# manual ccache setup
-RUN	ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-gcc \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-g++
