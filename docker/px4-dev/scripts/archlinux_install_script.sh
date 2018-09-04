@@ -33,4 +33,6 @@ pip install \
 		jinja2 \
 		numpy \
 		serial \
-		toml
+		toml \
+		pyyaml \
+		cerberus
