@@ -41,7 +41,7 @@ RUN apt-get update \
 
 RUN python -m pip install --upgrade \
 	&& pip install setuptools wheel \
-	&& pip install argparse coverage jinja2 empy numpy requests serial toml
+	&& pip install argparse coverage jinja2 empy numpy requests serial toml pyyaml cerberus
 
 # manual ccache setup
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
