@@ -155,6 +155,27 @@ pipeline {
           }
         }
 
+        stage('px4-dev-ros-kinetic') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros-kinetic'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make posix_sitl_default sitl_gazebo'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
         stage('px4-dev-armhf') {
           agent {
             dockerfile {

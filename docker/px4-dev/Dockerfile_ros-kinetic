@@ -2,11 +2,11 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:ubuntu16.04
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
-	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list' \
+	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu/ xenial main" > /etc/apt/sources.list.d/ros-shadow.list' \
 	&& apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
@@ -14,14 +14,14 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 		libgeographic-dev \
 		python-catkin-tools \
 		python-tk \
-		ros-melodic-gazebo-ros-pkgs \
-		ros-melodic-mavlink \
-		ros-melodic-mavros \
-		ros-melodic-mavros-extras \
-		ros-melodic-pcl-conversions \
-		ros-melodic-pcl-msgs \
-		ros-melodic-pcl-ros \
-		ros-melodic-ros-base \
+		ros-kinetic-gazebo-ros-pkgs \
+		ros-kinetic-mavlink \
+		ros-kinetic-mavros \
+		ros-kinetic-mavros-extras \
+		ros-kinetic-pcl-conversions \
+		ros-kinetic-pcl-msgs \
+		ros-kinetic-pcl-ros \
+		ros-kinetic-ros-base \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
