@@ -7,12 +7,12 @@
 # Parrot Bebop, or OcPoC-Zynq 
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:latest
 
 RUN apt-get update && apt-get -yy --quiet --no-install-recommends install \
-	g++-arm-linux-gnueabihf \
-	gcc-arm-linux-gnueabihf \
-	pkg-config-arm-linux-gnueabihf \
+		g++-arm-linux-gnueabihf \
+		gcc-arm-linux-gnueabihf \
+		pkg-config-arm-linux-gnueabihf \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*

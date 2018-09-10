@@ -2,7 +2,7 @@
 # PX4 NuttX development environment
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:latest
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-get update \

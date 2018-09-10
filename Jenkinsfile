@@ -1,7 +1,9 @@
 pipeline {
   agent any
   stages {
+
     stage('Build') {
+
       parallel {
 
         stage('px4-dev-base') {
@@ -45,6 +47,32 @@ pipeline {
             }
           }
         }
+
+        stage('px4-docs') {
+          environment {
+            HOME = "${WORKSPACE}"
+          }
+          agent {
+            dockerfile {
+              filename 'Dockerfile_docs'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Devguide.git'
+            dir(path: 'Devguide') {
+              sh 'export'
+              //sh 'gitbook build'
+            }
+          }
+        }
+
+      } // parallel
+    } // stage Build
+
+    stage('Build (on base)') {
+      parallel {
 
         stage('px4-dev-clang') {
           agent {
@@ -213,26 +241,6 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-            }
-          }
-        }
-
-        stage('px4-docs') {
-          environment {
-            HOME = "${WORKSPACE}"
-          }
-          agent {
-            dockerfile {
-              filename 'Dockerfile_docs'
-              dir 'docker/px4-dev'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
-            }
-          }
-          steps {
-            git 'https://github.com/PX4/Devguide.git'
-            dir(path: 'Devguide') {
-              sh 'export'
-              //sh 'gitbook build'
             }
           }
         }

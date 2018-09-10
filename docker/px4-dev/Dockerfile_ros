@@ -2,16 +2,21 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-base
+FROM px4io/px4-dev-base:latest
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
-RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
 	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu/ xenial main" > /etc/apt/sources.list.d/ros-shadow.list' \
 	&& apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
 		geographiclib-tools \
+		libeigen3-dev \
 		libgeographic-dev \
+		libopencv-dev \
+		protobuf-compiler \
 		python-catkin-tools \
 		python-tk \
 		ros-melodic-gazebo-ros-pkgs \
