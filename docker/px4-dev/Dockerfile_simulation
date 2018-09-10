@@ -6,14 +6,14 @@ FROM px4io/px4-dev-base
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
-	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main" > /etc/apt/sources.list.d/gazebo-stable.list' \
+	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable bionic main" > /etc/apt/sources.list.d/gazebo-stable.list' \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		ant \
-		gazebo7 \
+		gazebo9 \
 		gstreamer1.0-plugins-base \
 		libeigen3-dev \
-		libgazebo7-dev \
+		libgazebo9-dev \
 		libimage-exiftool-perl \
 		libopencv-dev \
 		libxml2-utils \
@@ -24,7 +24,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 # install MAVLink headers
-RUN	git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/include/mavlink/v2.0 && rm -rf /usr/local/include/mavlink/v2.0/.git
+RUN git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/include/mavlink/v2.0 && rm -rf /usr/local/include/mavlink/v2.0/.git
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
