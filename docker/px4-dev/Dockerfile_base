@@ -15,6 +15,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		cppcheck \
 		curl \
 		doxygen \
+		file \
 		g++ \
 		gcc \
 		gdb \
