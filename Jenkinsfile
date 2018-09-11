@@ -93,6 +93,7 @@ pipeline {
               sh 'make clean'
               sh 'ccache -z'
               sh 'make posix_sitl_default'
+              sh 'make posix_sitl_default package'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -156,6 +157,7 @@ pipeline {
               sh 'make clean'
               sh 'ccache -z'
               sh 'make posix_sitl_default sitl_gazebo'
+              sh 'make posix_sitl_default package'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -219,6 +221,29 @@ pipeline {
               sh 'make clean'
               sh 'ccache -z'
               sh 'make posix_bebop_default'
+              sh 'make posix_bebop_default package'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-raspi') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_raspi'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make posix_rpi_cross'
+              sh 'make posix_rpi_cross package'
               sh 'ccache -s'
               sh 'make clean'
             }
