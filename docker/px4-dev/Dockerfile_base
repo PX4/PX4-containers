@@ -46,7 +46,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN python -m pip install --upgrade \
-	&& pip install setuptools wheel \
+	&& pip install setuptools pkgconfig wheel \
 	&& pip install argparse argcomplete coverage jinja2 empy numpy requests serial toml pyyaml cerberus
 
 # manual ccache setup
