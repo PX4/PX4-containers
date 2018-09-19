@@ -14,6 +14,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		cmake \
 		cppcheck \
 		curl \
+		dirmngr \
 		doxygen \
 		file \
 		g++ \
@@ -23,6 +24,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		gnupg \
 		gosu \
 		lcov \
+		lsb-release \
 		make \
 		ninja-build \
 		openjdk-8-jdk \
@@ -31,6 +33,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		python-pip \
 		python-pygments \
 		python-setuptools \
+		python3-pip \
 		rsync \
 		shellcheck \
 		unzip \
