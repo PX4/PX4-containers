@@ -1,0 +1,52 @@
+#
+# PX4 ROS2 development environment
+# Based from containers under https://github.com/osrf/docker_images/blob/master/ros2/bouncy/ubuntu/bionic/
+#
+
+FROM px4io/px4-dev-ros:latest
+MAINTAINER Nuno Marques <n.marques21@hotmail.com>
+
+# setup environment
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV ROS1_DISTRO melodic
+ENV ROS2_DISTRO bouncy
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN echo 'Etc/UTC' > /etc/timezone && \
+	ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+	apt-get update && apt-get install -q -y tzdata && rm -rf /var/lib/apt/lists/*
+
+# install packages
+RUN apt-get update && apt-get install -q -y \
+	dirmngr \
+	gnupg2 \
+	lsb-release \
+	python3-pip \
+	&& rm -rf /var/lib/apt/lists/*
+
+# setup ros2 keys
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
+	--recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+# setup sources.list
+RUN . /etc/os-release \
+	&& echo "deb http://repo.ros2.org/$ID/main `lsb_release -sc` main" \
+	> /etc/apt/sources.list.d/ros2-latest.list
+
+# install python packages
+RUN pip3 install -U argcomplete
+
+# install ros2 desktop and ros1-bridge
+RUN apt-get update && apt-get install -y \
+	ros-$ROS2_DISTRO-desktop \
+	ros-$ROS2_DISTRO-ros1-bridge \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]

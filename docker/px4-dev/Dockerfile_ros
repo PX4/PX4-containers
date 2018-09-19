@@ -6,6 +6,7 @@ FROM px4io/px4-dev-base:latest
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV ROS_DISTRO melodic
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
 	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list' \
@@ -19,16 +20,16 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		protobuf-compiler \
 		python-catkin-tools \
 		python-tk \
-		ros-melodic-gazebo-ros-pkgs \
-		ros-melodic-mavlink \
-		ros-melodic-mavros \
-		ros-melodic-mavros-extras \
-		ros-melodic-pcl-conversions \
-		ros-melodic-pcl-msgs \
-		ros-melodic-pcl-ros \
-		ros-melodic-ros-base \
-		ros-melodic-rostest \
-		ros-melodic-rosunit \
+		ros-$ROS_DISTRO-gazebo-ros-pkgs \
+		ros-$ROS_DISTRO-mavlink \
+		ros-$ROS_DISTRO-mavros \
+		ros-$ROS_DISTRO-mavros-extras \
+		ros-$ROS_DISTRO-pcl-conversions \
+		ros-$ROS_DISTRO-pcl-msgs \
+		ros-$ROS_DISTRO-pcl-ros \
+		ros-$ROS_DISTRO-ros-base \
+		ros-$ROS_DISTRO-rostest \
+		ros-$ROS_DISTRO-rosunit \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
@@ -37,3 +38,9 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]

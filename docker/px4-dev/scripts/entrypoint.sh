@@ -23,8 +23,20 @@ else
 	export CCACHE_DISABLE=1
 fi
 
-if [ -f /opt/ros/kinetic/setup.bash ]; then
-	source /opt/ros/kinetic/setup.bash
+# unsetting ROS_DISTRO to silence ROS_DISTRO override warning
+unset ROS_DISTRO
+
+# setup ros1 environment
+if [ -v ROS1_DISTRO ] && [ ! -z "$ROS1_DISTRO" ] && [ -f /opt/ros/$ROS1_DISTRO/setup.bash ]; then
+	source /opt/ros/$ROS1_DISTRO/setup.bash
 fi
+
+# setup ros2 environment
+if [ -v ROS2_DISTRO ] && [ ! -z "$ROS2_DISTRO" ] && [ -f /opt/ros/$ROS2_DISTRO/setup.bash ]; then
+	source /opt/ros/$ROS2_DISTRO/setup.bash
+fi
+
+unset ROS1_DISTRO
+unset ROS2_DISTRO
 
 exec gosu user "$@"
