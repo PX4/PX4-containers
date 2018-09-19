@@ -10,7 +10,7 @@ ENV ROS_DISTRO kinetic
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
 	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list' \
-	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu/ xenial main" > /etc/apt/sources.list.d/ros-shadow.list' \
+	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu xenial main" > /etc/apt/sources.list.d/ros-shadow.list' \
 	&& apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
 		geographiclib-tools \
