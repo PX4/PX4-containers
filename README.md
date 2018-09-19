@@ -1,6 +1,6 @@
 # PX4 Container / VM support #
 
-[![Build Status](https://semaphoreci.com/api/v1/px4/containers/branches/master/shields_badge.svg)](https://semaphoreci.com/px4/containers)
+[![Build Status](http://ci.px4.io:8080/buildStatus/icon?job=PX4/containers/master)](http://ci.px4.io:8080/blue/organizations/jenkins/PX4%2Fcontainers/activity)
 
 # [px4io/px4-dev-base](https://hub.docker.com/r/px4io/px4-dev-base) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-base.svg)](http://microbadger.com/images/px4io/px4-dev-base) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-base.svg)](https://hub.docker.com/r/px4io/px4-dev-base)
 
