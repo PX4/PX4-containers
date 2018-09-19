@@ -22,8 +22,27 @@ RUN . /etc/os-release \
 	&& echo "deb http://repo.ros2.org/$ID/main `lsb_release -sc` main" \
 	> /etc/apt/sources.list.d/ros2-latest.list
 
-# install python packages
-RUN pip3 install -U argcomplete
+# install colcon build tools
+RUN python3 -m pip install -U \
+	argcomplete \
+	python3-colcon-common-extensions
+
+# install python packages needed for testing
+RUN python3 -m pip install -U \
+	flake8 \
+	flake8-blind-except \
+ 	flake8-builtins \
+	flake8-class-newline \
+	flake8-comprehensions \
+	flake8-deprecated \
+	flake8-docstrings \
+	flake8-import-order \
+	flake8-quotes \
+	pytest \
+	pytest-cov \
+	pytest-repeat \
+	pytest-runner \
+	pytest-rerunfailures
 
 # install ros2 desktop and ros1-bridge
 RUN apt-get update && apt-get install -y \
