@@ -15,15 +15,13 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo 'Etc/UTC' > /etc/timezone && \
 	ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
-	apt-get update && apt-get install -q -y tzdata && rm -rf /var/lib/apt/lists/*
+	apt-get update && apt-get install -q -y tzdata
 
 # install packages
 RUN apt-get update && apt-get install -q -y \
 	dirmngr \
 	gnupg2 \
-	lsb-release \
-	python3-pip \
-	&& rm -rf /var/lib/apt/lists/*
+	lsb-release
 
 # setup ros2 keys
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
