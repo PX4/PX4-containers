@@ -36,6 +36,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		python3-pip \
 		rsync \
 		shellcheck \
+		tzdata \
 		unzip \
 		wget \
 		xsltproc \
@@ -68,6 +69,7 @@ RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima
 
 ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
+ENV TZ=UTC
 
 # SITL UDP PORTS
 EXPOSE 14556/udp
