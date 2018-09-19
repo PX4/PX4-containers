@@ -273,8 +273,31 @@ pipeline {
       }
     }
 
-    stage('Build ROS2 (on ROS Melodic)') {
+    stage('Build ROS2 (after ROS1)') {
       parallel {
+        stage('px4-dev-ros2-ardent') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros2-ardent'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              // does not test anything relevant now wrt ROS2
+              // px4_ros_com build can be added when released instead
+              sh 'make posix_sitl_default sitl_gazebo'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
         stage('px4-dev-ros2-bouncy') {
           agent {
             dockerfile {
