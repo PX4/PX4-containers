@@ -24,12 +24,15 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		gnupg \
 		gosu \
 		lcov \
+		libfreetype6-dev \
+		libpng-dev \
 		lsb-release \
 		make \
 		ninja-build \
 		openjdk-8-jdk \
 		openjdk-8-jre \
 		openssh-client \
+		pkg-config \
 		python-pip \
 		python-pygments \
 		python-setuptools \
