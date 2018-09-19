@@ -1,0 +1,60 @@
+#
+# PX4 ROS2 development environment
+# Based from containers under https://github.com/osrf/docker_images/blob/master/ros2/bouncy/ubuntu/bionic/
+#
+
+FROM px4io/px4-dev-ros-kinetic:latest
+MAINTAINER Nuno Marques <n.marques21@hotmail.com>
+
+# setup environment
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV ROS1_DISTRO kinetic
+ENV ROS2_DISTRO ardent
+ENV DEBIAN_FRONTEND noninteractive
+
+# setup ros2 keys
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
+	--recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+# setup sources.list
+RUN . /etc/os-release \
+	&& echo "deb http://repo.ros2.org/$ID/main `lsb_release -sc` main" \
+	> /etc/apt/sources.list.d/ros2-latest.list
+
+# install colcon build tools
+RUN python3 -m pip install -U \
+	argcomplete \
+	python3-colcon-common-extensions
+
+# install python packages needed for testing
+RUN python3 -m pip install --upgrade && \
+	python3 -m pip install -U \
+	flake8 \
+	flake8-blind-except \
+ 	flake8-builtins \
+	flake8-class-newline \
+	flake8-comprehensions \
+	flake8-deprecated \
+	flake8-docstrings \
+	flake8-import-order \
+	flake8-quotes \
+	pytest \
+	pytest-cov \
+	pytest-repeat \
+	pytest-runner \
+	pytest-rerunfailures
+
+# install ros2 desktop and ros1-bridge
+RUN apt-get update && apt-get install -y \
+	ros-$ROS2_DISTRO-desktop \
+	ros-$ROS2_DISTRO-ros1-bridge \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
