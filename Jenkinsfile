@@ -206,29 +206,6 @@ pipeline {
           }
         }
 
-        stage('px4-dev-ros2-bouncy') {
-          agent {
-            dockerfile {
-              filename 'Dockerfile_ros2-bouncy'
-              dir 'docker/px4-dev'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
-            }
-          }
-          steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              // does not test anything relevant now wrt ROS2
-              // px4_ros_com build can be added when released instead
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
-          }
-        }
-
         stage('px4-dev-armhf') {
           agent {
             dockerfile {
@@ -293,6 +270,33 @@ pipeline {
           }
         }
 
+      }
+    }
+
+    stage('Build ROS2 (on ROS Melodic)') {
+      parallel {
+        stage('px4-dev-ros2-bouncy') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros2-bouncy'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              // does not test anything relevant now wrt ROS2
+              // px4_ros_com build can be added when released instead
+              sh 'make posix_sitl_default sitl_gazebo'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
       }
     }
   }

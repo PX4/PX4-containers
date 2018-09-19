@@ -28,7 +28,8 @@ RUN python3 -m pip install -U \
 	python3-colcon-common-extensions
 
 # install python packages needed for testing
-RUN python3 -m pip install -U \
+RUN python3 -m pip install --upgrade && \
+	python3 -m pip install -U \
 	flake8 \
 	flake8-blind-except \
  	flake8-builtins \
