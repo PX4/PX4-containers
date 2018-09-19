@@ -220,8 +220,8 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_bebop_default'
-              sh 'make posix_bebop_default package'
+              sh 'make posix_ocpoc_ubuntu'
+              sh 'make posix_ocpoc_ubuntu package'
               sh 'ccache -s'
               sh 'make clean'
             }
