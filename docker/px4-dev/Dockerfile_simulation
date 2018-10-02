@@ -14,7 +14,6 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		gstreamer1.0-plugins-base \
 		libeigen3-dev \
 		libgazebo9-dev \
-		libgtest-dev \
 		libimage-exiftool-perl \
 		libopencv-dev \
 		libxml2-utils \
@@ -23,11 +22,6 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
-
-# gtest
-RUN cd /usr/src/gtest \
-	&& cmake CMakeLists.txt && make \
-	&& cp *.a /usr/lib
 
 # install MAVLink headers
 RUN git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/include/mavlink/v2.0 && rm -rf /usr/local/include/mavlink/v2.0/.git
