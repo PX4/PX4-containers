@@ -22,9 +22,10 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		protobuf-compiler \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
-	# gtest
-	&& cd /usr/src/gtest \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# gtest
+RUN cd /usr/src/gtest \
 	&& cmake CMakeLists.txt && make \
 	&& cp *.a /usr/lib
 
