@@ -2,7 +2,7 @@
 # PX4 ecl build and test development environment
 #
 
-FROM px4io/px4-dev-base:latest
+FROM px4io/px4-dev-base:2018-09-28
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-get update \
@@ -19,4 +19,3 @@ RUN apt-get update \
 	# python requirements
 	&& wget -q https://raw.githubusercontent.com/PX4/ecl/master/EKF/tests/pytest/requirements.txt \
 	&& pip3 install -r requirements.txt && rm -rf requirements.txt
-
