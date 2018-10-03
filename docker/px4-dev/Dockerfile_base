@@ -50,8 +50,10 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 
 # gtest
 RUN cd /usr/src/gtest \
-	&& cmake CMakeLists.txt && make \
-	&& cp *.a /usr/lib
+	&& mkdir build && cd build \
+	&& cmake CMakeLists.txt .. && make \
+	&& cp *.a /usr/lib \
+	&& cd .. && rm -rf build
 
 RUN python -m pip install --upgrade \
 	&& pip install setuptools pkgconfig wheel \
