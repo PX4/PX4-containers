@@ -26,6 +26,8 @@ ENV RPI_TOOLCHAIN_DIR=/home/user/rpi_toolchain_install
 
 ENV PATH="$PATH:/home/user/rpi_toolchain_install/gcc-linaro-arm-linux-gnueabihf-raspbian/bin"
 
+ENV LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/i386-linux-gnu:/lib/i386-linux-gnu'
+
 # manual ccache setup
 RUN	ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-gcc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-linux-gnueabihf-g++
