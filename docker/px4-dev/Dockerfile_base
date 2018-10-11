@@ -25,6 +25,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		gosu \
 		lcov \
 		libfreetype6-dev \
+		libgtest-dev \
 		libpng-dev \
 		lsb-release \
 		make \
@@ -46,6 +47,13 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# gtest
+RUN cd /usr/src/gtest \
+	&& mkdir build && cd build \
+	&& cmake .. && make \
+	&& cp *.a /usr/lib \
+	&& cd .. && rm -rf build
 
 RUN python -m pip install --upgrade \
 	&& pip install setuptools pkgconfig wheel \
