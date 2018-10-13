@@ -173,15 +173,14 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh 'ls -l'
+            sh '''#!/bin/bash -l
+              cd catkin_ws;
+              source /opt/ros/melodic/setup.bash;
+              catkin build -j$(nproc) -l$(nproc);
+            '''
+            sh 'rm -rf catkin_ws'
           }
         }
 
@@ -194,15 +193,14 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh 'ls -l'
+            sh '''#!/bin/bash -l
+              cd catkin_ws;
+              source /opt/ros/kinetic/setup.bash;
+              catkin build -j$(nproc) -l$(nproc);
+            '''
+            sh 'rm -rf catkin_ws'
           }
         }
 
