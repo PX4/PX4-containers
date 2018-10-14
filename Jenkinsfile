@@ -282,17 +282,14 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              // does not test anything relevant now wrt ROS2
-              // px4_ros_com build can be added when released instead
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh 'ls -l'
+            sh '''#!/bin/bash -l
+              cd catkin_ws;
+              source /opt/ros/ardent/setup.bash;
+              catkin build -j$(nproc) -l$(nproc);
+            '''
+            sh 'rm -rf catkin_ws'
           }
         }
 
@@ -305,17 +302,14 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              // does not test anything relevant now wrt ROS2
-              // px4_ros_com build can be added when released instead
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
+            sh 'ls -l'
+            sh '''#!/bin/bash -l
+              cd colcon_ws;
+              source /opt/ros/bouncy/setup.bash;
+              colcon build --symlink-install;
+            '''
+            sh 'rm -rf colcon_ws'
           }
         }
       }
