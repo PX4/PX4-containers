@@ -307,7 +307,7 @@ pipeline {
             sh '''#!/bin/bash -l
               cd colcon_ws;
               source /opt/ros/bouncy/setup.bash;
-              colcon build --symlink-install;
+              colcon build --event-handlers console_direct+ --symlink-install;
             '''
             sh 'rm -rf colcon_ws'
           }
