@@ -5,7 +5,7 @@
 # Raspberry Pi or Parrot Bebop
 #
 
-FROM px4io/px4-dev-base:latest
+FROM px4io/px4-dev-base:2018-10-16
 MAINTAINER Michael Schaeuble
 
 RUN apt-get update \
