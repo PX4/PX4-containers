@@ -70,13 +70,14 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& rm -rf /tmp/*
 
 # Fast-RTPS
-RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
 	&& mkdir -p /usr/local/share/fastrtps \
-	&& cp eProsima_FastRTPS-1.5.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
-	&& cp eProsima_FastRTPS-1.5.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& cp eProsima_FastRTPS-1.6.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
+	&& cp eProsima_FastRTPS-1.6.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
 	&& rm -rf /tmp/*
 
+ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
 ENV TZ=UTC
