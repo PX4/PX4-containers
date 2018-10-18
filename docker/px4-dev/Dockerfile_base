@@ -77,7 +77,6 @@ RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima
 	&& cp eProsima_FastRTPS-1.6.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
 	&& rm -rf /tmp/*
 
-ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
 ENV TZ=UTC
