@@ -287,7 +287,7 @@ pipeline {
             sh '''#!/bin/bash -l
               cd catkin_ws;
               source /opt/ros/ardent/setup.bash;
-              catkin build -j$(nproc) -l$(nproc);
+              colcon build --event-handlers console_direct+ --symlink-install;
             '''
             sh 'rm -rf catkin_ws'
           }
