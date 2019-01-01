@@ -12,6 +12,7 @@ RUN	pacman -Sy --noconfirm \
 		ccache \
 		cmake \
 		git \
+		gnutls \
 		make \
 		ninja \
 		python-pip \
