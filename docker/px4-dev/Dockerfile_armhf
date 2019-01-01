@@ -7,7 +7,7 @@
 # Parrot Bebop, or OcPoC-Zynq
 #
 
-FROM px4io/px4-dev-base:2018-11-25
+FROM px4io/px4-dev-base:2019-01-01
 
 RUN apt-get update && apt-get -yy --quiet --no-install-recommends install \
 		g++-arm-linux-gnueabihf \
