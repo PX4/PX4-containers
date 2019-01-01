@@ -63,6 +63,7 @@ pipeline {
             git 'https://github.com/PX4/Devguide.git'
             dir(path: 'Devguide') {
               sh 'export'
+              sh 'gitbook install'
               sh 'gitbook build'
             }
           }
