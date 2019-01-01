@@ -20,7 +20,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_sitl_default'
+              sh 'make px4_sitl_default'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -41,7 +41,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_sitl_default'
+              sh 'make px4_sitl_default'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -63,7 +63,7 @@ pipeline {
             git 'https://github.com/PX4/Devguide.git'
             dir(path: 'Devguide') {
               sh 'export'
-              //sh 'gitbook build'
+              sh 'gitbook build'
             }
           }
         }
@@ -92,8 +92,8 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_sitl_default'
-              sh 'make posix_sitl_default package'
+              sh 'make px4_sitl_default'
+              sh 'make px4_sitl_default package'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -114,7 +114,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make px4fmu-v2_default'
+              sh 'make px4_fmu-v2_default'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -135,7 +135,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              //sh 'make px4fmu-v2_default'
+              sh 'make px4_fmu-v2_default'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -156,8 +156,8 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_sitl_default sitl_gazebo'
-              sh 'make posix_sitl_default package'
+              sh 'make px4_sitl_default sitl_gazebo'
+              sh 'make px4_sitl_default package'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -218,8 +218,8 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_ocpoc_ubuntu'
-              sh 'make posix_ocpoc_ubuntu package'
+              sh 'make aerotenna_ocpoc_ubuntu'
+              sh 'make aerotenna_ocpoc_ubuntu package'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -240,8 +240,8 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make posix_rpi_cross'
-              sh 'make posix_rpi_cross package'
+              sh 'make emlid_navio2_cross'
+              sh 'make emlid_navio2_cross package'
               sh 'ccache -s'
               sh 'make clean'
             }
