@@ -136,7 +136,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make px4_fmu-v2_default'
+              sh 'make scan-build'
               sh 'ccache -s'
               sh 'make clean'
             }
