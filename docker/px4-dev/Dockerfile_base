@@ -55,7 +55,7 @@ RUN cd /usr/src/gtest \
 	&& cp *.a /usr/lib \
 	&& cd .. && rm -rf build
 
-RUN python -m pip install --upgrade \
+RUN python -m pip install --upgrade pip \
 	&& pip install setuptools pkgconfig wheel \
 	&& pip install argparse argcomplete coverage jinja2 empy numpy requests serial toml pyyaml cerberus
 
