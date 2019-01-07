@@ -19,6 +19,7 @@ RUN apt-get update \
 		libncurses-dev \
 		libtool \
 		pkg-config \
+		uncrustify \
 		vim-common \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
