@@ -313,6 +313,26 @@ pipeline {
             sh 'rm -rf colcon_ws'
           }
         }
+
+        stage('px4-dev-ros2-crystal') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros2-crystal'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
+            sh 'ls -l'
+            sh '''#!/bin/bash -l
+              cd colcon_ws;
+              source /opt/ros/bouncy/setup.bash;
+              colcon build --event-handlers console_direct+ --symlink-install;
+            '''
+            sh 'rm -rf colcon_ws'
+          }
+        }
       }
     }
   }
