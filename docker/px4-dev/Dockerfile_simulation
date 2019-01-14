@@ -10,6 +10,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		ant \
+		libgazebo8 \
 		gazebo8 \
 		gstreamer1.0-plugins-base \
 		libeigen3-dev \
@@ -17,6 +18,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libimage-exiftool-perl \
 		libignition-math3 \
 		libopencv-dev \
+		libsdformat5 \
 		libsdformat5-dev \
 		libxml2-utils \
 		pkg-config \
