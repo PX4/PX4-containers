@@ -17,7 +17,7 @@ RUN apt-get update \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
 	# pip3
-	&& pip3 install --upgrade setuptools \
-	&& pip3 install --upgrade pip \
+	&& pip3 install --user --upgrade setuptools \
+	&& pip3 install --user --upgrade pip \
 	&& wget -q https://raw.githubusercontent.com/PX4/ecl/master/EKF/tests/pytest/requirements.txt \
-	&& pip3 install -r requirements.txt && rm -rf requirements.txt
+	&& pip3 install --user -r requirements.txt && rm -rf requirements.txt
