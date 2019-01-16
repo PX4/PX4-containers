@@ -1,6 +1,6 @@
 #
 # PX4 ROS2 development environment
-# Based from containers under https://github.com/osrf/docker_images/blob/master/ros2/bouncy/ubuntu/bionic/
+# Based from containers under https://github.com/osrf/docker_images/tree/master/ros2/crystal/ubuntu/bionic/
 #
 
 FROM px4io/px4-dev-ros:2019-01-01
@@ -24,6 +24,8 @@ RUN echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -
 RUN apt-get install -y --quiet \
 		ros-$ROS2_DISTRO-desktop \
 		ros-$ROS2_DISTRO-ros1-bridge \
+		dirmngr \
+		gnupg2 \
 		python3-dev \
 		python3-colcon-common-extensions \
 	&& apt-get -y autoremove \
@@ -49,6 +51,18 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python3 \
 		pytest-repeat \
 		pytest-runner \
 		pytest-rerunfailures
+
+# Build Fast-RTPS release 1.7.0 from source and replace fastrtpsgen
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git /tmp/Fast-RTPS \
+	&& cd /tmp/Fast-RTPS \
+	&& mkdir build \
+	&& cd build \
+	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. && make \
+	&& cd .. \
+	&& yes | cp -rf fastrtpsgen/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
+	&& yes | cp -rf fastrtpsgen/scripts/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& ldconfig \
+	&& rm -rf /tmp/*
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
