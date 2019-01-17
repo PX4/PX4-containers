@@ -26,6 +26,7 @@ RUN apt-get install -y --quiet \
 		ros-$ROS2_DISTRO-ros1-bridge \
 		dirmngr \
 		gnupg2 \
+		gradle \
 		python3-dev \
 		python3-colcon-common-extensions \
 	&& apt-get -y autoremove \
