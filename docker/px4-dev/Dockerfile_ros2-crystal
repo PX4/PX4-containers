@@ -60,9 +60,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git /tmp/Fast-RT
 	&& mkdir build \
 	&& cd build \
 	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. && make \
-	&& cd .. \
-	&& yes | cp -rf fastrtpsgen/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
-	&& yes | cp -rf fastrtpsgen/scripts/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& make install \
 	&& ldconfig \
 	&& rm -rf /tmp/*
 
