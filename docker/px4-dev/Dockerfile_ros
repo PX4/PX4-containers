@@ -29,6 +29,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		ros-$ROS_DISTRO-ros-base \
 		ros-$ROS_DISTRO-rostest \
 		ros-$ROS_DISTRO-rosunit \
+		ros-$ROS_DISTRO-xacro \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
