@@ -37,7 +37,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		ros-$ROS_DISTRO-rosunit \
 		ros-$ROS_DISTRO-xacro \
 		xvfb \
-		sudo \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
@@ -47,10 +46,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 
 RUN rosdep init && rosdep update
 
-
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
 
 CMD ["/bin/bash"]
