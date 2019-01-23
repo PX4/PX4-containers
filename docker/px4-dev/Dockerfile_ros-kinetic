@@ -47,11 +47,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 
 RUN rosdep init && rosdep update
 
-RUN useradd -m user && echo "user:user" | chpasswd && adduser user sudo
-
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 
 CMD ["/bin/bash"]

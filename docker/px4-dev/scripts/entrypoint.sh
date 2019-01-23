@@ -9,6 +9,7 @@ USER_ID=${LOCAL_USER_ID:-9001}
 echo "Starting with UID : $USER_ID"
 useradd --shell /bin/bash -u $USER_ID -o -c "" -m user
 usermod -a -G dialout user
+usermod -a -G sudo user
 
 if [ -d "$CCACHE_DIR" ]; then
 	chown -R $USER_ID $CCACHE_DIR
