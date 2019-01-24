@@ -21,10 +21,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		libopencv-dev \
 		protobuf-compiler \
 		python-catkin-tools \
-		python3-tk \
-		python3-dev \
-		python3-pip \
-		python3-setuptools \
+		python-tk \
 		ros-$ROS_DISTRO-gazebo8-ros-pkgs \
 		ros-$ROS_DISTRO-mavlink \
 		ros-$ROS_DISTRO-mavros \
@@ -41,7 +38,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# pip
-	&& pip3 install --upgrade matplotlib numpy px4tools pymavlink \
+	&& pip install --upgrade numpy px4tools pymavlink \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
