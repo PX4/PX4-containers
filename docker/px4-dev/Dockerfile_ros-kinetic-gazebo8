@@ -11,6 +11,8 @@ ENV ROS_DISTRO kinetic
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
 	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-shadow.list' \
+	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' \
+	&& wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
 	&& apt-get update \
 	&& apt-get -y --quiet --no-install-recommends install \
 		geographiclib-tools \
@@ -20,7 +22,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		protobuf-compiler \
 		python-catkin-tools \
 		python-tk \
-		ros-$ROS_DISTRO-gazebo-ros-pkgs \
+		ros-$ROS_DISTRO-gazebo8-ros-pkgs \
 		ros-$ROS_DISTRO-mavlink \
 		ros-$ROS_DISTRO-mavros \
 		ros-$ROS_DISTRO-mavros-extras \
@@ -31,6 +33,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		ros-$ROS_DISTRO-rostest \
 		ros-$ROS_DISTRO-rosunit \
 		ros-$ROS_DISTRO-xacro \
+		xvfb \
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
