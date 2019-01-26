@@ -27,27 +27,6 @@ pipeline {
           }
         }
 
-        stage('px4-dev-base_archlinux') {
-          agent {
-            dockerfile {
-              filename 'Dockerfile_base_archlinux'
-              dir 'docker/px4-dev'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
-            }
-          }
-          steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
-              sh 'export'
-              sh 'make clean'
-              sh 'ccache -z'
-              sh 'make px4_sitl_default'
-              sh 'ccache -s'
-              sh 'make clean'
-            }
-          }
-        }
-
         stage('px4-docs') {
           environment {
             HOME = "${WORKSPACE}"
