@@ -22,7 +22,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		protobuf-compiler \
 		python-catkin-tools \
 		python-tk \
-		ros-$ROS_DISTRO-gazebo8-ros-pkgs \
+		ros-$ROS_DISTRO-gazebo-ros-pkgs \
 		ros-$ROS_DISTRO-mavlink \
 		ros-$ROS_DISTRO-mavros \
 		ros-$ROS_DISTRO-mavros-extras \
