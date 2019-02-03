@@ -27,6 +27,12 @@ RUN npm config set registry http://registry.npmjs.org/ \
 
 RUN gem install html-proofer
 
+# create user with id 1001 (jenkins docker workflow default)
+RUN useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout user
+
+ENV TERM=xterm
+ENV TZ=UTC
+
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
