@@ -2,7 +2,7 @@
 # PX4 ecl build and test development environment
 #
 
-FROM px4io/px4-dev-base:2019-01-26
+FROM px4io/px4-dev-base:2019-01-31
 MAINTAINER Daniel Agar <daniel@agar.ca>
 
 RUN apt-get update \
