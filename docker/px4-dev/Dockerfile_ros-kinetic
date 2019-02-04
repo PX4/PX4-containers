@@ -2,7 +2,7 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-base:ubuntu16.04
+FROM px4io/px4-dev-base-xenial:pr-base-ubuntu16
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
