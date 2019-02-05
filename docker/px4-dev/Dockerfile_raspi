@@ -6,7 +6,7 @@
 #
 
 FROM px4io/px4-dev-base:2019-01-31
-MAINTAINER Michael Schaeuble
+LABEL maintainer="Michael Schaeuble"
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \

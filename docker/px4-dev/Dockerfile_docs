@@ -3,7 +3,7 @@
 #
 
 FROM ubuntu:xenial
-MAINTAINER Daniel Agar <daniel@agar.ca>
+LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
