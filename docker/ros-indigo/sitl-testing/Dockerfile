@@ -4,7 +4,7 @@
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
 FROM px4io/px4-ros-full:latest
-MAINTAINER Andreas Antener <andreas@uaventure.com>
+LABEL maintainer="Andreas Antener <andreas@uaventure.com>"
 
 # Add local files
 # FIXME: this doesn't work when building from vagrant

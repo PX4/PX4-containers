@@ -4,7 +4,7 @@
 #
 
 FROM px4io/px4-dev-ros:2019-01-31
-MAINTAINER Nuno Marques <n.marques21@hotmail.com>
+LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 # setup environment
 ENV LANG C.UTF-8

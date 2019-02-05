@@ -3,7 +3,7 @@
 #
 
 FROM archlinux/base:latest
-MAINTAINER Julien Lecoeur <julien.lecoeur@gmail.com>
+LABEL maintainer="Julien Lecoeur <julien.lecoeur@gmail.com>"
 
 RUN	pacman -Sy --noconfirm \
 		arm-none-eabi-gcc \

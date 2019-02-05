@@ -4,7 +4,7 @@
 # License: according to LICENSE.md in the root directory of the PX4 Firmware repository
 
 FROM ubuntu:14.04.2
-MAINTAINER Andreas Antener <andreas@uaventure.com>
+LABEL maintainer="Andreas Antener <andreas@uaventure.com>"
 
 # Install basics
 ## Use the "noninteractive" debconf frontend

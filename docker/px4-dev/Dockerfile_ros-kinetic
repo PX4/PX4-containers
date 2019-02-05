@@ -3,7 +3,7 @@
 #
 
 FROM px4io/px4-dev-base:ubuntu16.04
-MAINTAINER Daniel Agar <daniel@agar.ca>
+LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV ROS_DISTRO kinetic
