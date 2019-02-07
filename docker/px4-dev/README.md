@@ -6,14 +6,22 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
 ## Container Hierarchy ##
 
- - px4-dev-base
-   - px4-dev-nuttx
-   - px4-dev-simulation
-     - px4-dev-ros
-   - px4-dev-raspi
-   - px4-dev-snapdragon
+ - px4-dev-base-archlinux
+ - px4-dev-base-bionic
+   - px4-dev-armhf
    - px4-dev-clang
      - px4-dev-nuttx-clang
+   - px4-dev-ecl
+   - px4-dev-nuttx
+   - px4-dev-raspi
+   - px4-dev-simulation
+     - px4-dev-ros-melodic
+       - px4-dev-ros2-bouncy
+       - px4-dev-ros2-crystal
+ - px4-dev-base-xenial
+   - px4-dev-ros-kinetic
+     - px4-dev-ros2-ardent
+ - px4-docs
 
 ## Running ##
 
@@ -31,11 +39,13 @@ docker run -it --privileged \
 ## Building ##
 
 ```console
+docker build -t px4io/px4-dev-ros-melodic -f Dockerfile_ros-melodic .
 
-docker build -t px4io/px4-dev-base -f Dockerfile_base .
-docker build -t px4io/px4-dev-nuttx -f Dockerfile_nuttx .
-docker build -t px4io/px4-dev-raspi -f Dockerfile_raspi .
-docker build -t px4io/px4-dev-simulation -f Dockerfile_simulation .
-docker build -t px4io/px4-dev-ros -f Dockerfile_ros .
+```
+
+or 
+
+```console
+make px4-dev-ros-melodic
 
 ```
