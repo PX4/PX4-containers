@@ -1,15 +1,38 @@
+#!/bin/env/groovy
+
 pipeline {
-  agent any
+  agent none
+
   stages {
 
     stage('Build') {
-
       parallel {
 
-        stage('px4-dev-base') {
+        stage('px4-dev-base-bionic') {
           agent {
             dockerfile {
-              filename 'Dockerfile_base'
+              filename 'Dockerfile_base-bionic'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+            }
+          }
+          steps {
+            git 'https://github.com/PX4/Firmware.git'
+            dir(path: 'Firmware') {
+              sh 'export'
+              sh 'make clean'
+              sh 'ccache -z'
+              sh 'make px4_sitl_default'
+              sh 'ccache -s'
+              sh 'make clean'
+            }
+          }
+        }
+
+        stage('px4-dev-base-xenial') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_base-xenial'
               dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
@@ -28,15 +51,15 @@ pipeline {
         }
 
         stage('px4-docs') {
-          environment {
-            HOME = "${WORKSPACE}"
-          }
           agent {
             dockerfile {
               filename 'Dockerfile_docs'
               dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
+          }
+          environment {
+            HOME = "${WORKSPACE}"
           }
           steps {
             git 'https://github.com/PX4/Devguide.git'
@@ -144,17 +167,16 @@ pipeline {
           }
         }
 
-        stage('px4-dev-ros') {
+        stage('px4-dev-ros-melodic') {
           agent {
             dockerfile {
-              filename 'Dockerfile_ros'
+              filename 'Dockerfile_ros-melodic'
               dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
             sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
-            sh 'ls -l'
             sh '''#!/bin/bash -l
               cd catkin_ws;
               source /opt/ros/melodic/setup.bash;
@@ -174,7 +196,6 @@ pipeline {
           }
           steps {
             sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
-            sh 'ls -l'
             sh '''#!/bin/bash -l
               cd catkin_ws;
               source /opt/ros/kinetic/setup.bash;
@@ -248,11 +269,12 @@ pipeline {
           }
         }
 
-      }
-    }
+      } // parallel
+    } // stage Build (on base)
 
     stage('Build ROS2 (after ROS1)') {
       parallel {
+
         stage('px4-dev-ros2-ardent') {
           agent {
             dockerfile {
@@ -263,7 +285,6 @@ pipeline {
           }
           steps {
             sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
-            sh 'ls -l'
             sh '''#!/bin/bash -l
               cd catkin_ws;
               source /opt/ros/ardent/setup.bash;
@@ -283,7 +304,6 @@ pipeline {
           }
           steps {
             sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
-            sh 'ls -l'
             sh '''#!/bin/bash -l
               cd colcon_ws;
               source /opt/ros/bouncy/setup.bash;
@@ -303,7 +323,6 @@ pipeline {
           }
           steps {
             sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
-            sh 'ls -l'
             sh '''#!/bin/bash -l
               cd colcon_ws;
               source /opt/ros/bouncy/setup.bash;
@@ -311,18 +330,20 @@ pipeline {
             '''
             sh 'rm -rf colcon_ws'
           }
+
         }
-      }
-    }
-  }
+      } // parallel
+    } // Build ROS2 (after ROS1)
+
+  } // stages
 
   environment {
     CCACHE_DIR = '/tmp/ccache'
     CI = true
   }
+
   options {
-    buildDiscarder(logRotator(numToKeepStr: '10', artifactDaysToKeepStr: '30'))
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactDaysToKeepStr: '30'))
     timeout(time: 60, unit: 'MINUTES')
   }
-
-}
+} // pipeline
