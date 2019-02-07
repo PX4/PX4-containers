@@ -3,7 +3,7 @@
 #
 
 FROM ubuntu:16.04
-MAINTAINER Daniel Agar <daniel@agar.ca>
+LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
