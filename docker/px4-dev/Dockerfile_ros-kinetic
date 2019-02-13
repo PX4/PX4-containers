@@ -22,6 +22,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 		protobuf-compiler \
 		python-catkin-tools \
 		python-tk \
+		python3-pip \
 		ros-$ROS_DISTRO-gazebo-ros-pkgs \
 		ros-$ROS_DISTRO-mavlink \
 		ros-$ROS_DISTRO-mavros \
@@ -39,6 +40,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 	&& apt-get clean autoclean \
 	# pip
 	&& pip install --upgrade numpy px4tools pymavlink \
+	&& pip3 install --upgrade setuptools wheel \
+	&& pip3 install --upgrade pyulog \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
