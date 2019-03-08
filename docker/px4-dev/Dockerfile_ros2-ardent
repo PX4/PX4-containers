@@ -3,7 +3,7 @@
 # Based from containers under https://github.com/osrf/docker_images/blob/master/ros2/bouncy/ubuntu/bionic/
 #
 
-FROM px4io/px4-dev-ros-kinetic:2019-01-31
+FROM px4io/px4-dev-ros-kinetic:2019-03-08
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 # setup environment
