@@ -1,0 +1,20 @@
+#
+# PX4 gazebo development environment for python3 development
+#
+
+FROM px4io/px4-dev-simulation:2019-03-08
+LABEL maintainer="Daniel Agar <daniel@agar.ca>"
+
+RUN apt-get update \
+	&& apt-get -y --quiet --no-install-recommends install \
+		python3-pip \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& pip3 install --upgrade setuptools wheel \
+	&& pip3 install numpy pandas flit pyyaml\
+	&& pip3 install --upgrade pyulog \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# make python 3 default
+RUN echo "alias python=python3" >> ~/.bash_aliases \
+	&& echo "alias pip=pip3" >> ~/.bash_aliases
