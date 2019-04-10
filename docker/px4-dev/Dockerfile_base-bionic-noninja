@@ -1,0 +1,8 @@
+#
+# PX4 base development environment without ninja to use "Unix Makefiles" as the generator.
+#
+
+FROM px4io/px4-dev-base-bionic:2019-03-08
+LABEL maintainer="Julian Oes <daniel@agar.ca>"
+
+RUN apt-get -y purge ninja-build

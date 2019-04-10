@@ -1,0 +1,8 @@
+#
+# PX4 NuttX development environment without ninja to use "Unix Makefiles" as the generator.
+#
+
+FROM px4io/px4-dev-nuttx:2019-03-08
+LABEL maintainer="Julian Oes <julian@oes.ch>"
+
+RUN apt-get -y purge ninja-build
