@@ -44,11 +44,11 @@ RUN	curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > 
 	&& chmod +x /usr/sbin/gosu
 
 # Install Fast-RTPS
-RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-7-2/eprosima_fastrtps-1-7-2-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
-	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
-	&& mkdir -p /usr/local/share/fastrtps \
-	&& cp eProsima_FastRTPS-1.7.2-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
-	&& cp eProsima_FastRTPS-1.7.2-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b release/1.7.2 /tmp/Fast-RTPS-1.7.2
+	&& cd /tmp/Fast-RTPS-1.7.2 \
+	&& mkdir build && cd build \
+	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. \
+	&& make && sudo make install \
 	&& rm -rf /tmp/*
 
 # Add group dialout
