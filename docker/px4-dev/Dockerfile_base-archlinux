@@ -43,6 +43,14 @@ RUN	wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.
 RUN	curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > /usr/sbin/gosu \
 	&& chmod +x /usr/sbin/gosu
 
+# Install Fast-RTPS
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-7-2/eprosima_fastrtps-1-7-2-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& mkdir -p /usr/local/share/fastrtps \
+	&& cp eProsima_FastRTPS-1.7.2-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
+	&& cp eProsima_FastRTPS-1.7.2-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& rm -rf /tmp/*
+
 # Add group dialout
 RUN	groupadd dialout
 
@@ -51,6 +59,7 @@ RUN	ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-gcc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-g++
 
 ENV CCACHE_MAXSIZE=1G
+ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH "/usr/lib/ccache/bin:$PATH"
 ENV TERM=xterm
 
