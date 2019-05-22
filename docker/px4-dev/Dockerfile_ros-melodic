@@ -35,7 +35,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	# pip
-	&& pip install numpy px4tools pymavlink \
+	&& pip install px4tools pymavlink \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
