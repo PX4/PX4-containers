@@ -41,7 +41,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9F
 	# pip
 	&& pip install px4tools pymavlink \
 	&& pip3 install setuptools wheel \
-	&& pip3 install pyulog matplotlib<=3.0.3 \
+	&& pip3 install pyulog matplotlib==3.0.* \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
