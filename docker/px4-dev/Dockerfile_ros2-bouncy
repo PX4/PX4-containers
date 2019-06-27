@@ -3,13 +3,13 @@
 # Based from container under https://github.com/osrf/docker_images/tree/master/ros2/source/devel
 #
 
-FROM px4io/px4-dev-ros-melodic:2019-06-27
+FROM px4io/px4-dev-ros-kinetic:2019-06-27
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 # setup environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV ROS1_DISTRO melodic
+ENV ROS1_DISTRO kinetic
 ENV ROS2_DISTRO bouncy
 ENV DEBIAN_FRONTEND noninteractive
 
