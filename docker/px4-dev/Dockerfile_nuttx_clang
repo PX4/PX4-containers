@@ -2,7 +2,7 @@
 # PX4 Clang + NuttX development environment
 #
 
-FROM px4io/px4-dev-clang:2019-06-02
+FROM px4io/px4-dev-clang:2019-06-27
 
 RUN dpkg --add-architecture i386 \
 	&& apt-get update \
