@@ -13,6 +13,7 @@ RUN	pacman -Sy --noconfirm \
 		cmake \
 		git \
 		gnutls \
+		jdk11-openjdk \
 		make \
 		nettle \
 		ninja \
