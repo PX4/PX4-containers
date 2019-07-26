@@ -72,11 +72,10 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 # Fast-RTPS
 RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
-	&& mkdir -p /usr/local/share/fastrtps \
-	&& cp eProsima_FastRTPS-1.6.0-Linux/share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/fastrtpsgen.jar \
-	&& cp eProsima_FastRTPS-1.6.0-Linux/bin/fastrtpsgen /usr/local/bin/fastrtpsgen \
+	&& cd eProsima_FastRTPS-1.6.0-Linux \
+	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+	&& make install \
 	&& rm -rf /tmp/*
-
 
 # create user with id 1001 (jenkins docker workflow default)
 RUN useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout user
