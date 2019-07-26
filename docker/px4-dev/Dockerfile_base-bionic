@@ -79,11 +79,11 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O 
 ENV PATH "/opt/gradle/gradle-5.4.1/bin:$PATH"
 
 # Fast-RTPS
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b release/1.7.2 /tmp/Fast-RTPS-1.7.2 \
-	&& cd /tmp/Fast-RTPS-1.7.2 \
-	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. \
-	&& make && make install \
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-7-2/eprosima_fastrtps-1-7-2-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& cd eProsima_FastRTPS-1.7.2-Linux \
+	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+	&& make install \
 	&& rm -rf /tmp/*
 
 # create user with id 1001 (jenkins docker workflow default)
