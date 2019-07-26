@@ -65,3 +65,11 @@ RUN apt-get install -y --quiet python3-gencpp \
 		&& apt-get -y autoremove \
 		&& apt-get clean autoclean \
 		&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# downgrade Fast-RTPS to 1.6.0 (from the base container), as ROS2 Bouncy only supports Fast-RTPS 1.6.0
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& cd eProsima_FastRTPS-1.6.0-Linux \
+	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+	&& make install \
+	&& rm -rf /tmp/*
