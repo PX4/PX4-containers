@@ -79,14 +79,14 @@ CHARTS = [
     },
 ]
 
-KML_SERIES = ["mavros_local_position_local__pose_position_x",
-              "mavros_local_position_local__pose_position_y",
-              "mavros_local_position_local__pose_position_z",
-              "px4_vehicle_local_position__x",
-              "px4_vehicle_local_position__y",
-              "px4_vehicle_local_position__z",
-             ]
-
+KML_SERIES = [
+    "mavros_local_position_local__pose_position_x",
+    "mavros_local_position_local__pose_position_y",
+    "mavros_local_position_local__pose_position_z",
+    "px4_vehicle_local_position__x",
+    "px4_vehicle_local_position__y",
+    "px4_vehicle_local_position__z",
+]
 
 
 def kmlhead(name):
@@ -107,6 +107,7 @@ def kmlhead(name):
             <coordinates>
 ''' % (name, name)
 
+
 def kmltail(altmode):
     return '''
             </coordinates>
@@ -124,8 +125,8 @@ def export(output_dir, bag_file):
     bag_name = os.path.splitext(os.path.basename(bag_file))[0]
     output_dir = os.path.abspath(output_dir)
 
-    #data = data.truncate(before="20150319 13:38:30", after="20150319 13:39:00")
-    #data = data.truncate(before="20150319 14:53:30", after="20150319 14:54:30")
+    # data = data.truncate(before="20150319 13:38:30", after="20150319 13:39:00")
+    # data = data.truncate(before="20150319 14:53:30", after="20150319 14:54:30")
 
     # for c in data.columns:
     #     print(c)

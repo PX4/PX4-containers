@@ -1,20 +1,18 @@
 #!/usr/bin/env python
-#***************************************************************************
-#
-# Copyright (c) 2015 UAVenture AG. All rights reserved.
-#
-#***************************************************************************/
 
-#import roslib
-#roslib.load_manifest('broadcaster')
-#import rospy
+# Copyright (c) 2015 UAVenture AG. All rights reserved.
+
+# import roslib
+# roslib.load_manifest('broadcaster')
+# import rospy
 from pymavlink import mavutil
 import socket
 import time
 import SocketServer
 import threading
 
-#from mavros_msgs.msg import State as VehicleState
+# from mavros_msgs.msg import State as VehicleState
+
 
 class Broadcaster(object):
 
@@ -22,10 +20,10 @@ class Broadcaster(object):
         mavutil.set_dialect("pixhawk")
         self._mavlink = mavutil.mavlink.MAVLink(None, )
 
-        #rospy.Subscriber("/mavros/state", VehicleState, self._vehicle_state_callback)
+        # rospy.Subscriber("/mavros/state", VehicleState, self._vehicle_state_callback)
 
     def start(self):
-        #rate = rospy.Rate(2)
+        # rate = rospy.Rate(2)
         # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         # sock.bind(("", 1233))
@@ -39,19 +37,20 @@ class Broadcaster(object):
         server_thread.daemon = True
         server_thread.start()
 
-        #while not rospy.is_shutdown():
+        # while not rospy.is_shutdown():
         while 1:
             msg = self._mavlink.heartbeat_encode(0, 0, 0, 0, 0)
             buf = msg.pack(self._mavlink)
             print(":".join("{:02x}".format(ord(c)) for c in buf))
             server.socket.sendto(buf, ("192.168.1.255", 14550))
             time.sleep(0.5)
-            #rate.sleep()
+            # rate.sleep()
 
         server.shutdown = True
 
     def _vehicle_state_callback(self, data):
         pass
+
 
 class Server(threading.Thread):
     def __init__(self, sock):
@@ -61,13 +60,14 @@ class Server(threading.Thread):
 
     def run(self):
         while not self.shutdown:
-            data, addr = self._sock.recvfrom(1024) # buffer size is 1024 bytes
-            #print "received message:", data
+            data, addr = self._sock.recvfrom(1024)  # buffer size is 1024 bytes
+            # print "received message:", data
             print("received data from:", addr)
 
 
 class ThreadingUDPServer(SocketServer.ThreadingMixIn, SocketServer.UDPServer):
     pass
+
 
 class MessageHandler(SocketServer.BaseRequestHandler):
 
@@ -76,14 +76,16 @@ class MessageHandler(SocketServer.BaseRequestHandler):
         socket = self.request[1]
         print(self.client_address)
 
+
 # Main function.
 def main():
-    #rospy.init_node('broadcaster')
-    #try:
+    # rospy.init_node('broadcaster')
+    # try:
         broadcaster = Broadcaster()
         broadcaster.start()
     # except rospy.ROSInterruptException:
     #     pass
+
 
 if __name__ == '__main__':
     main()
