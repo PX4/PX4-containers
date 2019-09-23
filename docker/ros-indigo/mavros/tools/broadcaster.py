@@ -43,7 +43,7 @@ class Broadcaster(object):
         while 1:
             msg = self._mavlink.heartbeat_encode(0, 0, 0, 0, 0)
             buf = msg.pack(self._mavlink)
-            print ":".join("{:02x}".format(ord(c)) for c in buf)
+            print(":".join("{:02x}".format(ord(c)) for c in buf))
             server.socket.sendto(buf, ("192.168.1.255", 14550))
             time.sleep(0.5)
             #rate.sleep()
@@ -63,7 +63,7 @@ class Server(threading.Thread):
         while not self.shutdown:
             data, addr = self._sock.recvfrom(1024) # buffer size is 1024 bytes
             #print "received message:", data
-            print "received data from:", addr
+            print("received data from:", addr)
 
 
 class ThreadingUDPServer(SocketServer.ThreadingMixIn, SocketServer.UDPServer):
@@ -74,7 +74,7 @@ class MessageHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         data = self.request[0]
         socket = self.request[1]
-        print self.client_address
+        print(self.client_address)
 
 # Main function.
 def main():

@@ -128,7 +128,7 @@ def export(output_dir, bag_file):
     #data = data.truncate(before="20150319 14:53:30", after="20150319 14:54:30")
 
     # for c in data.columns:
-    #     print c
+    #     print(c)
 
     for chart in CHARTS:
         # Filter series
@@ -142,7 +142,7 @@ def export(output_dir, bag_file):
             if not os.path.exists(path):
                 os.makedirs(path)
 
-            print "Exporting chart %s to %s" % (chart["name"], path)
+            print("Exporting chart %s to %s" % (chart["name"], path))
 
             os.chdir(path)
             vis = bearcart.Chart(chart_df)
@@ -157,7 +157,7 @@ def export(output_dir, bag_file):
     if chart_df.columns.size > 0:
         mavros = KML_SERIES[0] in chart_df.columns
         path = os.path.join(output_dir, bag_name + '.kml')
-        print "Exporting KML to %s" % (path)
+        print("Exporting KML to %s" % (path))
 
         fid = open(path, 'w')
         fid.write(kmlhead(bag_name))
@@ -167,8 +167,8 @@ def export(output_dir, bag_file):
             a = base.altitude
 
             # if (math.isnan(row[KML_SERIES[0]]) or math.isnan(row[KML_SERIES[1]]) or math.isnan(row[KML_SERIES[2]])):
-            #     print "found nan"
-            #     print row
+            #     print("found nan")
+            #     print(row)
 
             if mavros and not (math.isnan(row[KML_SERIES[0]]) or math.isnan(row[KML_SERIES[1]]) or math.isnan(row[KML_SERIES[2]])):
                 x = row[KML_SERIES[0]]
