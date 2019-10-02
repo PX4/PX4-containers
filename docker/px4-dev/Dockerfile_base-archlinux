@@ -53,13 +53,19 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O 
 
 ENV PATH "/opt/gradle/gradle-5.4.1/bin:$PATH"
 
-# Install Fast-RTPS
 # Fast-RTPS
 RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-8-1/eprosima_fastrtps-1-8-1-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
 	&& cd eProsima_FastRTPS-1.8.1-Linux \
-	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
-	&& make install \
+	&& cd requiredcomponents \
+	&& tar -xvzf eProsima_Fast-CDR-1.0.10-Linux.tar.gz \
+	&& cd Fast-CDR-1.0.10 \
+	&& mkdir build && cd build \
+	&& cmake .. && cmake --build . --target install \
+	&& cd ../../.. && cd eProsima_FastRTPS-1.8.1-Linux \
+	&& mkdir build && cd build \
+	&& cmake -DSECURITY=ON .. \
+	&& cmake --build . --target install \
 	&& rm -rf /tmp/*
 
 # Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
