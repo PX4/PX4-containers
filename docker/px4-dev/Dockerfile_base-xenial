@@ -27,6 +27,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		libfreetype6-dev \
 		libgtest-dev \
 		libpng-dev \
+		libssl-dev \
 		lsb-release \
 		make \
 		ninja-build \
