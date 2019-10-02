@@ -45,17 +45,18 @@ RUN	curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > 
 	&& chmod +x /usr/sbin/gosu
 
 # Gradle (Required to build Fast-RTPS-Gen)
-RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O /tmp/gradle-5.4.1-bin.zip \
+RUN wget -q "https://services.gradle.org/distributions/gradle-5.6.2-bin.zip" -O /tmp/gradle-5.6.2-bin.zip \
 	&& mkdir /opt/gradle \
 	&& cd /tmp \
-	&& unzip -d /opt/gradle gradle-5.4.1-bin.zip \
+	&& unzip -d /opt/gradle gradle-5.6.2-bin.zip \
 	&& rm -rf /tmp/*
 
-ENV PATH "/opt/gradle/gradle-5.4.1/bin:$PATH"
+ENV PATH "/opt/gradle/gradle-5.6.2/bin:$PATH"
 
 # Fast-RTPS
 RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tmp/FastRTPS-1.8.2 \
 	&& cd /tmp/FastRTPS-1.8.2 \
+	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install \
 	&& rm -rf /tmp/*
