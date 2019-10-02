@@ -69,7 +69,7 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
-# Gradle (Required to build Fast-RTPS)
+# Gradle (Required to build Fast-RTPS-Gen)
 RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O /tmp/gradle-5.4.1-bin.zip \
 	&& mkdir /opt/gradle \
 	&& cd /tmp \
@@ -79,17 +79,9 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O 
 ENV PATH "/opt/gradle/gradle-5.4.1/bin:$PATH"
 
 # Fast-RTPS
-RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-8-1/eprosima_fastrtps-1-8-1-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
-	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
-	&& cd eProsima_FastRTPS-1.8.1-Linux \
-	&& cd requiredcomponents \
-	&& tar -xvzf eProsima_Fast-CDR-1.0.10-Linux.tar.gz \
-	&& cd Fast-CDR-1.0.10 \
-	&& mkdir build && cd build \
-	&& cmake .. && cmake --build . --target install \
-	&& cd ../../.. && cd eProsima_FastRTPS-1.8.1-Linux \
-	&& mkdir build && cd build \
-	&& cmake -DSECURITY=ON .. \
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tmp/FastRTPS-1.8.2 \
+	&& cd /tmp/FastRTPS-1.8.2 \
+	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install \
 	&& rm -rf /tmp/*
 
