@@ -54,11 +54,20 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip" -O 
 ENV PATH "/opt/gradle/gradle-5.4.1/bin:$PATH"
 
 # Install Fast-RTPS
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b release/1.7.2 /tmp/Fast-RTPS-1.7.2 \
-	&& cd /tmp/Fast-RTPS-1.7.2 \
-	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DBUILD_JAVA=ON .. \
-	&& make && make install \
+# Fast-RTPS
+RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-8-1/eprosima_fastrtps-1-8-1-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& cd eProsima_FastRTPS-1.8.1-Linux \
+	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+	&& make install \
+	&& rm -rf /tmp/*
+
+# Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
+RUN git clone https://github.com/eProsima/Fast-RTPS-Gen.git /tmp/Fast-RTPS-Gen \
+	&& cd /tmp/Fast-RTPS-Gen \
+	&& gradle assemble \
+	&& cp share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/ \
+	&& cp scripts/fastrtpsgen /usr/local/bin/ \
 	&& rm -rf /tmp/*
 
 # Add group dialout
