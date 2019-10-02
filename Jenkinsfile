@@ -22,7 +22,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make px4_sitl_default'
+              sh 'make px4_sitl_rtps'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -43,7 +43,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make px4_sitl_default'
+              sh 'make px4_sitl_rtps'
               sh 'ccache -s'
               sh 'make clean'
             }
@@ -64,7 +64,7 @@ pipeline {
               sh 'export'
               sh 'make clean'
               sh 'ccache -z'
-              sh 'make px4_sitl_default'
+              sh 'make px4_sitl_rtps'
               sh 'ccache -s'
               sh 'make clean'
             }
