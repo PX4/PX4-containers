@@ -20,11 +20,11 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_sitl_rtps'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -41,11 +41,11 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_sitl_rtps'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -62,11 +62,11 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_sitl_rtps'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -114,12 +114,12 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_sitl_default'
               sh 'make px4_sitl_default package'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -136,11 +136,11 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_fmu-v2_default'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -157,11 +157,11 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make scan-build'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -178,12 +178,12 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make px4_sitl_default sitl_gazebo'
               sh 'make px4_sitl_default package'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -238,12 +238,12 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make aerotenna_ocpoc_ubuntu'
               sh 'make aerotenna_ocpoc_ubuntu package'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
@@ -260,12 +260,12 @@ pipeline {
             git 'https://github.com/PX4/Firmware.git'
             dir(path: 'Firmware') {
               sh 'export'
-              sh 'make clean'
+              sh 'make distclean'
               sh 'ccache -z'
               sh 'make emlid_navio2_cross'
               sh 'make emlid_navio2_cross package'
               sh 'ccache -s'
-              sh 'make clean'
+              sh 'make distclean'
             }
           }
         }
