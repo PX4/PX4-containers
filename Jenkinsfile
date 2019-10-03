@@ -17,8 +17,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -38,8 +38,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -59,8 +59,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -79,12 +79,9 @@ pipeline {
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
-          environment {
-            HOME = "${WORKSPACE}"
-          }
           steps {
-            git 'https://github.com/PX4/Devguide.git'
-            dir(path: 'Devguide') {
+            dir('Devguide') {
+              git url: 'https://github.com/PX4/Devguide.git', branch: 'master'
               sh 'export'
               sh 'gitbook install'
               sh 'gitbook build'
@@ -111,8 +108,8 @@ pipeline {
               CXX = 'clang++'
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -133,8 +130,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -154,8 +151,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -175,8 +172,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -203,7 +200,14 @@ pipeline {
               source /opt/ros/melodic/setup.bash;
               catkin build -j$(nproc) -l$(nproc);
             '''
-            sh 'rm -rf catkin_ws'
+          }
+          post {
+            always {
+              sh 'rm -rf catkin_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
           }
         }
 
@@ -222,7 +226,14 @@ pipeline {
               source /opt/ros/kinetic/setup.bash;
               catkin build -j$(nproc) -l$(nproc);
             '''
-            sh 'rm -rf catkin_ws'
+          }
+          post {
+            always {
+              sh 'rm -rf catkin_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
           }
         }
 
@@ -235,8 +246,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -257,8 +268,8 @@ pipeline {
             }
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
               sh 'export'
               sh 'make distclean'
               sh 'ccache -z'
@@ -283,9 +294,14 @@ pipeline {
               CXX = 'clang++'
           }
           steps {
-            git 'https://github.com/PX4/Firmware.git'
-            dir(path: 'Firmware') {
+            dir('ecl') {
+              git url: 'https://github.com/PX4/ecl.git', branch: 'master'
               sh 'export'
+              sh 'ccache -z'
+              sh 'make clean'
+              sh 'make'
+              sh 'ccache -s'
+              sh 'make clean'
             }
           }
         }
@@ -305,13 +321,20 @@ pipeline {
             }
           }
           steps {
-            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
             sh '''#!/bin/bash -l
-              cd catkin_ws;
+              cd colcon_ws;
               source /opt/ros/ardent/setup.bash;
               colcon build --event-handlers console_direct+ --symlink-install;
             '''
-            sh 'rm -rf catkin_ws'
+          }
+          post {
+            always {
+              sh 'rm -rf colcon_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
           }
         }
 
@@ -330,7 +353,14 @@ pipeline {
               source /opt/ros/bouncy/setup.bash;
               colcon build --event-handlers console_direct+ --symlink-install;
             '''
-            sh 'rm -rf colcon_ws'
+          }
+          post {
+            always {
+              sh 'rm -rf colcon_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
           }
         }
 
@@ -349,9 +379,15 @@ pipeline {
               source /opt/ros/bouncy/setup.bash;
               colcon build --event-handlers console_direct+ --symlink-install;
             '''
-            sh 'rm -rf colcon_ws'
           }
-
+          post {
+            always {
+              sh 'rm -rf colcon_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
+          }
         }
 
         stage('px4-dev-ros2-dashing') {
@@ -369,9 +405,15 @@ pipeline {
               source /opt/ros/dashing/setup.bash;
               colcon build --event-handlers console_direct+ --symlink-install;
             '''
-            sh 'rm -rf colcon_ws'
           }
-
+          post {
+            always {
+              sh 'rm -rf colcon_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
+          }
         }
       } // parallel
     } // Build ROS2 (after ROS1)
