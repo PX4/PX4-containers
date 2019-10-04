@@ -71,23 +71,23 @@ pipeline {
           }
         }
 
-        stage('px4-docs') {
-          agent {
-            dockerfile {
-              filename 'Dockerfile_docs'
-              dir 'docker/px4-dev'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
-            }
-          }
-          steps {
-            dir('Devguide') {
-              git url: 'https://github.com/PX4/Devguide.git', branch: 'master'
-              sh 'export'
-              sh 'gitbook install'
-              sh 'gitbook build'
-            }
-          }
-        }
+        // stage('px4-docs') {
+        //   agent {
+        //     dockerfile {
+        //       filename 'Dockerfile_docs'
+        //       dir 'docker/px4-dev'
+        //       args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
+        //     }
+        //   }
+        //   steps {
+        //     dir('Devguide') {
+        //       git url: 'https://github.com/PX4/Devguide.git', branch: 'master'
+        //       sh 'export'
+        //       sh 'gitbook install'
+        //       sh 'gitbook build'
+        //     }
+        //   }
+        // }
 
       } // parallel
     } // stage Build
