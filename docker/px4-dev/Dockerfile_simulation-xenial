@@ -2,7 +2,7 @@
 # PX4 gazebo development environment
 #
 
-FROM px4io/px4-dev-base-xenial:2019-07-26
+FROM px4io/px4-dev-base-xenial:2019-07-29
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
