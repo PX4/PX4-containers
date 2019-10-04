@@ -259,10 +259,6 @@ pipeline {
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
-          environment {
-              CC = 'clang'
-              CXX = 'clang++'
-          }
           steps {
             dir('ecl') {
               git url: 'https://github.com/PX4/ecl.git', branch: 'master'
@@ -278,6 +274,7 @@ pipeline {
                 cmake --build .;
               '''
               sh 'ccache -s'
+              sh 'rm -rf build'
             }
           }
         }
