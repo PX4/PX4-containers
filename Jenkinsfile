@@ -163,10 +163,10 @@ pipeline {
           }
         }
 
-        stage('px4-dev-simulation') {
+        stage('px4-dev-simulation-xenial') {
           agent {
             dockerfile {
-              filename 'Dockerfile_simulation'
+              filename 'Dockerfile_simulation-xenial'
               dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
@@ -185,54 +185,24 @@ pipeline {
           }
         }
 
-        stage('px4-dev-ros-melodic') {
+        stage('px4-dev-simulation-bionic') {
           agent {
             dockerfile {
-              filename 'Dockerfile_ros-melodic'
+              filename 'Dockerfile_simulation-bionic'
               dir 'docker/px4-dev'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
           steps {
-            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
-            sh '''#!/bin/bash -l
-              cd catkin_ws;
-              source /opt/ros/melodic/setup.bash;
-              catkin build -j$(nproc) -l$(nproc);
-            '''
-          }
-          post {
-            always {
-              sh 'rm -rf catkin_ws'
-            }
-            failure {
-              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
-            }
-          }
-        }
-
-        stage('px4-dev-ros-kinetic') {
-          agent {
-            dockerfile {
-              filename 'Dockerfile_ros-kinetic'
-              dir 'docker/px4-dev'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
-            }
-          }
-          steps {
-            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
-            sh '''#!/bin/bash -l
-              cd catkin_ws;
-              source /opt/ros/kinetic/setup.bash;
-              catkin build -j$(nproc) -l$(nproc);
-            '''
-          }
-          post {
-            always {
-              sh 'rm -rf catkin_ws'
-            }
-            failure {
-              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            dir('Firmware') {
+              git url: 'https://github.com/PX4/Firmware.git', branch: 'master'
+              sh 'export'
+              sh 'make distclean'
+              sh 'ccache -z'
+              sh 'make px4_sitl_default sitl_gazebo'
+              sh 'make px4_sitl_default package'
+              sh 'ccache -s'
+              sh 'make distclean'
             }
           }
         }
@@ -315,6 +285,63 @@ pipeline {
 
       } // parallel
     } // stage Build (on base)
+
+    stage('Build ROS1 (after simulation containers)') {
+      parallel {
+        stage('px4-dev-ros-melodic') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros-melodic'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh '''#!/bin/bash -l
+              cd catkin_ws;
+              source /opt/ros/melodic/setup.bash;
+              catkin build -j$(nproc) -l$(nproc);
+            '''
+            sh 'rm -rf catkin_ws'
+          }
+          post {
+            always {
+              sh 'rm -rf catkin_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
+          }
+        }
+
+        stage('px4-dev-ros-kinetic') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros-kinetic'
+              dir 'docker/px4-dev'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git catkin_ws/src/Firmware'
+            sh '''#!/bin/bash -l
+              cd catkin_ws;
+              source /opt/ros/kinetic/setup.bash;
+              catkin build -j$(nproc) -l$(nproc);
+            '''
+          }
+          post {
+            always {
+              sh 'rm -rf catkin_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
+          }
+        }
+      } // parallel
+    } // Build ROS1 (after simulation containers)
 
     stage('Build ROS2 (after ROS1)') {
       parallel {
