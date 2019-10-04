@@ -272,13 +272,12 @@ pipeline {
                 if [ ! -d build ]; then
                   mkdir build;
                 fi
+                cd build;
+                cmake ..;
+                make clean;
+                cmake --build .;
               '''
-              sh 'cd build'
-              sh 'cmake ..'
-              sh 'make clean'
-              sh 'cmake --build .'
               sh 'ccache -s'
-              sh 'make clean'
             }
           }
         }
