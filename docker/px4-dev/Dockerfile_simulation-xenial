@@ -1,0 +1,42 @@
+#
+# PX4 gazebo development environment
+#
+
+FROM px4io/px4-dev-base-xenial:2019-07-26
+LABEL maintainer="Daniel Agar <daniel@agar.ca>"
+
+RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
+	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -sc` main" > /etc/apt/sources.list.d/gazebo-stable.list' \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		ant \
+		gazebo7 \
+		gstreamer1.0-plugins-bad \
+		gstreamer1.0-plugins-base \
+		gstreamer1.0-plugins-good \
+		gstreamer1.0-plugins-ugly \
+		libeigen3-dev \
+		libgazebo7-dev \
+		libgstreamer-plugins-base1.0-dev \
+		libimage-exiftool-perl \
+		libopencv-dev \
+		libxml2-utils \
+		pkg-config \
+		protobuf-compiler \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# install MAVLink headers
+RUN git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/include/mavlink/v2.0 && rm -rf /usr/local/include/mavlink/v2.0/.git
+
+# Some QT-Apps/Gazebo don't not show controls without this
+ENV QT_X11_NO_MITSHM 1
+
+# Gazebo 7 crashes on VM with OpenGL 3.3 support, so downgrade to OpenGL 2.1
+# http://answers.gazebosim.org/question/13214/virtual-machine-not-launching-gazebo/
+# https://www.mesa3d.org/vmware-guest.html
+ENV SVGA_VGPU10 0
+
+# Use UTF8 encoding in java tools (needed to compile jMAVSim)
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
