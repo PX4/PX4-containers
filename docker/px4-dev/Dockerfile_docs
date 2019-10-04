@@ -22,13 +22,17 @@ RUN apt-get update \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-RUN npm config set registry http://registry.npmjs.org/ \
-	&& npm install gitbook-cli -g
-
 RUN gem install html-proofer
 
 # create user with id 1001 (jenkins docker workflow default)
 RUN useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout user
+
+USER user
+ENV NPM_CONFIG_PREFIX=/home/user/.npm-global
+ENV PATH=$PATH:/home/user/.npm-global/bin
+
+RUN npm config set registry http://registry.npmjs.org/ \
+	&& npm install gitbook-cli -g --unsafe-perm=true
 
 ENV TERM=xterm
 ENV TZ=UTC
