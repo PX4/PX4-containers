@@ -88,7 +88,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tm
 	&& rm -rf /tmp/*
 
 # Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git /tmp/Fast-RTPS-Gen \
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.1 /tmp/Fast-RTPS-Gen \
 	&& cd /tmp/Fast-RTPS-Gen \
 	&& gradle assemble \
 	&& cp share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/ \
