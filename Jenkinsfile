@@ -298,8 +298,15 @@ pipeline {
               git url: 'https://github.com/PX4/ecl.git', branch: 'master'
               sh 'export'
               sh 'ccache -z'
+              sh '''#!/bin/bash -l
+                if [ ! -d build ]; then
+                  mkdir build;
+                fi
+              '''
+              sh 'cd build'
+              sh 'cmake ..'
               sh 'make clean'
-              sh 'make'
+              sh 'cmake --build .'
               sh 'ccache -s'
               sh 'make clean'
             }
