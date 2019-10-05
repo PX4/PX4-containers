@@ -2,7 +2,7 @@
 
 Containers with PX4 tool chain and SITL simulation support. With and without ROS.
 
-License: according to LICENSE.md in the root directory of the PX4 Firmware repository
+License: according to LICENSE.md in the root directory of the PX4 Firmware repository.
 
 ## Container Hierarchy ##
 
@@ -14,13 +14,15 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
    - px4-dev-ecl
    - px4-dev-nuttx
    - px4-dev-raspi
-   - px4-dev-simulation
+   - px4-dev-simulation-bouncy
      - px4-dev-ros-melodic
        - px4-dev-ros2-bouncy
        - px4-dev-ros2-crystal
+       - px4-dev-ros2-dashing
  - px4-dev-base-xenial
-   - px4-dev-ros-kinetic
-     - px4-dev-ros2-ardent
+   - px4-dev-simulation-xenial
+     - px4-dev-ros-kinetic
+       - px4-dev-ros2-ardent
  - px4-docs
 
 ## Running ##
@@ -32,7 +34,7 @@ docker run -it --privileged \
 	-v <local_src>:<container_src>:rw \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=${DISPLAY} \
-	--name=container_name px4io/px4-dev-simulation /bin/bash
+	--name=container_name px4io/px4-dev-simulation-bionic /bin/bash
 
 ```
 
@@ -43,7 +45,7 @@ docker build -t px4io/px4-dev-ros-melodic -f Dockerfile_ros-melodic .
 
 ```
 
-or 
+or
 
 ```console
 make px4-dev-ros-melodic
