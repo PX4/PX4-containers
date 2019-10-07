@@ -2,7 +2,7 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-simulation-xenial:latest
+FROM px4io/px4-dev-simulation-xenial:2019-10-04
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
