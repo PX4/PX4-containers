@@ -12,7 +12,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_base-bionic'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -33,7 +33,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_base-xenial'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -54,7 +54,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_base-archlinux'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -75,7 +75,7 @@ pipeline {
         //   agent {
         //     dockerfile {
         //       filename 'Dockerfile_docs'
-        //       dir 'docker/px4-dev'
+        //       dir 'docker'
         //       args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
         //     }
         //   }
@@ -99,7 +99,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_clang'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -125,7 +125,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_nuttx'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -146,7 +146,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_nuttx_clang'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -167,7 +167,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_simulation-xenial'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -189,7 +189,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_simulation-bionic'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -211,7 +211,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_armhf'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -233,7 +233,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_raspi'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -255,7 +255,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ecl'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
             }
           }
@@ -288,7 +288,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros-melodic'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -315,7 +315,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros-kinetic'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -346,7 +346,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros2-ardent'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -372,7 +372,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros2-bouncy'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -398,7 +398,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros2-crystal'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
@@ -424,7 +424,7 @@ pipeline {
           agent {
             dockerfile {
               filename 'Dockerfile_ros2-dashing'
-              dir 'docker/px4-dev'
+              dir 'docker'
               args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
             }
           }
