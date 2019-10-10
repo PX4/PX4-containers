@@ -14,7 +14,7 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
    - px4-dev-ecl
    - px4-dev-nuttx
    - px4-dev-raspi
-   - px4-dev-simulation-bouncy
+   - px4-dev-simulation-bionic
      - px4-dev-ros-melodic
        - px4-dev-ros2-bouncy
        - px4-dev-ros2-crystal
