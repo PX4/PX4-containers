@@ -19,6 +19,7 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
        - px4-dev-ros2-bouncy
        - px4-dev-ros2-crystal
        - px4-dev-ros2-dashing
+       - px4-dev-ros2-eloquent
  - px4-dev-base-xenial
    - px4-dev-simulation-xenial
      - px4-dev-ros-kinetic

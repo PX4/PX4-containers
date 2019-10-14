@@ -445,6 +445,32 @@ pipeline {
             }
           }
         }
+
+        stage('px4-dev-ros2-eloquent') {
+          agent {
+            dockerfile {
+              filename 'Dockerfile_ros2-eloquent'
+              dir 'docker'
+              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'git clone --recursive https://github.com/PX4/Firmware.git colcon_ws/src/Firmware'
+            sh '''#!/bin/bash -l
+              cd colcon_ws;
+              source /opt/ros/eloquent/setup.bash;
+              colcon build --event-handlers console_direct+ --symlink-install;
+            '''
+          }
+          post {
+            always {
+              sh 'rm -rf colcon_ws'
+            }
+            failure {
+              archiveArtifacts(allowEmptyArchive: false, artifacts: '.ros/**/*.xml, .ros/**/*.log')
+            }
+          }
+        }
       } // parallel
     } // Build ROS2 (after ROS1)
 
