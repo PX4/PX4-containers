@@ -2,7 +2,7 @@
 # PX4 ecl build and test development environment
 #
 
-FROM px4io/px4-dev-base-bionic:2019-10-04
+FROM px4io/px4-dev-base-bionic:2019-10-23
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \

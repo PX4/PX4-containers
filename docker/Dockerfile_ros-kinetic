@@ -2,8 +2,8 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-simulation-xenial:2019-10-04
-LABEL maintainer="Daniel Agar <daniel@agar.ca>"
+FROM px4io/px4-dev-simulation-xenial:2019-10-23
+LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV ROS_DISTRO kinetic
