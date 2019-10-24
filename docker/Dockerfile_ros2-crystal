@@ -74,7 +74,8 @@ RUN apt-get install -y --quiet python3-gencpp \
 
 
 # Downgrade Fast-RTPS to 1.7.2 (and replace Fast-RTPS-Gen)
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.7.x /tmp/FastRTPS-1.7.2 \
+RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* /usr/local/bin/fastrtpsgen \
+	&& git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.7.x /tmp/FastRTPS-1.7.2 \
 	&& cd /tmp/FastRTPS-1.7.2 \
 	&& mkdir build && cd build \
 	&& cmake -DBUILD_JAVA=ON -DTHIRDPARTY=ON -DSECURITY=ON .. \
