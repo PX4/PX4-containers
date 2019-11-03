@@ -15,7 +15,4 @@ RUN apt-get update \
 	&& python3 -m pip uninstall pip && apt-get -y --quiet install --reinstall python3-pip  \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
-	# python requirements
-	&& wget -q https://raw.githubusercontent.com/PX4/ecl/master/EKF/tests/pytest/requirements.txt \
-	&& pip3 install -r requirements.txt && rm -rf requirements.txt
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
