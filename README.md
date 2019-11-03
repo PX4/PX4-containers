@@ -22,8 +22,6 @@ Contains build scripts for Docker containers and virtual machines used to run Do
 
 ### [px4io/px4-dev-nuttx](https://hub.docker.com/r/px4io/px4-dev-nuttx) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-nuttx.svg)](http://microbadger.com/images/px4io/px4-dev-nuttx) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-nuttx.svg)](https://hub.docker.com/r/px4io/px4-dev-nuttx)
 
-### [px4io/px4-dev-ecl](https://hub.docker.com/r/px4io/px4-dev-ecl) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-ecl.svg)](http://microbadger.com/images/px4io/px4-dev-ecl) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-ecl.svg)](https://hub.docker.com/r/px4io/px4-dev-ecl)
-
 ## Simulation containers
 
 ### [px4io/px4-dev-simulation-xenial](https://hub.docker.com/r/px4io/px4-dev-simulation-xenial) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-simulation-xenial.svg)](http://microbadger.com/images/px4io/px4-dev-simulation-xenial) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-simulation-xenial.svg)](https://hub.docker.com/r/px4io/px4-dev-simulation-xenial)
