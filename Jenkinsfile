@@ -250,35 +250,6 @@ pipeline {
             }
           }
         }
-
-        stage('px4-dev-ecl') {
-          agent {
-            dockerfile {
-              filename 'Dockerfile_ecl'
-              dir 'docker'
-              args '-e CCACHE_BASEDIR=$WORKSPACE -v ${CCACHE_DIR}:${CCACHE_DIR}:rw'
-            }
-          }
-          steps {
-            dir('ecl') {
-              git url: 'https://github.com/PX4/ecl.git', branch: 'master'
-              sh 'export'
-              sh 'ccache -z'
-              sh '''#!/bin/bash -l
-                if [ ! -d build ]; then
-                  mkdir build;
-                fi
-                cd build;
-                cmake ..;
-                make clean;
-                cmake --build .;
-              '''
-              sh 'ccache -s'
-              sh 'rm -rf build'
-            }
-          }
-        }
-
       } // parallel
     } // stage Build (on base)
 
