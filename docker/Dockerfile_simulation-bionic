@@ -21,7 +21,6 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libimage-exiftool-perl \
 		libopencv-dev \
 		libxml2-utils \
-		pkg-config \
 		protobuf-compiler \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
