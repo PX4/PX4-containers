@@ -5,7 +5,7 @@
 FROM archlinux/base:latest
 LABEL maintainer="Julien Lecoeur <julien.lecoeur@gmail.com>"
 
-RUN	pacman -Sy --noconfirm \
+RUN pacman -Sy --noconfirm \
 		arm-none-eabi-gcc \
 		arm-none-eabi-newlib \
 		base-devel \
@@ -18,6 +18,7 @@ RUN	pacman -Sy --noconfirm \
 		nettle \
 		ninja \
 		python-pip \
+		python-setuptools \
 		tar \
 		unzip \
 		vim \
@@ -25,23 +26,19 @@ RUN	pacman -Sy --noconfirm \
 		zip
 
 # Install python dependencies
-RUN	pip install \
-		cerberus \
-		empy \
-		jinja2 \
-		numpy \
-		pyyaml \
-		serial \
-		toml
+RUN python3 -m pip install --upgrade pip \
+	&& pip3 install argparse argcomplete coverage cerberus empy jinja2 \
+		matplotlib==3.0.* numpy pkgconfig pyulog pyyaml requests serial \
+		toml pyulog wheel
 
 # Install genromfs
-RUN	wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.5.2.tar.gz \
+RUN wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.5.2.tar.gz \
 	&& tar zxvf genromfs-0.5.2.tar.gz \
 	&& cd genromfs-0.5.2 && make && make install && cd .. \
 	&& rm genromfs-0.5.2.tar.gz genromfs-0.5.2 -r
 
 # Install gosu
-RUN	curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > /usr/sbin/gosu \
+RUN curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > /usr/sbin/gosu \
 	&& chmod +x /usr/sbin/gosu
 
 # Gradle (Required to build Fast-RTPS-Gen)
@@ -70,10 +67,10 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.
 	&& rm -rf /tmp/*
 
 # Add group dialout
-RUN	groupadd dialout
+RUN groupadd dialout
 
 # manual ccache setup
-RUN	ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-gcc \
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-gcc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-g++
 
 ENV CCACHE_MAXSIZE=1G

@@ -37,6 +37,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		pkg-config \
 		python3-pip \
 		python3-pygments \
+		python3-setuptools \
 		rsync \
 		shellcheck \
 		tzdata \
@@ -59,7 +60,7 @@ RUN cd /usr/src/gtest \
 RUN python3 -m pip install --upgrade pip \
 	&& pip3 install argparse argcomplete coverage cerberus empy jinja2 \
 		matplotlib==3.0.* numpy pkgconfig pyulog pyyaml requests serial \
-		setuptools toml pyulog wheel
+		toml pyulog wheel
 
 # manual ccache setup
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
