@@ -25,11 +25,11 @@ RUN pacman -Sy --noconfirm \
 		wget \
 		zip
 
-# Install python dependencies
+# python3 dependencies installed by pip
 RUN python3 -m pip install --upgrade pip \
 	&& pip3 install argparse argcomplete coverage cerberus empy jinja2 \
-		matplotlib==3.0.* numpy pkgconfig pyulog pyyaml requests serial \
-		toml pyulog wheel
+		matplotlib==3.0.* numpy pkgconfig pyros-genmsg pyulog pyyaml \
+		requests serial toml pyulog wheel
 
 # Install genromfs
 RUN wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.5.2.tar.gz \
