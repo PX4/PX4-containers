@@ -39,6 +39,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 	&& apt-get clean autoclean \
 	# pip2
 	&& pip install px4tools pymavlink \
+	# pip3
+	&& pip3 install catkin_pkg \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN rosdep init && rosdep update
