@@ -7,11 +7,8 @@ FROM px4io/px4-dev-ros-melodic:2019-11-22
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 # setup environment
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
 ENV ROS1_DISTRO melodic
-ENV ROS2_DISTRO dashing
-ENV DEBIAN_FRONTEND noninteractive
+ENV ROS2_DISTRO eloquent
 
 # setup ros2 keys
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
