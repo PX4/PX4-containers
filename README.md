@@ -1,6 +1,6 @@
-# PX4 Container / VM support
+# PX4 Container
 
-Contains build scripts for Docker containers and virtual machines used to run Docker. Currently used for running a pre-setup ROS SITL environment, among other build setups used on CI/CD.
+Contains Dockerfiles for Docker containers to build and test PX4.
 
 ## Build status: [![Build Status](http://ci.px4.io:8080/buildStatus/icon?job=PX4/containers/master)](http://ci.px4.io:8080/blue/organizations/jenkins/PX4%2Fcontainers/activity)
 
