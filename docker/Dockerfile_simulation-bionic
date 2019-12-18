@@ -41,5 +41,5 @@ ENV SVGA_VGPU10 0
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 # Install MAVSDK library
-RUN wget https://github.com/mavlink/MAVSDK/releases/download/v0.21.3/mavsdk_0.21.3_ubuntu18.04_amd64.deb \
-    && dpkg -i mavsdk_0.21.3_ubuntu18.04_amd64.deb
+RUN wget https://github.com/mavlink/MAVSDK/releases/download/v0.23.0/mavsdk_0.23.0_ubuntu18.04_amd64.deb \
+    && dpkg -i mavsdk_0.23.0_ubuntu18.04_amd64.deb
