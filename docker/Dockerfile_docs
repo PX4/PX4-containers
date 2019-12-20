@@ -2,7 +2,7 @@
 # PX4 docs build environment
 #
 
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
@@ -11,10 +11,8 @@ RUN apt-get update \
 		ca-certificates \
 		git \
 		gosu \
-		libcurl4-openssl-dev \
 		libfontconfig \
 		nodejs \
-		nodejs-legacy \
 		npm \
 		ruby-dev \
 		zlib1g-dev \
