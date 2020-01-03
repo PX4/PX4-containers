@@ -16,12 +16,16 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 		libeigen3-dev \
 		libgeographic-dev \
 		libopencv-dev \
+		libyaml-cpp-dev \
 		python-catkin-tools \
 		python-tk \
 		ros-$ROS_DISTRO-gazebo-ros-pkgs \
+		ros-$ROS_DISTRO-mav-msgs \
 		ros-$ROS_DISTRO-mavlink \
 		ros-$ROS_DISTRO-mavros \
 		ros-$ROS_DISTRO-mavros-extras \
+		ros-$ROS_DISTRO-octomap \
+		ros-$ROS_DISTRO-octomap-msgs \
 		ros-$ROS_DISTRO-pcl-conversions \
 		ros-$ROS_DISTRO-pcl-msgs \
 		ros-$ROS_DISTRO-pcl-ros \
