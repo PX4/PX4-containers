@@ -10,6 +10,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		ant \
+		bc \
 		gazebo7 \
 		gstreamer1.0-plugins-bad \
 		gstreamer1.0-plugins-base \
