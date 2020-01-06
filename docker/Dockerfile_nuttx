@@ -2,7 +2,7 @@
 # PX4 NuttX development environment
 #
 
-FROM px4io/px4-dev-base-bionic:2019-12-18
+FROM px4io/px4-dev-base-bionic:2020-01-06
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
