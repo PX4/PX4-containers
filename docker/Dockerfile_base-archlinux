@@ -9,6 +9,7 @@ RUN pacman -Sy --noconfirm \
 		arm-none-eabi-gcc \
 		arm-none-eabi-newlib \
 		base-devel \
+		bc \
 		ccache \
 		cmake \
 		git \
