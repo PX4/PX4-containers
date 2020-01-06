@@ -59,9 +59,8 @@ RUN cd /usr/src/gtest \
 	&& cp *.a /usr/lib \
 	&& cd .. && rm -rf build
 
-# python3 dependencies installed by pip
-RUN python3 -m pip install --upgrade pip \
-	&& pip3 install argparse argcomplete coverage cerberus empy jinja2 \
+# Python 3 dependencies installed by pip
+RUN pip3 install argparse argcomplete coverage cerberus empy jinja2 \
 		matplotlib==3.0.* numpy pkgconfig pyros-genmsg pyulog pyyaml \
 		requests serial toml pyulog wheel
 
