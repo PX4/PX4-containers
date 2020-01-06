@@ -2,7 +2,7 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-simulation-xenial:2019-12-18
+FROM px4io/px4-dev-simulation-xenial:2020-01-06
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 ENV ROS_DISTRO kinetic
