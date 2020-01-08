@@ -1,5 +1,5 @@
 name: Build Docker images
-on: [pull_request, push]
+on: [push]
 jobs:
   build:
     name: "Build"
@@ -8,10 +8,9 @@ jobs:
     - uses: actions/checkout@v1
     - uses: whoan/docker-build-with-cache-action@v3
       with:
-        username: $GITHUB_ACTOR
-        password: ${{ secrets.GITHUB_TOKEN }}
-        image_name: px4/containers/px4-dev-base-xenial
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        image_name: px4io/px4-dev-base-xenial
         push_image_and_stages: true
         dockerfile: Dockerfile_base-xenial
         context: docker
-        registry: docker.pkg.github.com
