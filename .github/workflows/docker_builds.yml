@@ -11,8 +11,8 @@ on:
     - cron: '0 0 1 * *' # Monthly on day 1
 
 jobs:
-  build:
-    name: "Build"
+  build_xenial_base:
+    name: "Build Ubuntu Xenial Base"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -22,5 +22,19 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: docker/Dockerfile_base-xenial
+        context: docker
+        cache: ${{ github.event_name != 'schedule' }}
+
+  build_bionic_base:
+    name: "Build Ubuntu Bionic Base"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: px4io/px4-dev-base-bionic
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: docker/Dockerfile_base-bionic
         context: docker
         cache: ${{ github.event_name != 'schedule' }}
