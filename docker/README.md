@@ -11,7 +11,6 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
    - px4-dev-armhf
    - px4-dev-clang
      - px4-dev-nuttx-clang
-   - px4-dev-ecl
    - px4-dev-nuttx
    - px4-dev-raspi
    - px4-dev-simulation-bionic
