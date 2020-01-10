@@ -22,6 +22,7 @@ RUN pacman -Sy --noconfirm \
 		python-setuptools \
 		tar \
 		unzip \
+		valgrind \
 		vim \
 		wget \
 		zip
