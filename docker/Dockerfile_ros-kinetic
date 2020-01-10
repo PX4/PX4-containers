@@ -21,6 +21,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 		libyaml-cpp-dev \
 		protobuf-compiler \
 		python-catkin-tools \
+		python-jinja2 \
 		python-rospkg \
 		python-tk \
 		ros-$ROS_DISTRO-gazebo-ros-pkgs \
