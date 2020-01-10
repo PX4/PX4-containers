@@ -43,6 +43,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		shellcheck \
 		tzdata \
 		unzip \
+		valgrind \
 		wget \
 		xsltproc \
 		zip \
