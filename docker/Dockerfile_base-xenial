@@ -53,7 +53,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 # gtest
 RUN cd /usr/src/gtest \
 	&& mkdir build && cd build \
-	&& cmake .. && make \
+	&& cmake .. && make -j$(nproc) \
 	&& cp *.a /usr/lib \
 	&& cd .. && rm -rf build
 
@@ -72,7 +72,7 @@ RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 # astyle v2.06
 RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz -O /tmp/astyle.tar.gz \
 	&& cd /tmp && tar zxf astyle.tar.gz && cd astyle/src \
-	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
+	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin -j $(nproc) \
 	&& rm -rf /tmp/*
 
 # Fast-RTPS
@@ -80,7 +80,7 @@ RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
 	&& cd eProsima_FastRTPS-1.6.0-Linux \
 	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
-	&& make install \
+	&& make -j$(nproc) install \
 	&& rm -rf /tmp/*
 
 # create user with id 1001 (jenkins docker workflow default)

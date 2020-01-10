@@ -40,10 +40,10 @@ RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
 RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
 	&& cd /tmp/tools/kconfig-frontends \
 	&& autoreconf -f -i \
-	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make && make install \
+	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make -j$(nproc) && make install \
 	&& rm -rf /tmp/*
 
 # bloaty - https://github.com/google/bloaty
 RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
-	&& cd /tmp/bloaty && cmake -GNinja . && ninja bloaty && cp bloaty /usr/local/bin/ \
+	&& cd /tmp/bloaty && cmake -GNinja . && ninja -j $(nproc) bloaty && cp bloaty /usr/local/bin/ \
 	&& rm -rf /tmp/*

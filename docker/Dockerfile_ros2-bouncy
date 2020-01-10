@@ -58,5 +58,5 @@ RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/
 	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
 	&& cd eProsima_FastRTPS-1.6.0-Linux \
 	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
-	&& make install \
+	&& make -j$(nproc) install \
 	&& rm -rf /tmp/*
