@@ -89,7 +89,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tm
 	&& cd /tmp/FastRTPS-1.8.2 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install -j $(nproc) \
+	&& cmake --build . --target install -- -j $(nproc) \
 	&& rm -rf /tmp/*
 
 # Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
