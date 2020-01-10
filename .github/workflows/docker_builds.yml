@@ -2,13 +2,8 @@ name: Build Docker images
 
 on:
   push:
-    branches:
-    - master
-  pull_request:
-    branches:
+    tags:
     - '*'
-  schedule:
-    - cron: '0 0 1 * *' # Monthly on day 1
 
 jobs:
   build_xenial_base:
@@ -23,7 +18,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: docker/Dockerfile_base-xenial
         context: docker
-        cache: ${{ github.event_name != 'schedule' }}
+        cache: false
 
   build_bionic_base:
     name: "Build Ubuntu Bionic Base"
@@ -37,4 +32,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: docker/Dockerfile_base-bionic
         context: docker
-        cache: ${{ github.event_name != 'schedule' }}
+        cache: false
