@@ -2,7 +2,7 @@
 
 Contains Dockerfiles for Docker containers to build and test PX4.
 
-## Build status: [![Build Status](https://github.com/PX4/containers/workflows/.github/workflows/docker_builds.yml/badge.svg)](https://github.com/PX4/containers/actions)
+[![Build Status](https://github.com/PX4/containers/workflows/Build%20Docker%20images/badge.svg)](https://github.com/PX4/containers/actions)
 
 ## Base containers
 
