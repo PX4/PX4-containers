@@ -19,6 +19,7 @@ jobs:
         dockerfile: docker/Dockerfile_base-archlinux
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-base-bionic:
     name: "Ubuntu Bionic Base"
@@ -33,6 +34,7 @@ jobs:
         dockerfile: docker/Dockerfile_base-bionic
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-armhf:
     name: "Ubuntu armhf"
@@ -48,6 +50,7 @@ jobs:
         dockerfile: docker/Dockerfile_armhf
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-clang:
     name: "Ubuntu Clang"
@@ -63,6 +66,7 @@ jobs:
         dockerfile: docker/Dockerfile_clang
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-nuttx-clang:
     name: "Ubuntu NuttX Clang"
@@ -78,6 +82,7 @@ jobs:
         dockerfile: docker/Dockerfile_nuttx_clang
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-nuttx:
     name: "Ubuntu NuttX"
@@ -93,6 +98,7 @@ jobs:
         dockerfile: docker/Dockerfile_nuttx
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-raspi:
     name: "Ubuntu Raspberry Pi"
@@ -108,6 +114,7 @@ jobs:
         dockerfile: docker/Dockerfile_raspi
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-simulation-bionic:
     name: "Ubuntu Bionic Simulation"
@@ -123,6 +130,7 @@ jobs:
         dockerfile: docker/Dockerfile_simulation-bionic
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros-melodic:
     name: "Ubuntu ROS Melodic"
@@ -138,6 +146,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros-melodic
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros2-bouncy:
     name: "Ubuntu ROS2 Bouncy"
@@ -153,6 +162,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros2-bouncy
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros2-crystal:
     name: "Ubuntu ROS2 Crystal"
@@ -168,6 +178,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros2-crystal
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros2-dashing:
     name: "Ubuntu ROS2 Dashing"
@@ -183,6 +194,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros2-dashing
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros2-eloquent:
     name: "Ubuntu ROS2 Eloquent"
@@ -198,6 +210,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros2-eloquent
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-base-xenial:
     name: "Ubuntu Xenial Base"
@@ -212,6 +225,7 @@ jobs:
         dockerfile: docker/Dockerfile_base-xenial
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-simulation-xenial:
     name: "Ubuntu Xenial Simulation"
@@ -227,6 +241,7 @@ jobs:
         dockerfile: docker/Dockerfile_simulation-xenial
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros-kinetic:
     name: "Ubuntu ROS Kinetic"
@@ -242,6 +257,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros-kinetic
         context: docker
         cache: false
+        tag_names: true
 
   px4-dev-ros2-ardent:
     name: "Ubuntu ROS2 Ardent"
@@ -257,6 +273,7 @@ jobs:
         dockerfile: docker/Dockerfile_ros2-ardent
         context: docker
         cache: false
+        tag_names: true
 
   px4-docs:
     name: "Ubuntu Docs"
@@ -271,3 +288,4 @@ jobs:
         dockerfile: docker/Dockerfile_docs
         context: docker
         cache: false
+        tag_names: true
