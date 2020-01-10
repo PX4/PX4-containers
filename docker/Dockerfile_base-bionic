@@ -53,7 +53,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 # gtest
 RUN cd /usr/src/gtest \
 	&& mkdir build && cd build \
-	&& cmake .. && make \
+	&& cmake .. && make -j$(nproc) \
 	&& cp *.a /usr/lib \
 	&& cd .. && rm -rf build
 
@@ -72,7 +72,7 @@ RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 # astyle v2.06
 RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.06/astyle_2.06_linux.tar.gz -O /tmp/astyle.tar.gz \
 	&& cd /tmp && tar zxf astyle.tar.gz && cd astyle/src \
-	&& make -f ../build/gcc/Makefile && cp bin/astyle /usr/local/bin \
+	&& make -f ../build/gcc/Makefile -j$(nproc) && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
 # Gradle (Required to build Fast-RTPS-Gen)
@@ -89,7 +89,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tm
 	&& cd /tmp/FastRTPS-1.8.2 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install \
+	&& cmake --build . --target install -j $(nproc) \
 	&& rm -rf /tmp/*
 
 # Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
