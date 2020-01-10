@@ -2,7 +2,7 @@
 
 Contains Dockerfiles for Docker containers to build and test PX4.
 
-## Build status: [![Build Status](http://ci.px4.io:8080/buildStatus/icon?job=PX4/containers/master)](http://ci.px4.io:8080/blue/organizations/jenkins/PX4%2Fcontainers/activity)
+## Build status: [![Build Status](https://github.com/PX4/containers/workflows/.github/workflows/docker_builds.yml/badge.svg)](https://github.com/PX4/containers/actions)
 
 ## Base containers
 
