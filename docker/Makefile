@@ -13,7 +13,7 @@ all: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 		px4-dev-ros2-crystal, px4-dev-ros2-dashing, px4-dev-ros2-eloquent, \
 		px4-dev-simulation-xenial, px4-dev-simulation-bionic
 
-px4-dev-armhf: px4-dev-base-bionic
+px4-dev-armhf:
 	docker build -t px4io/px4-dev-armhf . -f Dockerfile_armhf
 
 px4-dev-base-archlinux:
