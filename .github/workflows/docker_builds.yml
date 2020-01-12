@@ -37,7 +37,7 @@ jobs:
         tag_names: true
 
   px4-dev-armhf:
-    name: "Ubuntu armhf"
+    name: "Debian armhf"
     runs-on: ubuntu-latest
     needs: px4-dev-base-bionic
     steps:
