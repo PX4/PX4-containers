@@ -8,7 +8,6 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
 
  - px4-dev-base-archlinux
  - px4-dev-base-bionic
-   - px4-dev-armhf
    - px4-dev-clang
      - px4-dev-nuttx-clang
    - px4-dev-nuttx
@@ -23,6 +22,7 @@ License: according to LICENSE.md in the root directory of the PX4 Firmware repos
    - px4-dev-simulation-xenial
      - px4-dev-ros-kinetic
        - px4-dev-ros2-ardent
+ - px4-dev-armhf
  - px4-docs
 
 ## Running ##
