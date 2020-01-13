@@ -3,7 +3,7 @@
 #  px4-dev-base + latest clang
 #
 
-FROM px4io/px4-dev-base-bionic:2020-01-10
+FROM px4io/px4-dev-base-bionic:2020-01-13
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://apt.llvm.org/llvm-snapshot.gpg.key -O - | apt-key add - \
