@@ -39,7 +39,6 @@ jobs:
   px4-dev-armhf:
     name: "Debian armhf"
     runs-on: ubuntu-latest
-    needs: px4-dev-base-bionic
     steps:
     - uses: actions/checkout@v1
     - uses: julianoes/Publish-Docker-Github-Action@master
