@@ -21,6 +21,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 		libyaml-cpp-dev \
 		protobuf-compiler \
 		python-pip \
+		python-tk \
 		ros-$ROS_DISTRO-gazebo-ros-pkgs \
 		ros-$ROS_DISTRO-mav-msgs \
 		ros-$ROS_DISTRO-mavlink \
@@ -45,10 +46,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 # Install everything again for Python 2 because we could not get Firmware
 # to compile using catkin without it.
 RUN pip install wheel setuptools
-RUN pip install catkin_pkg px4tools pymavlink rospkg tk catkin-tools \
-    argparse argcomplete coverage cerberus empy jinja2 matplotlib==2.2.* \
-    numpy pkgconfig pyros-genmsg pyulog pyyaml requests serial six toml \
-    pygments pandas==0.24.2 scipy==0.16 more-itertools==5.0.0
+RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
+    empy jinja2 matplotlib==2.2.* more-itertools==5.0.0 numpy pandas==0.24.2  \
+    pkgconfig px4tools pygments pymavlink pyros-genmsg pyulog pyyaml requests \
+    rospkg serial six scipy==0.16 toml
 
 RUN rosdep init && rosdep update
 
