@@ -48,7 +48,7 @@ RUN pip install wheel setuptools
 RUN pip install catkin_pkg px4tools pymavlink rospkg tk catkin-tools \
     argparse argcomplete coverage cerberus empy jinja2 matplotlib==2.2.* \
     numpy pkgconfig pyros-genmsg pyulog pyyaml requests serial six toml \
-    pygments pandas==0.24.2
+    pygments pandas==0.24.2 scipy==0.16
 
 RUN rosdep init && rosdep update
 
