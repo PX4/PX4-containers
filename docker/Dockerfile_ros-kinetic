@@ -20,10 +20,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 		libopencv-dev \
 		libyaml-cpp-dev \
 		protobuf-compiler \
-		python-catkin-tools \
-		python-jinja2 \
-		python-rospkg \
-		python-tk \
+		python-pip \
 		ros-$ROS_DISTRO-gazebo-ros-pkgs \
 		ros-$ROS_DISTRO-mav-msgs \
 		ros-$ROS_DISTRO-mavlink \
@@ -42,8 +39,16 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 	&& geographiclib-get-geoids egm96-5 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& pip3 install catkin_pkg px4tools pymavlink \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+
+# Install everything again for Python 2 because we could not get Firmware
+# to compile using catkin without it.
+RUN pip install wheel setuptools
+RUN pip install catkin_pkg px4tools pymavlink rospkg tk catkin-tools \
+    argparse argcomplete coverage cerberus empy jinja2 matplotlib==2.2.* \
+    numpy pkgconfig pyros-genmsg pyulog pyyaml requests serial six toml \
+    pygments
 
 RUN rosdep init && rosdep update
 
