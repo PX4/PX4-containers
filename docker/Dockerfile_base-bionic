@@ -85,16 +85,16 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.6.2-bin.zip" -O 
 
 ENV PATH "/opt/gradle/gradle-5.6.2/bin:$PATH"
 
-# Fast-RTPS
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b 1.8.x /tmp/FastRTPS-1.8.2 \
+# Fast-RTPS 1.8.2
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
 	&& cd /tmp/FastRTPS-1.8.2 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install -- -j $(nproc) \
 	&& rm -rf /tmp/*
 
-# Fast-RTPS-Gen (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.2 /tmp/Fast-RTPS-Gen \
+# Fast-RTPS-Gen 1.0.3 (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.3 /tmp/Fast-RTPS-Gen \
 	&& cd /tmp/Fast-RTPS-Gen \
 	&& gradle assemble \
 	&& cp share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/ \
