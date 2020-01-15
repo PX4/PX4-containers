@@ -77,13 +77,13 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& rm -rf /tmp/*
 
 # Gradle (Required to build Fast-RTPS-Gen)
-RUN wget -q "https://services.gradle.org/distributions/gradle-5.6.2-bin.zip" -O /tmp/gradle-5.6.2-bin.zip \
+RUN wget -q "https://services.gradle.org/distributions/gradle-6.1-rc-3-bin.zip" -O /tmp/gradle-6.1-rc-3-bin.zip \
 	&& mkdir /opt/gradle \
 	&& cd /tmp \
-	&& unzip -d /opt/gradle gradle-5.6.2-bin.zip \
+	&& unzip -d /opt/gradle gradle-6.1-rc-3-bin.zip \
 	&& rm -rf /tmp/*
 
-ENV PATH "/opt/gradle/gradle-5.6.2/bin:$PATH"
+ENV PATH "/opt/gradle/gradle-6.1-rc-3/bin:$PATH"
 
 # Fast-RTPS 1.8.2
 RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
