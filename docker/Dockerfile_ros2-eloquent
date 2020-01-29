@@ -3,7 +3,7 @@
 # Based from container under https://github.com/osrf/docker_images/tree/master/ros2/source/devel
 #
 
-FROM px4io/px4-dev-ros-melodic:2020-01-13
+FROM px4io/px4-dev-ros-melodic:2020-01-29
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 # setup environment
