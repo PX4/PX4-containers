@@ -22,7 +22,6 @@ RUN apt-get install -y --quiet \
 		python3-colcon-common-extensions \
 		python3-vcstool \
 		ros-$ROS2_DISTRO-desktop \
-		ros-$ROS2_DISTRO-ros2bag \
 		ros-$ROS2_DISTRO-rosidl-generator-dds-idl \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
