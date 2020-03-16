@@ -48,8 +48,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 RUN pip install wheel setuptools
 RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     empy jinja2 matplotlib==2.2.* more-itertools==5.0.0 numpy pandas==0.24.2  \
-    pkgconfig px4tools pygments pymavlink pyros-genmsg pyulog pyyaml requests \
-    rospkg serial six scipy==0.16 toml
+    packaging pkgconfig px4tools pygments pymavlink pyros-genmsg pyulog pyyaml \
+    requests rospkg serial six scipy==0.16 toml
 
 RUN rosdep init && rosdep update
 
