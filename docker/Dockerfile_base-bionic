@@ -63,8 +63,8 @@ RUN pip3 install wheel setuptools
 
 # Python 3 dependencies installed by pip
 RUN pip3 install argparse argcomplete coverage cerberus empy jinja2 \
-		matplotlib==3.0.* numpy pkgconfig pyros-genmsg pyulog pyyaml \
-		requests serial six toml psutil pygments
+		matplotlib==3.0.* numpy packaging pkgconfig pyros-genmsg pyulog \
+		pyyaml requests serial six toml psutil pyulog wheel
 
 # manual ccache setup
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/cc \
