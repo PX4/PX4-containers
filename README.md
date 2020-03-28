@@ -21,6 +21,7 @@ License: according to [LICENSE](https://github.com/PX4/Firmware/blob/master/LICE
             - [px4io/px4-dev-ros2-crystal](https://hub.docker.com/r/px4io/px4-dev-ros2-crystal) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-ros2-crystal.svg)](http://microbadger.com/images/px4io/px4-dev-ros2-crystal) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-ros2-crystal.svg)](https://hub.docker.com/r/px4io/px4-dev-ros2-crystal)
             - [px4io/px4-dev-ros2-dashing](https://hub.docker.com/r/px4io/px4-dev-ros2-dashing) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-ros2-dashing.svg)](http://microbadger.com/images/px4io/px4-dev-ros2-dashing) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-ros2-dashing.svg)](https://hub.docker.com/r/px4io/px4-dev-ros2-dashing)
             - [px4io/px4-dev-ros2-eloquent](https://hub.docker.com/r/px4io/px4-dev-ros2-eloquent) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-ros2-eloquent.svg)](http://microbadger.com/images/px4io/px4-dev-ros2-eloquent) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-ros2-eloquent.svg)](https://hub.docker.com/r/px4io/px4-dev-ros2-eloquent)
+- px4io/px4-dev-base-focal
 - [px4io/px4-dev-base-xenial](https://hub.docker.com/r/px4io/px4-dev-base-xenial) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-base-xenial.svg)](http://microbadger.com/images/px4io/px4-dev-base-xenial) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-base-xenial.svg)](https://hub.docker.com/r/px4io/px4-dev-base-xenial)
     - [px4io/px4-dev-simulation-xenial](https://hub.docker.com/r/px4io/px4-dev-simulation-xenial) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-simulation-xenial.svg)](http://microbadger.com/images/px4io/px4-dev-simulation-xenial) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-simulation-xenial.svg)](https://hub.docker.com/r/px4io/px4-dev-simulation-xenial)
         - [px4io/px4-dev-ros-kinetic](https://hub.docker.com/r/px4io/px4-dev-ros-kinetic) [![](https://images.microbadger.com/badges/image/px4io/px4-dev-ros-kinetic.svg)](http://microbadger.com/images/px4io/px4-dev-ros-kinetic) [![Docker Pulls](https://img.shields.io/docker/pulls/px4io/px4-dev-ros-kinetic.svg)](https://hub.docker.com/r/px4io/px4-dev-ros-kinetic)
@@ -57,7 +58,3 @@ or:
 cd docker
 make px4-dev-ros-melodic
 ```
-
-
-
-
