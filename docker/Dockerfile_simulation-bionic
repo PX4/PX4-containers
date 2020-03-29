@@ -33,10 +33,5 @@ RUN git clone --depth 1 https://github.com/mavlink/c_library_v2.git /usr/local/i
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
 
-# Gazebo 7 crashes on VM with OpenGL 3.3 support, so downgrade to OpenGL 2.1
-# http://answers.gazebosim.org/question/13214/virtual-machine-not-launching-gazebo/
-# https://www.mesa3d.org/vmware-guest.html
-ENV SVGA_VGPU10 0
-
 # Use UTF8 encoding in java tools (needed to compile jMAVSim)
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
