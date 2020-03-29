@@ -1,5 +1,5 @@
 #
-# PX4 gazebo development environment
+# PX4 Gazebo 9 development environment in Ubuntu 20.04 Xenial
 #
 
 FROM px4io/px4-dev-base-xenial:2020-03-29
