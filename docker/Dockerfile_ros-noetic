@@ -37,6 +37,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+# bootstrap rosdep
 RUN rosdep init && rosdep update
 
 # create and start as LOCAL_USER_ID
