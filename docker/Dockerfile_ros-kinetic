@@ -50,6 +50,7 @@ RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     pandas==0.24.2 packaging pkgconfig px4tools pygments pymavlink pyros-genmsg \
     pyulog pyyaml requests rosdep rospkg serial six scipy==0.16 toml
 
+# bootstrap rosdep
 RUN rosdep init && rosdep update
 
 # create and start as LOCAL_USER_ID
