@@ -76,12 +76,20 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& make -f ../build/gcc/Makefile -j$(nproc) && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
-# Fast-RTPS
-RUN wget -q "http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
-	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
-	&& cd eProsima_FastRTPS-1.6.0-Linux \
-	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
-	&& make -j$(nproc) install \
+# Fast-CDR 1.0.7
+RUN git clone --recursive https://github.com/eProsima/Fast-CDR.git -b v1.0.7 /tmp/FastCDR-1.0.7 \
+	&& cd /tmp/FastCDR-1.0.7 \
+	&& mkdir build && cd build \
+	&& cmake -DBUILD_SHARED_LIBS=ON .. \
+	&& cmake --build . --target install -- -j $(nproc) \
+	&& rm -rf /tmp/*
+
+# Fast-RTPS 1.6.0
+RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
+	&& cd /tmp/FastRTPS-1.6.0 \
+	&& mkdir build && cd build \
+	&& cmake -DBUILD_JAVA=ON -DSECURITY=ON -DTHIRDPARTY=ON .. \
+	&& cmake --build . --target install -- -j $(nproc) \
 	&& rm -rf /tmp/*
 
 # create user with id 1001 (jenkins docker workflow default)
