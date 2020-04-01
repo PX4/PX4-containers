@@ -76,6 +76,15 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%202.0
 	&& make -f ../build/gcc/Makefile -j$(nproc) && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
+# Gradle (Required to build Fast-RTPS-Gen)
+RUN wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" -O /tmp/gradle-6.3-rc-4-bin.zip \
+	&& mkdir /opt/gradle \
+	&& cd /tmp \
+	&& unzip -d /opt/gradle gradle-6.3-rc-4-bin.zip \
+	&& rm -rf /tmp/*
+
+ENV PATH "/opt/gradle/gradle-6.3-rc-4/bin:$PATH"
+
 # Fast-CDR 1.0.7
 RUN git clone --recursive https://github.com/eProsima/Fast-CDR.git -b v1.0.7 /tmp/FastCDR-1.0.7 \
 	&& cd /tmp/FastCDR-1.0.7 \
