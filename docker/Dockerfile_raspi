@@ -5,7 +5,7 @@
 # Raspberry Pi or Parrot Bebop
 #
 
-FROM px4io/px4-dev-base-bionic:2020-04-01
+FROM px4io/px4-dev-base-bionic:2020-04-02
 LABEL maintainer="Michael Schaeuble"
 
 RUN apt-get update \
