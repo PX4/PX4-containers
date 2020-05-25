@@ -1,5 +1,5 @@
 #
-# PX4 Gazebo 9 development environment in Ubuntu 20.04 Focal
+# PX4 Gazebo 11 development environment in Ubuntu 20.04 Focal
 #
 
 FROM px4io/px4-dev-base-focal:2020-04-25
@@ -13,13 +13,13 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		binutils \
 		bc \
 		dirmngr \
-		gazebo9 \
+		gazebo11 \
 		gstreamer1.0-plugins-bad \
 		gstreamer1.0-plugins-base \
 		gstreamer1.0-plugins-good \
 		gstreamer1.0-plugins-ugly \
 		libeigen3-dev \
-		libgazebo9-dev \
+		libgazebo11-dev \
 		libgstreamer-plugins-base1.0-dev \
 		libimage-exiftool-perl \
 		libopencv-dev \
