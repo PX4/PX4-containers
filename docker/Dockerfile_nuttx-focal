@@ -2,7 +2,7 @@
 # PX4 NuttX development environment in Ubuntu 20.04 Focal
 #
 
-FROM px4io/px4-dev-base-focal:2020-04-25
+FROM px4io/px4-dev-base-focal:2020-05-25
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
