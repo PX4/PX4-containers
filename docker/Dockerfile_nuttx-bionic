@@ -5,36 +5,16 @@
 FROM px4io/px4-dev-base-bionic:2020-06-28
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
-RUN apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
-		autoconf \
-		automake \
-		bison \
-		build-essential \
-		bzip2 \
-		file \
-		flex \
-		genromfs \
-		gperf \
-		libncurses-dev \
-		libtool \
-		pkg-config \
-		uncrustify \
-		vim-common \
+RUN cd /tmp \
+	&& wget https://raw.githubusercontent.com/PX4/Firmware/master/Tools/setup/ubuntu.sh \
+	&& wget https://raw.githubusercontent.com/PX4/Firmware/master/Tools/setup/requirements.txt \
+	&& bash ubuntu.sh --no-sim-tools \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
-	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
-
-# GNU Arm Embedded Toolchain: 9-2020-q2-update Released: June 30, 2020
-RUN mkdir -p /opt/gcc && cd /opt/gcc \
-	&& wget -qO- "https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2" | tar jx --strip 1 \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 	&& rm -rf /opt/gcc/share/doc
 
 ENV PATH="$PATH:/opt/gcc/bin"
-
-# manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
-RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
-	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
 
 # nuttx tools
 RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
@@ -47,3 +27,12 @@ RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
 RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
 	&& cd /tmp/bloaty && cmake -GNinja . && ninja -j $(nproc) bloaty && cp bloaty /usr/local/bin/ \
 	&& rm -rf /tmp/*
+
+# cleanup
+RUN rm -rf \
+	/var/lib/apt/lists/* \
+	/tmp/* /var/tmp/* \
+	/root/.cache \
+	/root/.gradle \
+	/root/.local
+
