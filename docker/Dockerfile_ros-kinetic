@@ -42,14 +42,13 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-
 # Install everything again for Python 2 because we could not get Firmware
 # to compile using catkin without it.
-RUN pip install wheel setuptools
+RUN pip install --upgrade wheel 'setuptools<45.0.0'
 RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
-    empy jinja2 matplotlib==2.2.* more-itertools==5.0.0 numpy pandas==0.24.2  \
-    packaging pkgconfig px4tools pygments pymavlink pyros-genmsg pyulog pyyaml \
-    requests rosdep rospkg serial six scipy==0.16 toml
+    empy jinja2 kiwisolver==1.1.0 matplotlib==2.2.* more-itertools==5.0.0 numpy \
+    pandas==0.24.2 packaging pkgconfig px4tools pygments pymavlink pyros-genmsg \
+    pyulog pyyaml requests rosdep rospkg serial six scipy==0.16 toml
 
 RUN rosdep init && rosdep update
 
