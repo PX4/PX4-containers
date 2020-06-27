@@ -52,19 +52,18 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-6.1-rc-3-bin.zip" 
 ENV PATH "/opt/gradle/gradle-6.1-rc-3/bin:$PATH"
 
 # Fast-RTPS 1.8.2
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
 	&& cd /tmp/FastRTPS-1.8.2 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install -- -j $(nproc) \
 	&& rm -rf /tmp/*
 
-# Fast-RTPS-Gen 1.0.3 (required since Fast-RTPS-Gen got split from Fast-RTPS repo since 1.8.x)
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.3 /tmp/Fast-RTPS-Gen \
-	&& cd /tmp/Fast-RTPS-Gen \
+# Fast-RTPS-Gen 1.0.4
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
+	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& gradle assemble \
-	&& cp share/fastrtps/fastrtpsgen.jar /usr/local/share/fastrtps/ \
-	&& cp scripts/fastrtpsgen /usr/local/bin/ \
+	&& gradle install \
 	&& rm -rf /tmp/*
 
 # Add group dialout

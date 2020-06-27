@@ -63,7 +63,7 @@ RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foona
 
 # Install Fast-RTPS 1.9.3
 RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* \
-	&& git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.9.3 /tmp/FastRTPS-1.9.3 \
+	&& git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.9.3 /tmp/FastRTPS-1.9.3 \
 	&& cd /tmp/FastRTPS-1.9.3 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \

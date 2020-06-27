@@ -94,7 +94,7 @@ RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foona
 	&& rm -rf /tmp/*
 
 # Fast-RTPS 1.9.4
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.9.4 /tmp/FastRTPS-1.9.4 \
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.9.4 /tmp/FastRTPS-1.9.4 \
 	&& cd /tmp/FastRTPS-1.9.4 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
@@ -102,7 +102,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.9.4 /t
 	&& rm -rf /tmp/*
 
 # Fast-RTPS-Gen 1.0.4
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& gradle assemble \
 	&& gradle install \
