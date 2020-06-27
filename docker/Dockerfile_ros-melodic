@@ -46,5 +46,10 @@ RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     empy jinja2 matplotlib==2.2.* numpy pkgconfig px4tools pygments pymavlink \
     packaging pyros-genmsg pyulog pyyaml requests rosdep rospkg serial six toml
 
-
 RUN rosdep init && rosdep update
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
