@@ -53,7 +53,7 @@ RUN colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mix
 
 # downgrade Fast-RTPS to 1.6.0 (from the base container), as ROS2 Bouncy only supports Fast-RTPS 1.6.0
 RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* /usr/local/bin/fastrtpsgen \
-	&& git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
+	&& git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
 		&& cd /tmp/FastRTPS-1.6.0 \
 		&& mkdir build && cd build \
 		&& cmake -DBUILD_JAVA=ON -DSECURITY=ON -DTHIRDPARTY=ON .. \

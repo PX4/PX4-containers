@@ -94,7 +94,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-CDR.git -b v1.0.7 /tm
 	&& rm -rf /tmp/*
 
 # Fast-RTPS 1.6.0
-RUN git clone --recursive https://github.com/eProsima/Fast-RTPS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
 	&& cd /tmp/FastRTPS-1.6.0 \
 	&& mkdir build && cd build \
 	&& cmake -DBUILD_JAVA=ON -DSECURITY=ON -DTHIRDPARTY=ON .. \
