@@ -4,17 +4,16 @@
 #
 
 FROM px4io/px4-dev-ros-melodic:2020-06-20
-LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
+LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 # setup environment
-ENV ROS1_DISTRO melodic
 ENV ROS2_DISTRO dashing
 
 # setup ros2 keys
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
 # setup sources.list
-RUN echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros2-latest.list \
+RUN echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list \
 	&& apt-get update
 
 # install ros2 desktop
