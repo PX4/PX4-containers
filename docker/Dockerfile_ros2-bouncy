@@ -59,16 +59,9 @@ RUN colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mix
 
 # downgrade Fast-RTPS to 1.6.0 (from the base container), as ROS2 Bouncy only supports Fast-RTPS 1.6.0
 RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* /usr/local/bin/fastrtpsgen \
-	&& git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
-		&& cd /tmp/FastRTPS-1.6.0 \
-		&& mkdir build && cd build \
-		&& cmake -DBUILD_JAVA=ON -DSECURITY=ON -DTHIRDPARTY=ON .. \
-		&& cmake --build . --target install -- -j $(nproc) \
+	&& wget -q "https://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-dds/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+		&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+		&& cd eProsima_FastRTPS-1.6.0-Linux \
+		&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+		&& make -j$(nproc) install \
 		&& rm -rf /tmp/*
-
-# Fast-RTPS-Gen 1.0.4
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& gradle assemble \
-	&& gradle install \
-	&& rm -rf /tmp/*

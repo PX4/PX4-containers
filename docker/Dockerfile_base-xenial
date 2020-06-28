@@ -94,11 +94,11 @@ RUN git clone --recursive https://github.com/eProsima/Fast-CDR.git -b v1.0.7 /tm
 	&& rm -rf /tmp/*
 
 # Fast-RTPS 1.6.0
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.6.0 /tmp/FastRTPS-1.6.0 \
-	&& cd /tmp/FastRTPS-1.6.0 \
-	&& mkdir build && cd build \
-	&& cmake -DBUILD_JAVA=ON -DSECURITY=ON -DTHIRDPARTY=ON .. \
-	&& cmake --build . --target install -- -j $(nproc) \
+RUN wget -q "https://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-dds/eprosima-fast-rtps-1-6-0/eprosima_fastrtps-1-6-0-linux-tar-gz?format=raw" -O /tmp/eprosima_fastrtps.tar.gz \
+	&& cd /tmp && tar zxf eprosima_fastrtps.tar.gz \
+	&& cd eProsima_FastRTPS-1.6.0-Linux \
+	&& ./configure CXXFLAGS="-g -D__DEBUG" --libdir=/usr/lib \
+	&& make -j$(nproc) install \
 	&& rm -rf /tmp/*
 
 # create user with id 1001 (jenkins docker workflow default)
