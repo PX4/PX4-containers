@@ -39,9 +39,3 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
-
-# create and start as LOCAL_USER_ID
-COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
-CMD ["/bin/bash"]

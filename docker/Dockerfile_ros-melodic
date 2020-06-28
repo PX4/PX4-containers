@@ -48,9 +48,3 @@ RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
-
-# create and start as LOCAL_USER_ID
-COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
-CMD ["/bin/bash"]

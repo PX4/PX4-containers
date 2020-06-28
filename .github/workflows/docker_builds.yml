@@ -268,7 +268,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: julianoes/Publish-Docker-Github-Action@master
       with:
-        name: px4io/px4-dev-ros-melodic
+        name: px4io/px4-dev-ros-noetic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: docker/Dockerfile_ros-noetic
