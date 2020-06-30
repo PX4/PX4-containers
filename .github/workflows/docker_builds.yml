@@ -22,7 +22,7 @@ jobs:
         cd docker
         make px4-dev-base-archlinux
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-base-archlinux
@@ -43,7 +43,7 @@ jobs:
         cd docker
         make px4-dev-base-bionic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-base-bionic
@@ -64,7 +64,7 @@ jobs:
         cd docker
         make px4-dev-armhf
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-armhf
@@ -86,7 +86,7 @@ jobs:
         cd docker
         make px4-dev-clang
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-clang
@@ -108,7 +108,7 @@ jobs:
         cd docker
         make px4-dev-nuttx-clang
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-nuttx-clang
@@ -130,7 +130,7 @@ jobs:
         cd docker
         make px4-dev-nuttx-bionic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-nuttx-bionic
@@ -152,7 +152,7 @@ jobs:
         cd docker
         make px4-dev-raspi
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-raspi
@@ -174,7 +174,7 @@ jobs:
         cd docker
         make px4-dev-simulation-bionic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-simulation-bionic
@@ -196,7 +196,7 @@ jobs:
         cd docker
         make px4-dev-ros-melodic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros-melodic
@@ -218,7 +218,7 @@ jobs:
         cd docker
         make px4-dev-ros2-bouncy
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-bouncy
@@ -240,7 +240,7 @@ jobs:
         cd docker
         make px4-dev-ros2-crystal
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-crystal
@@ -262,7 +262,7 @@ jobs:
         cd docker
         make px4-dev-ros2-dashing
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-dashing
@@ -284,7 +284,7 @@ jobs:
         cd docker
         make px4-dev-ros2-eloquent
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-eloquent
@@ -305,7 +305,7 @@ jobs:
         cd docker
         make px4-dev-base-focal
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-base-focal
@@ -327,7 +327,7 @@ jobs:
         cd docker
         make px4-dev-nuttx-focal
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-nuttx-focal
@@ -349,7 +349,7 @@ jobs:
         cd docker
         make px4-dev-simulation-focal
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-simulation-focal
@@ -371,7 +371,7 @@ jobs:
         cd docker
         make px4-dev-ros-noetic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros-noetic
@@ -393,7 +393,7 @@ jobs:
         cd docker
         make px4-dev-ros2-foxy
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-foxy
@@ -414,7 +414,7 @@ jobs:
         cd docker
         make px4-dev-base-xenial
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-base-xenial
@@ -436,7 +436,7 @@ jobs:
         cd docker
         make px4-dev-simulation-xenial
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-simulation-xenial
@@ -458,7 +458,7 @@ jobs:
         cd docker
         make px4-dev-ros-kinetic
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros-kinetic
@@ -480,7 +480,7 @@ jobs:
         cd docker
         make px4-dev-ros2-ardent
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-dev-ros2-ardent
@@ -501,7 +501,7 @@ jobs:
         cd docker
         make px4-docs
     - name: Build & Publish container
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
         name: px4io/px4-docs
