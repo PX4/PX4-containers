@@ -28,9 +28,10 @@ jobs:
         name: px4io/px4-dev-base-archlinux
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_base-archlinux
+        dockerfile: Dockerfile_base-archlinux
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-base-bionic:
     name: "Ubuntu Bionic Base"
@@ -49,9 +50,10 @@ jobs:
         name: px4io/px4-dev-base-bionic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_base-bionic
+        dockerfile: Dockerfile_base-bionic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-armhf:
     name: "Debian armhf"
@@ -70,9 +72,10 @@ jobs:
         name: px4io/px4-dev-armhf
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_armhf
+        dockerfile: Dockerfile_armhf
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-clang:
     name: "Ubuntu Clang"
@@ -92,9 +95,10 @@ jobs:
         name: px4io/px4-dev-clang
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_clang
+        dockerfile: Dockerfile_clang
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-nuttx-clang:
     name: "Ubuntu NuttX Clang"
@@ -114,9 +118,10 @@ jobs:
         name: px4io/px4-dev-nuttx-clang
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_nuttx_clang
+        dockerfile: Dockerfile_nuttx_clang
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-nuttx-bionic:
     name: "NuttX in Ubuntu Bionic"
@@ -136,9 +141,10 @@ jobs:
         name: px4io/px4-dev-nuttx-bionic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_nuttx-bionic
+        dockerfile: Dockerfile_nuttx-bionic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-raspi:
     name: "Ubuntu Raspberry Pi"
@@ -158,9 +164,10 @@ jobs:
         name: px4io/px4-dev-raspi
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_raspi
+        dockerfile: Dockerfile_raspi
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-simulation-bionic:
     name: "Ubuntu Bionic Simulation"
@@ -180,9 +187,10 @@ jobs:
         name: px4io/px4-dev-simulation-bionic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_simulation-bionic
+        dockerfile: Dockerfile_simulation-bionic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros-melodic:
     name: "Ubuntu ROS Melodic"
@@ -202,9 +210,10 @@ jobs:
         name: px4io/px4-dev-ros-melodic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros-melodic
+        dockerfile: Dockerfile_ros-melodic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-bouncy:
     name: "Ubuntu ROS2 Bouncy"
@@ -224,9 +233,10 @@ jobs:
         name: px4io/px4-dev-ros2-bouncy
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-bouncy
+        dockerfile: Dockerfile_ros2-bouncy
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-crystal:
     name: "Ubuntu ROS2 Crystal"
@@ -246,9 +256,10 @@ jobs:
         name: px4io/px4-dev-ros2-crystal
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-crystal
+        dockerfile: Dockerfile_ros2-crystal
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-dashing:
     name: "Ubuntu ROS2 Dashing"
@@ -268,9 +279,10 @@ jobs:
         name: px4io/px4-dev-ros2-dashing
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-dashing
+        dockerfile: Dockerfile_ros2-dashing
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-eloquent:
     name: "Ubuntu ROS2 Eloquent"
@@ -290,9 +302,10 @@ jobs:
         name: px4io/px4-dev-ros2-eloquent
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-eloquent
+        dockerfile: Dockerfile_ros2-eloquent
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-base-focal:
     name: "Ubuntu Focal Base"
@@ -311,9 +324,10 @@ jobs:
         name: px4io/px4-dev-base-focal
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_base-focal
+        dockerfile: Dockerfile_base-focal
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-nuttx-focal:
     name: "NuttX in Ubuntu Focal"
@@ -333,9 +347,10 @@ jobs:
         name: px4io/px4-dev-nuttx-focal
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_nuttx-focal
+        dockerfile: Dockerfile_nuttx-focal
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-simulation-focal:
     name: "Ubuntu Focal Simulation"
@@ -355,9 +370,10 @@ jobs:
         name: px4io/px4-dev-simulation-focal
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_simulation-focal
+        dockerfile: Dockerfile_simulation-focal
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros-noetic:
     name: "Ubuntu ROS Noetic"
@@ -377,9 +393,10 @@ jobs:
         name: px4io/px4-dev-ros-noetic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros-noetic
+        dockerfile: Dockerfile_ros-noetic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-foxy:
     name: "Ubuntu ROS2 Foxy"
@@ -399,9 +416,10 @@ jobs:
         name: px4io/px4-dev-ros2-foxy
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-foxy
+        dockerfile: Dockerfile_ros2-foxy
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-base-xenial:
     name: "Ubuntu Xenial Base"
@@ -420,9 +438,10 @@ jobs:
         name: px4io/px4-dev-base-xenial
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_base-xenial
+        dockerfile: Dockerfile_base-xenial
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-simulation-xenial:
     name: "Ubuntu Xenial Simulation"
@@ -442,9 +461,10 @@ jobs:
         name: px4io/px4-dev-simulation-xenial
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_simulation-xenial
+        dockerfile: Dockerfile_simulation-xenial
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros-kinetic:
     name: "Ubuntu ROS Kinetic"
@@ -464,9 +484,10 @@ jobs:
         name: px4io/px4-dev-ros-kinetic
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros-kinetic
+        dockerfile: Dockerfile_ros-kinetic
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-dev-ros2-ardent:
     name: "Ubuntu ROS2 Ardent"
@@ -486,9 +507,10 @@ jobs:
         name: px4io/px4-dev-ros2-ardent
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_ros2-ardent
+        dockerfile: Dockerfile_ros2-ardent
         cache: false
         tag_names: true
+        workdir: docker
 
   px4-docs:
     name: "Ubuntu Docs"
@@ -507,6 +529,7 @@ jobs:
         name: px4io/px4-docs
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: docker/Dockerfile_docs
+        dockerfile: Dockerfile_docs
         cache: false
         tag_names: true
+        workdir: docker
