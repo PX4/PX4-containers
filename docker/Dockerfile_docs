@@ -16,6 +16,7 @@ RUN apt-get update \
 		npm \
 		ruby-dev \
 		zlib1g-dev \
+		yarn \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
