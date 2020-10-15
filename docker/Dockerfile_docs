@@ -19,6 +19,9 @@ RUN apt-get update \
 		ruby-dev \
 		zlib1g-dev \
 		curl \
+		gnupg \
+		gnupg2 \
+		gnupg1 \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
