@@ -5,6 +5,10 @@
 FROM ubuntu:bionic
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
+# Setup sources for getting yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
 		build-essential \
