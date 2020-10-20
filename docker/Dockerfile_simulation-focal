@@ -41,5 +41,5 @@ ENV QT_X11_NO_MITSHM 1
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 # Install JSBSim
-RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/Linux/JSBSim-devel_1.1.0.dev1-85.focal.amd64.deb
-RUN dpkg -i JSBSim-devel_1.1.0.dev1-85.focal.amd64.deb
+RUN wget  -r --no-parent -A https://github.com/JSBSim-Team/jsbsim/releases/download/Linux/JSBSim-devel_1.1.0.dev1-*.focal.amd64.deb
+RUN dpkg -i JSBSim-devel_1.1.0.dev1-*.focal.amd64.deb
