@@ -2,7 +2,7 @@
 # PX4 Gazebo 11 development environment in Ubuntu 20.04 Focal
 #
 
-FROM px4io/px4-dev-base-focal:2020-06-28
+FROM px4io/px4-dev-base-focal:2020-10-20
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
@@ -41,5 +41,5 @@ ENV QT_X11_NO_MITSHM 1
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 # Install JSBSim
-RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/Linux/JSBSim-devel_1.1.0.dev1-85.focal.amd64.deb
-RUN dpkg -i JSBSim-devel_1.1.0.dev1-85.focal.amd64.deb
+RUN wget -r https://github.com/JSBSim-Team/jsbsim/releases -A "download/v1.1.0/JSBSim-devel_1.1.0-*.focal.amd64.deb"
+RUN dpkg -i JSBSim-devel_1.1.0-*.focal.amd64.deb
