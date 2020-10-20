@@ -2,7 +2,7 @@
 # PX4 Gazebo 9 development environment in Ubuntu 20.04 Xenial
 #
 
-FROM px4io/px4-dev-base-xenial:2020-06-28
+FROM px4io/px4-dev-base-xenial:2020-10-20
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
