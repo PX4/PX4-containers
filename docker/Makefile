@@ -21,6 +21,9 @@ all: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 px4-dev-armhf:
 	docker build -t px4io/px4-dev-armhf . -f Dockerfile_armhf
 
+px4-dev-aarch64:
+	docker build -t px4io/px4-dev-aarch64 . -f Dockerfile_aarch64
+
 px4-dev-base-archlinux:
 	docker build -t px4io/px4-dev-base-archlinux . -f Dockerfile_base-archlinux
 
