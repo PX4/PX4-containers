@@ -77,6 +77,28 @@ jobs:
         tag_names: true
         workdir: docker
 
+  px4-dev-aarch64:
+    name: "Debian aarch64"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build container
+      if: github.event_name == 'pull_request'
+      run: |
+        cd docker
+        make px4-dev-aarch64
+    - name: Build & Publish container
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
+      uses: julianoes/Publish-Docker-Github-Action@master
+      with:
+        name: px4io/px4-dev-aarch64
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile_aarch64
+        cache: false
+        tag_names: true
+        workdir: docker
+
   px4-dev-clang:
     name: "Ubuntu Clang"
     runs-on: ubuntu-latest
