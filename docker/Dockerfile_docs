@@ -14,7 +14,6 @@ RUN apt-get update \
 		git \
 		gosu \
 		libfontconfig \
-		nodejs \
 		npm \
 		ruby-dev \
 		zlib1g-dev \
@@ -25,8 +24,12 @@ RUN apt-get update \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
-	
-	
+
+
+# Install nodejs in version (12) required for worker scripts
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends nodejs
+
 # Setup sources for getting yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
