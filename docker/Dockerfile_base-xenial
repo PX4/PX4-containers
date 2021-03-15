@@ -59,6 +59,7 @@ RUN cd /usr/src/gtest \
 	&& cd .. && rm -rf build
 
 # Install Python 3 pip build dependencies first.
+RUN pip3 install --upgrade "pip < 21.0"
 RUN pip3 install wheel setuptools
 
 # Python 3 dependencies installed by pip
