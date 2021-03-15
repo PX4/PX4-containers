@@ -53,9 +53,17 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-6.1-rc-3-bin.zip" 
 
 ENV PATH "/opt/gradle/gradle-6.1-rc-3/bin:$PATH"
 
-# Fast-RTPS 1.8.2
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
-	&& cd /tmp/FastRTPS-1.8.2 \
+# Intall foonathan_memory from source as it is required to Fast-RTPS >= 1.9
+RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foonathan_memory \
+	&& cd /tmp/foonathan_memory \
+	&& mkdir build && cd build \
+	&& cmake .. \
+	&& cmake --build . --target install -- -j $(nproc) \
+	&& rm -rf /tmp/*
+
+# Fast-DDS 2.0.0
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.0.0 /tmp/FastRTPS-2.0.0 \
+	&& cd /tmp/FastRTPS-2.0.0 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install -- -j $(nproc) \
