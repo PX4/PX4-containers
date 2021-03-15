@@ -48,7 +48,7 @@ RUN pip install --upgrade wheel 'setuptools<45.0.0'
 RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     empy jinja2 kiwisolver==1.1.0 matplotlib==2.2.* more-itertools==5.0.0 numpy \
     pandas==0.24.2 packaging pkgconfig px4tools pygments pymavlink pyros-genmsg \
-    pyulog pyyaml requests rosdep rospkg serial six scipy==0.16 toml
+    pyulog==0.8.0 pyyaml requests rosdep rospkg serial six scipy==0.16 toml
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
