@@ -5,6 +5,8 @@
 FROM archlinux/base:latest
 LABEL maintainer="Julien Lecoeur <julien.lecoeur@gmail.com>"
 
+RUN pacman -Syu --noconfirm
+
 RUN pacman -Sy --noconfirm \
 		arm-none-eabi-gcc \
 		arm-none-eabi-newlib \
