@@ -45,10 +45,12 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6B
 # Install everything again for Python 2 because we could not get Firmware
 # to compile using catkin without it.
 RUN pip install --upgrade wheel 'setuptools<45.0.0'
+# FIXME: regression in control>0.8.4 (used by px4tools) does not run on Python 2.
 RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     empy jinja2 kiwisolver==1.1.0 matplotlib==2.2.* more-itertools==5.0.0 numpy \
-    pandas==0.24.2 packaging pkgconfig px4tools pygments pymavlink pyros-genmsg \
-    pyulog==0.8.0 pyyaml requests rosdep rospkg serial six scipy==0.16 toml
+    pandas==0.24.2 packaging pkgconfig control==0.8.4 px4tools pygments pymavlink \
+    pyros-genmsg pyulog==0.8.0 pyyaml requests rosdep rospkg serial six scipy==0.16 \
+    toml
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
