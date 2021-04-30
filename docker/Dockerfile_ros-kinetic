@@ -50,7 +50,7 @@ RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
     empy jinja2 kiwisolver==1.1.0 matplotlib==2.2.* more-itertools==5.0.0 numpy \
     pandas==0.24.2 packaging pkgconfig control==0.8.4 px4tools pygments pymavlink \
     pyros-genmsg pyulog==0.8.0 pyyaml requests rosdep rospkg serial six scipy==0.16 \
-    toml
+    toml jsonschema==2.6.0
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update

@@ -66,7 +66,7 @@ RUN pip3 install wheel setuptools
 # Python 3 dependencies installed by pip
 RUN pip3 install argparse argcomplete coverage cerberus empy jinja2 \
 		matplotlib==3.0.* numpy packaging pkgconfig pyros-genmsg pyulog \
-		pyyaml requests serial six toml psutil pyulog wheel
+		pyyaml requests serial six toml psutil pyulog wheel jsonschema
 
 # astyle v3.1
 RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.1/astyle_3.1_linux.tar.gz -O /tmp/astyle.tar.gz \
