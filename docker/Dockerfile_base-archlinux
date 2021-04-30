@@ -2,7 +2,7 @@
 # PX4 development environment based on Arch Linux
 #
 
-FROM archlinux/base:latest
+FROM archlinux:base
 LABEL maintainer="Julien Lecoeur <julien.lecoeur@gmail.com>"
 
 RUN pacman -Syu --noconfirm
