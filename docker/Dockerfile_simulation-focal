@@ -2,7 +2,7 @@
 # PX4 Gazebo 11 development environment in Ubuntu 20.04 Focal
 #
 
-FROM px4io/px4-dev-base-focal:2021-04-29
+FROM px4io/px4-dev-base-focal:2021-05-04
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
