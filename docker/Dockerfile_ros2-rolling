@@ -1,0 +1,74 @@
+#
+# PX4 ROS2 Rolling development environment
+# Based from container under https://github.com/osrf/docker_images/tree/master/ros2/source/devel
+#
+# "Rolling Ridley is continuously updated and is subject to in-place updates
+# which will at times include breaking changes. It is used for ROS 2 development
+# and by maintainers who want their packages released and ready for the next
+# stable distribution." - in https://docs.ros.org/en/foxy/Releases/Release-Rolling-Ridley.html
+#
+
+FROM px4io/px4-dev-base-focal:2021-05-04
+LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
+
+# setup environment
+ENV ROS_DISTRO rolling
+
+# setup ros2 keys
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+# setup sources.list
+RUN sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
+
+# install bootstrap tools
+RUN apt-get update \
+	&& apt-get install --quiet -y \
+		python3-colcon-common-extensions \
+		python3-colcon-mixin \
+		python3-rosdep \
+		python3-vcstool \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# install ros2 desktop
+RUN apt-get install --quiet --no-install-recommends -y \
+		ros-$ROS_DISTRO-desktop \
+		ros-$ROS_DISTRO-launch-testing-ament-cmake \
+		ros-$ROS_DISTRO-ros2bag \
+		ros-$ROS_DISTRO-rosidl-generator-dds-idl \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# Install Python 3 packages needed for testing
+RUN pip3 install -U \
+		argcomplete \
+		flake8 \
+		flake8-blind-except \
+		flake8-builtins \
+		flake8-class-newline \
+		flake8-comprehensions \
+		flake8-deprecated \
+		flake8-docstrings \
+		flake8-import-order \
+		flake8-quotes \
+		pytest-repeat \
+		pytest-rerunfailures
+
+# bootstrap rosdep
+RUN rosdep init && rosdep update
+
+# setup colcon mixin and metadata
+RUN colcon mixin add default \
+		https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml \
+	&& colcon mixin update \
+	&& colcon metadata add default \
+		https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml \
+	&& colcon metadata update
+
+# create and start as LOCAL_USER_ID
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["/bin/bash"]
