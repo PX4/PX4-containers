@@ -1,20 +1,16 @@
-
 .PHONY: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 		px4-dev-base-focal, px4-dev-clang, px4-dev-nuttx-bionic, \
 		px4-dev-nuttx-focal, px4-dev-nuttx-clang, px4-dev-raspi, \
-		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-bouncy, \
-		px4-dev-ros2-crystal, px4-dev-ros2-dashing, px4-dev-ros2-eloquent, \
-		px4-dev-ros2-foxy, px4-dev-simulation-bionic, px4-dev-simulation-focal, \
-		px4-docs\
-
+		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-dashing, \
+		px4-dev-ros2-eloquent, px4-dev-ros2-foxy, px4-dev-simulation-bionic, \
+		px4-dev-simulation-focal, px4-docs
 
 all: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 		px4-dev-base-focal, px4-dev-clang, px4-dev-nuttx-bionic, \
 		px4-dev-nuttx-focal, px4-dev-nuttx-clang, px4-dev-raspi, \
-		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-bouncy, \
-		px4-dev-ros2-crystal, px4-dev-ros2-dashing, px4-dev-ros2-eloquent, \
-		px4-dev-ros2-foxy, px4-dev-simulation-bionic, px4-dev-simulation-focal, \
-		px4-docs \
+		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-dashing,\
+		px4-dev-ros2-eloquent, px4-dev-ros2-foxy, px4-dev-simulation-bionic, \
+		px4-dev-simulation-focal, px4-docs
 
 px4-dev-armhf:
 	docker build -t px4io/px4-dev-armhf . -f Dockerfile_armhf
@@ -51,15 +47,6 @@ px4-dev-ros-melodic: px4-dev-simulation-bionic
 
 px4-dev-ros-noetic: px4-dev-simulation-focal
 	docker build -t px4io/px4-dev-ros-noetic . -f Dockerfile_ros-noetic
-
-px4-dev-ros2-bouncy: px4-dev-ros-melodic
-	docker build -t px4io/px4-dev-ros2-bouncy . -f Dockerfile_ros2-bouncy
-
-px4-dev-ros2-crystal: px4-dev-ros-melodic
-	docker build -t px4io/px4-dev-ros2-crystal . -f Dockerfile_ros2-crystal
-
-px4-dev-ros2-bouncy: px4-dev-ros-melodic
-	docker build -t px4io/px4-dev-ros2-bouncy . -f Dockerfile_ros2-bouncy
 
 px4-dev-ros2-dashing: px4-dev-ros-melodic
 	docker build -t px4io/px4-dev-ros2-dashing . -f Dockerfile_ros2-dashing
