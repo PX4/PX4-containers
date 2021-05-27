@@ -2,7 +2,7 @@
 # PX4 ROS development environment
 #
 
-FROM px4io/px4-dev-simulation-bionic:2021-05-09
+FROM px4io/px4-dev-simulation-bionic:2021-05-27
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
 ENV ROS_DISTRO melodic
