@@ -2,7 +2,7 @@
 # PX4 NuttX development environment in Ubuntu 18.04 Bionic
 #
 
-FROM px4io/px4-dev-base-bionic:2021-05-27
+FROM px4io/px4-dev-base-bionic:2021-05-31
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
