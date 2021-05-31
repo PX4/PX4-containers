@@ -85,9 +85,9 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" 
 
 ENV PATH "/opt/gradle/gradle-6.3-rc-4/bin:$PATH"
 
-# Fast-RTPS 1.8.2
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \
-	&& cd /tmp/FastRTPS-1.8.2 \
+# Fast-RTPS 1.8.4
+RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.4 /tmp/FastRTPS-1.8.4 \
+	&& cd /tmp/FastRTPS-1.8.4 \
 	&& mkdir build && cd build \
 	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& cmake --build . --target install -- -j $(nproc) \
