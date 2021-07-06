@@ -2,7 +2,7 @@
 # PX4 docs build environment
 #
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN apt-get update \
