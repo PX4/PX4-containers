@@ -1,9 +1,9 @@
 #
-# PX4 base development environment
+# PX4 base development environment based on NVidia L4T distribution for Jetson boards
 #
 
 FROM nvcr.io/nvidia/l4t-base:r32.5.0
-LABEL maintainer="Daniel Agar <daniel@agar.ca>"
+LABEL maintainer="Dom Raniszewski<dominik.raniszewski@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
