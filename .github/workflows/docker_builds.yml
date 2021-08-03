@@ -306,7 +306,7 @@ jobs:
         workdir: docker
 
   px4-dev-base-l4t:
-    name: "Ubuntu Focal L4T"
+    name: "Ubuntu L4T Base"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
