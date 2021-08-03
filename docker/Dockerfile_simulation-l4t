@@ -1,5 +1,5 @@
 #
-# PX4 Gazebo 9 development environment in Ubuntu 18.04 Bionic
+# PX4 Gazebo 9 development environment in Nvidia L4T 
 #
 
 FROM px4io/px4-dev-base-l4t:latest
