@@ -63,7 +63,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 RUN pip3 install wheel setuptools
 
 # Python 3 dependencies installed by pip
-RUN pip3 install argparse argcomplete coverage cerberus empy jinja2 \
+RUN pip3 install argparse argcomplete coverage cerberus empy jinja2 kconfiglib \
 		matplotlib==3.0.* numpy packaging pkgconfig pyros-genmsg pyulog \
 		pyyaml requests serial six toml psutil pyulog wheel jsonschema
 
