@@ -19,39 +19,54 @@ jobs:
     name: "Ubuntu L4T Base"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build container
-      if: github.event_name == 'pull_request'
+    - 
+      name: Checkout
+      uses: actions/checkout@v2
+    - 
+      name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+    - 
+      name: Build container
       run: |
         cd docker
         make px4-dev-base-l4t
-    - name: Build & Publish container
+    - 
+      name: Build & Publish container
       if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
-        name: px4io/px4-dev-base-l4t
+        name: random82/px4-dev-base-l4t
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: Dockerfile_base-l4t
         cache: false
         tag_names: true
         workdir: docker
+
   px4-dev-simulation-l4t:
       name: "Ubuntu L4T Simulation"
       runs-on: ubuntu-latest
       needs: px4-dev-base-l4t
       steps:
-      - uses: actions/checkout@v2
-      - name: Build container
-        if: github.event_name == 'pull_request'
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - 
+        name: Build container
         run: |
           cd docker
           make px4-dev-simulation-l4t
-      - name: Build & Publish container
+      - 
+        name: Build & Publish container
         if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
         uses: julianoes/Publish-Docker-Github-Action@master
         with:
-          name: px4io/px4-dev-simulation-l4t
+          name: random82/px4-dev-simulation-l4t
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: Dockerfile_simulation-l4t
