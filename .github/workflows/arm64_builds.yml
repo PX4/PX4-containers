@@ -17,7 +17,7 @@ on:
 jobs:
   px4-dev-base-l4t:
     name: "Ubuntu L4T Base"
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - 
       name: Checkout
