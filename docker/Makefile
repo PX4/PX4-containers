@@ -30,7 +30,7 @@ px4-dev-base-focal:
 	docker build -t px4io/px4-dev-base-focal . -f Dockerfile_base-focal
 
 px4-dev-base-l4t:
-	docker build -t px4io/px4-dev-base-l4t . -f Dockerfile_base-l4t
+	docker buildx build --platform linux/arm64 -t px4io/px4-dev-base-l4t . -f Dockerfile_base-l4t
 
 px4-dev-clang: px4-dev-base-bionic
 	docker build -t px4io/px4-dev-clang . -f Dockerfile_clang
@@ -75,7 +75,7 @@ px4-dev-simulation-focal: px4-dev-base-focal
 	docker build -t px4io/px4-dev-simulation-focal . -f Dockerfile_simulation-focal
 
 px4-dev-simulation-l4t: px4-dev-base-l4t
-	docker build -t px4io/px4-dev-simulation-l4t . -f Dockerfile_simulation-l4t
+	docker buildx build --platform linux/arm64 -t px4io/px4-dev-simulation-l4t . -f Dockerfile_simulation-l4t
 
 px4-docs:
 	docker build -t px4io/px4-dev-docs . -f Dockerfile_docs
