@@ -2,7 +2,7 @@
 # PX4 Gazebo 9 development environment in Ubuntu 18.04 Bionic
 #
 
-FROM px4io/px4-dev-base-bionic:2021-07-13
+FROM px4io/px4-dev-base-bionic:2021-08-18
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
