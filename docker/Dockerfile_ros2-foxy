@@ -3,7 +3,7 @@
 # Based from container under https://github.com/osrf/docker_images/tree/master/ros2/source/devel
 #
 
-FROM px4io/px4-dev-ros-noetic:2021-08-18
+FROM px4io/px4-dev-ros-noetic:2021-09-08
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 # setup environment
