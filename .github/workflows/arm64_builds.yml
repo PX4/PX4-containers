@@ -45,7 +45,7 @@ jobs:
       if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
       uses: julianoes/Publish-Docker-Github-Action@master
       with:
-        name: random82/px4-dev-base-l4t
+        name: px4io/px4-dev-base-l4t
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: Dockerfile_base-l4t
@@ -80,7 +80,7 @@ jobs:
         if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
         uses: julianoes/Publish-Docker-Github-Action@master
         with:
-          name: random82/px4-dev-simulation-l4t
+          name: px4io/px4-dev-simulation-l4t
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: Dockerfile_simulation-l4t
