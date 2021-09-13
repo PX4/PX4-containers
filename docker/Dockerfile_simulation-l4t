@@ -2,7 +2,7 @@
 # PX4 Gazebo 9 development environment in Nvidia L4T 
 #
 
-FROM random82/px4-dev-base-l4t:latest
+FROM px4io/px4-dev-base-l4t:latest
 LABEL maintainer="Dom Raniszewski<dominik.raniszewski@gmail.com>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
@@ -33,4 +33,3 @@ ENV QT_X11_NO_MITSHM 1
 
 # Use UTF8 encoding in java tools (needed to compile jMAVSim)
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
-
