@@ -6,9 +6,13 @@ on:
       - '*'
     branches:
       - master
+    paths-ignore:
+      - docker/Dockerfile_*-l4t
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - docker/Dockerfile_*-l4t
 
 jobs:
   px4-dev-base-archlinux:
