@@ -8,7 +8,7 @@
 # stable distribution." - in https://docs.ros.org/en/foxy/Releases/Release-Rolling-Ridley.html
 #
 
-FROM px4io/px4-dev-base-focal:2021-07-13
+FROM px4io/px4-dev-base-focal:2021-09-08
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 # setup environment

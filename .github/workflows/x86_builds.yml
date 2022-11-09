@@ -19,7 +19,7 @@ jobs:
     name: "Arch Linux Base"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -41,7 +41,7 @@ jobs:
     name: "Ubuntu Bionic Base"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -63,7 +63,7 @@ jobs:
     name: "Debian armhf"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -85,7 +85,7 @@ jobs:
     name: "Debian aarch64"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -108,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-bionic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -131,7 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-clang
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -154,7 +154,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-bionic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -177,7 +177,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-bionic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -200,7 +200,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-bionic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -223,7 +223,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-simulation-bionic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -246,7 +246,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-ros-melodic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -269,7 +269,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-ros-melodic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -291,7 +291,7 @@ jobs:
     name: "Ubuntu Focal Base"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -314,7 +314,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-focal
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -337,7 +337,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-focal
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -360,7 +360,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-simulation-focal
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -383,7 +383,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-ros-noetic
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -406,7 +406,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-focal
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -429,7 +429,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: px4-dev-base-focal
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
@@ -451,7 +451,7 @@ jobs:
     name: "Ubuntu Docs"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build container
       if: github.event_name == 'pull_request'
       run: |
