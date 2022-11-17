@@ -50,8 +50,8 @@ px4-dev-ros-melodic: px4-dev-simulation-bionic
 px4-dev-ros-noetic: px4-dev-simulation-focal
 	docker build -t px4io/px4-dev-ros-noetic . -f Dockerfile_ros-noetic
 
-px4-dev-ros-noetic-dev: px4-dev-simulation-focal
-	docker build -t px4io/px4-dev-ros-noetic-dev . -f Dockerfile_ros-noetic_dev
+px4-dev-ros-noetic-offboard: px4-dev-simulation-focal
+	docker build -t px4io/px4-dev-ros-noetic-offboard . -f Dockerfile_ros-noetic-offboard
 
 px4-dev-ros2-dashing: px4-dev-ros-melodic
 	docker build -t px4io/px4-dev-ros2-dashing . -f Dockerfile_ros2-dashing
