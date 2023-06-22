@@ -7,7 +7,8 @@
 # Parrot Bebop, or OcPoC-Zynq
 #
 
-FROM debian:buster
+# Debian 11 https://www.debian.org/releases/
+FROM debian:bullseye
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 ENV DEBIAN_FRONTEND noninteractive
