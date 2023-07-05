@@ -168,6 +168,29 @@ jobs:
         tag_names: true
         workdir: docker
 
+  px4-dev-nuttx-jammy:
+    name: "NuttX in Ubuntu Jammy"
+    runs-on: ubuntu-latest
+    needs: px4-dev-base-bionic
+    steps:
+    - name: Build container
+      uses: actions/checkout@v3
+      if: github.event_name == 'pull_request'
+      run: |
+        cd docker
+        make px4-dev-nuttx-jammy
+    - name: Build & Publish container
+      if: github.event_name == 'push' && (contains(github.ref, '/heads/master') || contains(github.ref, '/tags/'))
+      uses: julianoes/Publish-Docker-Github-Action@master
+      with:
+        name: px4io/px4-dev-nuttx-jammy
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile_nuttx-bionic
+        cache: false
+        tag_names: true
+        workdir: docker
+
   px4-dev-raspi:
     name: "Ubuntu Raspberry Pi"
     runs-on: ubuntu-latest
