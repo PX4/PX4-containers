@@ -41,7 +41,7 @@ px4-dev-nuttx-bionic: px4-dev-base-bionic
 px4-dev-nuttx-focal: px4-dev-base-focal
 	docker build -t px4io/px4-dev-nuttx-focal . -f Dockerfile_nuttx-focal
 
-px4-dev-nuttx-jammy: px4-dev-base-focal
+px4-dev-nuttx-jammy: px4-dev-base-jammy
 	docker build -t px4io/px4-dev-nuttx-jammy . -f Dockerfile_nuttx-jammy
 
 px4-dev-nuttx-clang: px4-dev-clang
