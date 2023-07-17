@@ -4,7 +4,7 @@ Contains Dockerfiles for Docker containers to build and test PX4, with and witho
 
 License: according to [LICENSE](https://github.com/PX4/Firmware/blob/master/LICENSE) in the root directory of the PX4 Firmware repository.
 
-[![Build Status](https://github.com/PX4/containers/workflows/Build%20Docker%20images/badge.svg)](https://github.com/PX4/containers/actions)
+[![Build Status](https://github.com/PX4/PX4-containers/actions/workflows/docker_builds.yml/badge.svg)](https://github.com/PX4/PX4-containers/actions/workflows/docker_builds.yml)
 
 
 ## Container Hierarchy
