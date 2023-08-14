@@ -65,11 +65,14 @@ px4-dev-ros2-eloquent: px4-dev-ros-melodic
 px4-dev-ros2-foxy: px4-dev-ros-noetic
 	docker build -t px4io/px4-dev-ros2-foxy . -f Dockerfile_ros2-foxy
 
-px4-dev-ros2-rolling: px4-dev-base-focal
-	docker build -t px4io/px4-dev-ros2-rolling . -f Dockerfile_ros2-rolling
+px4-dev-ros2-humble: px4-dev-base-jammy
+	docker build -t px4io/px4-dev-ros2-humble -f Dockerfile_ros2 --build-arg="ROS_DISTRO=humble" --build-arg="BASE=px4io/px4-dev-base-jammy" .
+
+px4-dev-ros2-rolling: px4-dev-base-jammy
+	docker build -t px4io/px4-dev-ros2-rolling -f Dockerfile_ros2 --build-arg="ROS_DISTRO=rolling" --build-arg="BASE=px4io/px4-dev-base-jammy" .
 
 px4-dev-ros2-galactic: px4-dev-base-focal
-	docker build -t px4io/px4-dev-ros2-galactic . -f Dockerfile_ros2-galactic
+	docker build -t px4io/px4-dev-ros2-galactic -f Dockerfile_ros2 --build-arg="ROS_DISTRO=galactic" --build-arg="BASE=px4io/px4-dev-base-focal" .
 
 px4-dev-simulation-bionic: px4-dev-base-bionic
 	docker build -t px4io/px4-dev-simulation-bionic . -f Dockerfile_simulation-bionic
