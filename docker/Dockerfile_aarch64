@@ -19,7 +19,6 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		ccache \
 		clang \
 		clang-tidy \
-		cmake \
 		cppcheck \
 		curl \
 		default-jdk-headless \
@@ -57,6 +56,10 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# CMake 3.25
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.2/cmake-3.25.2-linux-x86_64.sh \
+	&& sh cmake-3.25.2-linux-x86_64.sh --prefix=/usr/local/ --exclude-subdir
 
 # Install Python 3 pip build dependencies first.
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
