@@ -34,6 +34,11 @@ ENV QT_X11_NO_MITSHM 1
 # Use UTF8 encoding in java tools (needed to compile jMAVSim)
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
+# so these can change at build time
+ARG JSBSIM_URL=https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a
+ARG	JSBSIM_DEB=JSBSim-devel_1.1.1-134.focal.amd64.deb
+
 # Install JSBSim
-RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.bionic.amd64.deb
-RUN dpkg -i JSBSim-devel_1.1.1-134.bionic.amd64.deb
+RUN	wget "$JSBSIM_URL/$JSBSIM_DEB" && \
+	dpkg -i "$JSBSIM_DEB" && \
+	rm -f "$JSBSIM_DEB"
