@@ -3,7 +3,7 @@
 #
 
 FROM px4io/px4-dev-base-jammy:latest
-LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
+LABEL maintainer="Thomas Debrunner <thomas.debrunner@auterion.com>"
 
 RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
 	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null \
