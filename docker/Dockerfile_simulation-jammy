@@ -1,5 +1,5 @@
 #
-# PX4 Gazebo 7 (Garden) development environment in Ubuntu 22.04 Focal
+# PX4 Gazebo 7 (Garden) development environment in Ubuntu 22.04 Jammy
 #
 
 FROM px4io/px4-dev-base-jammy:latest
