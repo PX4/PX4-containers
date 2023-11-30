@@ -1,0 +1,41 @@
+#
+# PX4 Gazebo 7 (Garden) development environment in Ubuntu 22.04 Jammy
+#
+
+FROM px4io/px4-dev-base-jammy:latest
+LABEL maintainer="Thomas Debrunner <thomas.debrunner@auterion.com>"
+
+RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		ant \
+		binutils \
+		bc \
+		dirmngr \
+		gz-garden \
+		gstreamer1.0-plugins-bad \
+		gstreamer1.0-plugins-base \
+		gstreamer1.0-plugins-good \
+		gstreamer1.0-plugins-ugly \
+		libeigen3-dev \
+		libgstreamer-plugins-base1.0-dev \
+		libimage-exiftool-perl \
+		libopencv-dev \
+		libxml2-utils \
+		mesa-utils \
+		protobuf-compiler \
+		x-window-system \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# Some QT-Apps/Gazebo don't not show controls without this
+ENV QT_X11_NO_MITSHM 1
+
+# Use UTF8 encoding in java tools (needed to compile jMAVSim)
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+# Install JSBSim
+RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb
+RUN dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb
