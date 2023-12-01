@@ -46,7 +46,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
 RUN pip install wheel setuptools
 # FIXME: regression in control>0.8.4 (used by px4tools) does not run on Python 2.
 RUN pip install argcomplete argparse catkin_pkg catkin-tools cerberus coverage \
-    empy jinja2 matplotlib==2.2.* numpy pkgconfig control==0.8.4 px4tools pygments \
+    empy==3.3.4 jinja2 matplotlib==2.2.* numpy pkgconfig control==0.8.4 px4tools pygments \
     pymavlink packaging pyros-genmsg pyulog==0.8.0 pyyaml requests rosdep rospkg \
     serial six toml jsonschema==2.6.0
 
