@@ -1,0 +1,30 @@
+FROM px4io/px4-dev-simulation-jammy
+LABEL maintainer="Jakub Wilk <kubawilk63@gmail.com>"
+
+# ENV DEBIAN_FRONTEND noninteractive
+# ENV LANG C.UTF-8
+# ENV LC_ALL C.UTF-8
+
+RUN apt update
+RUN apt install -y \
+    git \ 
+    sudo
+
+WORKDIR /home/user
+
+# clone and build px4
+RUN git clone https://github.com/PX4/PX4-Autopilot.git
+RUN ./PX4-Autopilot/Tools/setup/ubuntu.sh
+
+# install ros2 humble
+RUN apt update && apt install -y locales
+RUN locale-gen en_US en_US.UTF-8
+RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+RUN export LANG=en_US.UTF-8 
+RUN apt install -y software-properties-common
+RUN add-apt-repository universe
+RUN apt update && apt install curl -y
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+RUN apt update && apt upgrade -y
+RUN apt install -y ros-humble-desktop
