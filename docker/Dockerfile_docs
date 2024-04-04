@@ -29,9 +29,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 # Install yarn
 RUN npm install --global yarn
 
-# Setup sources for getting yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-
+# Install html-proofer
 RUN gem install html-proofer
 
 # create user with id 1001 (jenkins docker workflow default)
