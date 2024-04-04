@@ -7,12 +7,12 @@
 # and by maintainers who want their packages released and ready for the next
 # stable distribution." - in https://docs.ros.org/en/foxy/Releases/Release-Rolling-Ridley.html
 #
-
-FROM px4io/px4-dev-base-focal:2021-09-08
+ARG BASE=px4io/px4-dev-base-jammy
+FROM ${BASE}
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 # setup environment
-ENV ROS_DISTRO rolling
+ARG ROS_DISTRO=rolling
 
 # setup ros2 keys
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
@@ -67,13 +67,13 @@ RUN colcon mixin add default \
 		https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml \
 	&& colcon metadata update
 
-# Install Fast-DDS 2.3.1
-RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* \
-	&& git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.3.1 /tmp/FastRTPS-2.3.1 \
-	&& cd /tmp/FastRTPS-2.3.1 \
+# Install Micro-XRCE-DDS-Agent
+RUN git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git /tmp/micro-xrce-dds-agent \
+    && cd /tmp/micro-xrce-dds-agent \
 	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install -- -j $(nproc) \
+	&& cmake .. \
+	&& make -j $(nproc) && make install \
+	&& ldconfig /usr/local/lib \
 	&& rm -rf /tmp/*
 
 # create and start as LOCAL_USER_ID
