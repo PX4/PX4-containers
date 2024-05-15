@@ -79,7 +79,7 @@ RUN python3 -m pip install --upgrade pip wheel setuptools
 # Python 3 dependencies installed by pip
 RUN python3 -m pip install argparse argcomplete coverage cerberus empy==3.3.4 jinja2 kconfiglib \
     matplotlib>=3.0.* numpy nunavut>=1.1.0 packaging pkgconfig pyros-genmsg pyulog \
-    pyyaml requests serial six toml psutil pyulog wheel jsonschema pynacl lxml
+    pyyaml requests pyserial six toml psutil pyulog wheel jsonschema pynacl lxml
 
 #RUN python3 -m pip install argcomplete argparse>=1.2 cerberus coverage empy>=3.3 future \
   #jinja2>=2.8 jsonschema kconfiglib lxml matplotlib>=3.0.* numpy>=1.13 nunavut>=1.1.0 \
