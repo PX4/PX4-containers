@@ -76,30 +76,6 @@ RUN wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.1
 	&& make -f ../build/gcc/Makefile -j$(nproc) && cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
-# Gradle (Required to build Fast-RTPS-Gen)
-RUN wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" -O /tmp/gradle-6.3-rc-4-bin.zip \
-	&& mkdir /opt/gradle \
-	&& cd /tmp \
-	&& unzip -d /opt/gradle gradle-6.3-rc-4-bin.zip \
-	&& rm -rf /tmp/*
-
-ENV PATH "/opt/gradle/gradle-6.3-rc-4/bin:$PATH"
-
-# Fast-RTPS 1.8.4
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.4 /tmp/FastRTPS-1.8.4 \
-	&& cd /tmp/FastRTPS-1.8.4 \
-	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install -- -j $(nproc) \
-	&& rm -rf /tmp/*
-
-# Fast-RTPS-Gen 1.0.4
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& gradle assemble \
-	&& gradle install \
-	&& rm -rf /tmp/*
-
 # create user with id 1001 (jenkins docker workflow default)
 RUN useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout user
 
@@ -110,7 +86,6 @@ RUN mkdir /tmp/.X11-unix && \
 ENV DISPLAY :99
 
 ENV CCACHE_UMASK=000
-ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
 ENV TZ=UTC
