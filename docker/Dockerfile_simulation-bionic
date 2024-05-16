@@ -27,19 +27,52 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+# Install dependencies for building Ignition Edifice from source
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+		build-essential \
+		libbz2-dev \
+		libcurl4-openssl-dev \
+		libdw-dev \
+		libfreeimage-dev \
+		libgflags-dev \
+		libglew-dev \
+		libglm-dev \
+		libgts-dev \
+		libjansson-dev \
+		libprotobuf-dev \
+		libogre-1.9-dev \
+		libogre-2.1-dev \
+		libsqlite3-dev \
+		libswscale-dev \
+		libtinyxml2-dev \
+		libwebsockets-dev \
+		python3 \
+		libignition-gui5-dev \
+		qtbase5-dev \
+		qtdeclarative5-dev \
+		qtquickcontrols2-5-dev \
+		ruby-ronn \
+		uuid-dev \
+	&& apt-get -y autoremove \
+    && apt-get clean autoclean \
+    && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
 # Clone, build and install Ignition Edifice and libraries
 RUN for repo in \
-		ign-cmake:ignition-cmake2_2.6.1 \
-		ign-common:ignition-common3_3.11.1 \
-		ign-math:ignition-math6_6.7.0 \
-		ign-tools:ignition-tools1_1.2.0 \
-		ign-transport:ignition-transport9_9.3.0 \
-		ign-fuel-tools:ignition-fuel-tools6_6.5.0 \
-		ign-gui:ignition-gui4_4.7.0 \
-		ign-rendering:ignition-rendering4_4.8.0 \
-		ign-physics:ignition-physics4_4.5.0 \
-		ign-sensors:ignition-sensors4_4.5.0 \
-		ign-gazebo:ignition-gazebo4_4.8.0; \
+		ign-cmake:ignition-cmake2_2.7.0 \
+		ign-common:ignition-common4_4.0.0 \
+		ign-math:ignition-math6_6.8.0 \
+		ign-msgs:ignition-msgs7_7.0.0 \
+		ign-plugin:ignition-plugin_1.2.0 \
+		ign-launch:ignition-launch4_4.0.0 \
+		ign-transport:ignition-transport10_10.0.0 \
+		ign-fuel-tools:ignition-fuel-tools6_6.0.0 \
+		ign-gui:ignition-gui5_5.0.0 \
+		ign-rendering:ignition-rendering5_5.0.0 \
+		ign-physics:ignition-physics4_4.0.0 \
+		ign-sensors:ignition-sensors5_5.0.0 \
+		ign-gazebo:ignition-gazebo5_5.0.0 \
+		ign-tools:ignition-tools_1.1.0; \
 	do \
 		cd /root; \
 		repo_name=$(echo $repo | cut -d: -f1); \
