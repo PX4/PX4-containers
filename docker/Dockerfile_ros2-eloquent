@@ -58,20 +58,3 @@ RUN colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mix
 	&& colcon mixin update \
 	&& colcon metadata add default https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml \
 	&& colcon metadata update
-
-# Intall foonathan_memory from source as it is required to Fast-RTPS >= 1.9
-RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foonathan_memory \
-	&& cd /tmp/foonathan_memory \
-	&& mkdir build && cd build \
-	&& cmake .. \
-	&& cmake --build . --target install -- -j $(nproc) \
-	&& rm -rf /tmp/*
-
-# Install Fast-RTPS 1.9.3
-RUN rm -rf /usr/local/include/fastrtps /usr/local/share/fastrtps /usr/local/lib/libfastrtps* \
-	&& git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.9.3 /tmp/FastRTPS-1.9.3 \
-	&& cd /tmp/FastRTPS-1.9.3 \
-	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install -- -j $(nproc) \
-	&& rm -rf /tmp/*

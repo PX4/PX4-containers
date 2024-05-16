@@ -106,7 +106,6 @@ RUN mkdir /tmp/.X11-unix && \
 ENV DISPLAY :99
 
 ENV CCACHE_UMASK=000
-ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH="/usr/lib/ccache:$PATH"
 ENV TERM=xterm
 ENV TZ=UTC

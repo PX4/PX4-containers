@@ -51,38 +51,6 @@ RUN wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.
 RUN curl -sSL https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 > /usr/sbin/gosu \
 	&& chmod +x /usr/sbin/gosu
 
-# Gradle (Required to build Fast-RTPS-Gen)
-RUN wget -q "https://services.gradle.org/distributions/gradle-6.1-rc-3-bin.zip" -O /tmp/gradle-6.1-rc-3-bin.zip \
-	&& mkdir /opt/gradle \
-	&& cd /tmp \
-	&& unzip -d /opt/gradle gradle-6.1-rc-3-bin.zip \
-	&& rm -rf /tmp/*
-
-ENV PATH "/opt/gradle/gradle-6.1-rc-3/bin:$PATH"
-
-# Intall foonathan_memory from source as it is required to Fast-RTPS >= 1.9
-RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foonathan_memory \
-	&& cd /tmp/foonathan_memory \
-	&& mkdir build && cd build \
-	&& cmake .. \
-	&& cmake --build . --target install -- -j $(nproc) \
-	&& rm -rf /tmp/*
-
-# Fast-DDS 2.0.0
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.0.0 /tmp/FastRTPS-2.0.0 \
-	&& cd /tmp/FastRTPS-2.0.0 \
-	&& mkdir build && cd build \
-	&& cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
-	&& cmake --build . --target install -- -j $(nproc) \
-	&& rm -rf /tmp/*
-
-# Fast-RTPS-Gen 1.0.4
-RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& gradle assemble \
-	&& gradle install \
-	&& rm -rf /tmp/*
-
 # Add group dialout
 RUN groupadd dialout
 
@@ -91,7 +59,6 @@ RUN ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-gcc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/bin/arm-none-eabi-g++
 
 ENV CCACHE_MAXSIZE=1G
-ENV FASTRTPSGEN_DIR="/usr/local/bin/"
 ENV PATH "/usr/lib/ccache/bin:$PATH"
 ENV TERM=xterm
 
