@@ -29,9 +29,16 @@ RUN pacman -Sy --noconfirm \
 		wget \
 		zip
 
-# Python 3 dependencies installed by pip
-RUN pip3 install argparse argcomplete coverage cerberus empy==3.3.4 jinja2 kconfiglib \
-		matplotlib==3.0.* numpy packaging pkgconfig pyros-genmsg pyulog \
+# Create a virtual environment for Python packages
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install wheel and setuptools in the virtual environment
+RUN pip3 install wheel setuptools
+
+# Python 3 dependencies installed by pip inside the virtual environment
+RUN pip3 install argparse argcomplete coverage cerberus empy==3.3.4 jinja2 \
+		kconfiglib matplotlib numpy packaging pkgconfig pyros-genmsg pyulog \
 		pyyaml requests serial six toml psutil pyulog wheel jsonschema
 
 # Install genromfs
