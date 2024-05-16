@@ -1,8 +1,8 @@
 #
-# PX4 Gazebo 9 development environment in Ubuntu 18.04 Bionic
+# PX4 Gazebo (classic) 9 / Igntion Edifice development environment in Ubuntu 18.04 Bionic
 #
 
-FROM px4io/px4-dev-base-bionic:2021-09-08
+FROM px4io/px4-dev-base-bionic:2024-04-04
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
@@ -23,10 +23,31 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 		libopencv-dev \
 		libxml2-utils \
 		protobuf-compiler \
-		ignition-edifice \
 	&& apt-get -y autoremove \
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# Clone, build and install Ignition Edifice and libraries
+RUN for repo in \
+		ign-cmake:ignition-cmake2_2.6.1 \
+		ign-common:ignition-common3_3.11.1 \
+		ign-math:ignition-math6_6.7.0 \
+		ign-tools:ignition-tools1_1.2.0 \
+		ign-transport:ignition-transport9_9.3.0 \
+		ign-fuel-tools:ignition-fuel-tools6_6.5.0 \
+		ign-gui:ignition-gui4_4.7.0 \
+		ign-rendering:ignition-rendering4_4.8.0 \
+		ign-physics:ignition-physics4_4.5.0 \
+		ign-sensors:ignition-sensors4_4.5.0 \
+		ign-gazebo:ignition-gazebo4_4.8.0; \
+	do \
+		cd /root; \
+		repo_name=$(echo $repo | cut -d: -f1); \
+		repo_branch=$(echo $repo | cut -d: -f2); \
+		git clone https://github.com/ignitionrobotics/$repo_name.git -b $repo_branch /root/$repo_name \
+		&& cd /root/$repo_name && mkdir build && cd build && cmake .. && make && make install \
+		&& rm -rf /root/$repo_name; \
+	done
 
 # Some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
