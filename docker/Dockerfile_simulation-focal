@@ -2,7 +2,7 @@
 # PX4 Gazebo 11 development environment in Ubuntu 20.04 Focal
 #
 
-FROM px4io/px4-dev-base-focal:2024-04-04
+FROM px4io/px4-dev-base-focal:2024-05-17
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
