@@ -2,7 +2,7 @@
 # PX4 Gazebo 7 (Garden) development environment in Ubuntu 22.04 Jammy
 #
 
-FROM px4io/px4-dev-base-jammy:2024-05-17
+FROM px4io/px4-dev-base-jammy:2024-05-18
 LABEL maintainer="Thomas Debrunner <thomas.debrunner@auterion.com>"
 
 RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \

@@ -2,7 +2,7 @@
 # PX4 NuttX development environment in Ubuntu 20.04 Focal
 #
 
-FROM px4io/px4-dev-base-jammy:2024-05-17
+FROM px4io/px4-dev-base-jammy:2024-05-18
 LABEL maintainer="Ramón Roche <rroche@linuxfoundation.org>"
 
 RUN apt-get update \

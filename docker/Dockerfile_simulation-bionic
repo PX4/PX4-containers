@@ -2,7 +2,7 @@
 # PX4 Gazebo (classic) 9 / Igntion Edifice development environment in Ubuntu 18.04 Bionic
 #
 
-FROM px4io/px4-dev-base-bionic:2024-05-17
+FROM px4io/px4-dev-base-bionic:2024-05-18
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
 RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
