@@ -41,9 +41,14 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
 	&& apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-RUN pip3 install -U \
-		pymavlink \
-		osrf-pycommon
+# Clone the px4tools repository and install Python packages
+RUN git clone https://github.com/dronecrew/px4tools.git /tmp/px4tools && \
+    pip3 install -U \
+		jupyter \
+    	/tmp/px4tools \
+    	pymavlink \
+    	osrf-pycommon && \
+    rm -rf /tmp/px4tools
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
