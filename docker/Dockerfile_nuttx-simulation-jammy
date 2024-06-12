@@ -1,0 +1,92 @@
+#
+# PX4 NuttX and Simulation development environment in Ubuntu 22.04 Jammy
+#
+
+FROM px4io/px4-dev-base-jammy:latest
+LABEL maintainer="Pittaya <pittaya.ws@gmail.com>"
+
+
+##### PX4 NuttX Part
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		autoconf \
+		automake \
+		bison \
+		build-essential \
+		bzip2 \
+		file \
+		flex \
+		genromfs \
+		gperf \
+		libncurses5 \
+		libncurses5-dev \
+		libncursesw5-dev \
+		libtool \
+		pkg-config \
+		uncrustify \
+		vim-common \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# GNU Arm Embedded Toolchain: 10.3-2021.10 Released: October 21, 2021
+RUN mkdir -p /opt/gcc && cd /opt/gcc \
+	&& wget -qO- "https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2" | tar jx --strip 1 \
+	&& rm -rf /opt/gcc/share/doc
+
+ENV PATH="$PATH:/opt/gcc/bin"
+
+# manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
+
+# nuttx tools
+RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
+	&& cd /tmp/tools/kconfig-frontends \
+	&& autoreconf -f -i \
+	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make -j$(nproc) && make install \
+	&& rm -rf /tmp/*
+
+# bloaty - https://github.com/google/bloaty
+RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
+	&& cd /tmp/bloaty && cmake -GNinja . && ninja -j $(nproc) bloaty && cp bloaty /usr/local/bin/ \
+	&& rm -rf /tmp/*
+
+
+##### Simulation part
+ 
+RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		ant \
+		binutils \
+		bc \
+		dirmngr \
+		gz-garden \
+		gstreamer1.0-plugins-bad \
+		gstreamer1.0-plugins-base \
+		gstreamer1.0-plugins-good \
+		gstreamer1.0-plugins-ugly \
+		libeigen3-dev \
+		libgstreamer-plugins-base1.0-dev \
+		libimage-exiftool-perl \
+		libopencv-dev \
+		libxml2-utils \
+		mesa-utils \
+		protobuf-compiler \
+		x-window-system \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# Some QT-Apps/Gazebo don't not show controls without this
+ENV QT_X11_NO_MITSHM 1
+
+# Use UTF8 encoding in java tools (needed to compile jMAVSim)
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+# Install JSBSim
+RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb
+RUN dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb

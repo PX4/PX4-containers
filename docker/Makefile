@@ -47,6 +47,9 @@ px4-dev-nuttx-jammy: px4-dev-base-jammy
 px4-dev-simulation-jammy: px4-dev-base-jammy
 	docker build -t px4io/px4-dev-simulation-jammy . -f Dockerfile_simulation-jammy
 
+px4-dev-nuttx-simulation-jammy: px4-dev-base-jammy
+	docker build -t px4io/px4-dev-nuttx-simulation-jammy . -f Dockerfile_nuttx-simulation-jammy
+
 px4-dev-nuttx-clang: px4-dev-clang
 	docker build -t px4io/px4-dev-nuttx-clang . -f Dockerfile_nuttx_clang
 
