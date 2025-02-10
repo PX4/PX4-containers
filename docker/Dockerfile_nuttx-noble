@@ -1,0 +1,51 @@
+#
+# PX4 NuttX development environment in Ubuntu 24.04 Noble
+#
+
+FROM px4io/px4-dev-base-noble:2025-02-10
+LABEL maintainer="Alexander Lerach <alexander@auterion.com>"
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+		autoconf \
+		automake \
+		bison \
+		build-essential \
+		bzip2 \
+		file \
+		flex \
+		genromfs \
+		gperf \
+		libncurses-dev \
+		libncurses6 \
+		libncursesw6 \
+		libtool \
+		pkg-config \
+		uncrustify \
+		vim-common \
+	&& apt-get -y autoremove \
+	&& apt-get clean autoclean \
+	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+
+# GNU Arm Embedded Toolchain: 13.3.Rel1 Released: July 04, 2024
+RUN mkdir -p /opt/gcc && cd /opt/gcc \
+	&& wget -qO- "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz" | tar -Jx --strip 1 \
+	&& rm -rf /opt/gcc/share/doc
+
+ENV PATH="$PATH:/opt/gcc/bin"
+
+# manual ccache setup for arm-none-eabi-g++/arm-none-eabi-gcc
+RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
+	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
+
+# nuttx tools
+RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
+	&& cd /tmp/tools/kconfig-frontends \
+	&& autoreconf -f -i \
+	&& ./configure --enable-mconf --disable-nconf --disable-gconf --disable-qconf -prefix=/usr && make -j$(nproc) && make install \
+	&& rm -rf /tmp/*
+
+# bloaty - https://github.com/google/bloaty
+RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
+	&& cd /tmp/bloaty && cmake -GNinja . && ninja -j $(nproc) bloaty && cp bloaty /usr/local/bin/ \
+	&& rm -rf /tmp/*
