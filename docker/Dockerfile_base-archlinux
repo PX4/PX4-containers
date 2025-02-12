@@ -39,7 +39,7 @@ RUN pip3 install wheel setuptools
 # Python 3 dependencies installed by pip inside the virtual environment
 RUN pip3 install argparse argcomplete coverage cerberus empy==3.3.4 jinja2 \
 		kconfiglib matplotlib numpy packaging pkgconfig pyros-genmsg pyulog \
-		pyyaml requests serial six toml psutil pyulog wheel jsonschema
+		pyyaml requests serial six toml psutil pyulog wheel jsonschema symforce
 
 # Install genromfs
 RUN wget https://sourceforge.net/projects/romfs/files/genromfs/0.5.2/genromfs-0.5.2.tar.gz \
