@@ -5,7 +5,7 @@
 FROM px4io/px4-dev-simulation-focal:2021-09-08
 LABEL maintainer="Nuno Marques <n.marques21@hotmail.com>"
 
-ENV ROS_DISTRO noetic
+ENV ROS_DISTRO=noetic
 
 # setup ros keys
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -

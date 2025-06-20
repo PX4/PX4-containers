@@ -22,5 +22,5 @@ RUN mkdir -p /opt/gcc && cd /opt/gcc && \
 RUN ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-g++ \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/arm-none-eabi-gcc
 
-ENV PATH "$PATH:/opt/gcc/bin"
+ENV PATH="$PATH:/opt/gcc/bin"
 ENV CCACHE_CPP2=1

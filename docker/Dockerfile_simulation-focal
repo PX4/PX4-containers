@@ -33,7 +33,7 @@ RUN wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 # Some QT-Apps/Gazebo don't not show controls without this
-ENV QT_X11_NO_MITSHM 1
+ENV QT_X11_NO_MITSHM=1
 
 # Use UTF8 encoding in java tools (needed to compile jMAVSim)
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8

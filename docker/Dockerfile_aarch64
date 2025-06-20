@@ -9,9 +9,9 @@
 FROM debian:buster
 LABEL maintainer="SalimTerryLi <lhf2613@gmail.com>"
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		bzip2 \
@@ -80,7 +80,7 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-5.6.2-bin.zip" -O 
 	&& unzip -d /opt/gradle gradle-5.6.2-bin.zip \
 	&& rm -rf /tmp/*
 
-ENV PATH "/opt/gradle/gradle-5.6.2/bin:$PATH"
+ENV PATH="/opt/gradle/gradle-5.6.2/bin:$PATH"
 
 # Fast-RTPS
 RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.2 /tmp/FastRTPS-1.8.2 \

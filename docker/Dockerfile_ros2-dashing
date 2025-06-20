@@ -7,7 +7,7 @@ FROM px4io/px4-dev-ros-melodic:2021-09-08
 LABEL maintainer="Nuno Marques <nuno.marques@dronesolutions.io>"
 
 # setup environment
-ENV ROS_DISTRO dashing
+ENV ROS_DISTRO=dashing
 
 # setup ros2 keys
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg

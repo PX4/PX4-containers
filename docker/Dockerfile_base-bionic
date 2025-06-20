@@ -5,9 +5,9 @@
 FROM ubuntu:18.04
 LABEL maintainer="Daniel Agar <daniel@agar.ca>"
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
 		bzip2 \
@@ -83,7 +83,7 @@ RUN wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" 
 	&& unzip -d /opt/gradle gradle-6.3-rc-4-bin.zip \
 	&& rm -rf /tmp/*
 
-ENV PATH "/opt/gradle/gradle-6.3-rc-4/bin:$PATH"
+ENV PATH="/opt/gradle/gradle-6.3-rc-4/bin:$PATH"
 
 # Fast-RTPS 1.8.4
 RUN git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v1.8.4 /tmp/FastRTPS-1.8.4 \
@@ -107,7 +107,7 @@ RUN useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout use
 RUN mkdir /tmp/.X11-unix && \
 	chmod 1777 /tmp/.X11-unix && \
 	chown -R root:root /tmp/.X11-unix
-ENV DISPLAY :99
+ENV DISPLAY=:99
 
 ENV CCACHE_UMASK=000
 ENV FASTRTPSGEN_DIR="/usr/local/bin/"
