@@ -1,17 +1,19 @@
 .PHONY: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 		px4-dev-base-focal, px4-dev-base-jammy, px4-dev-clang, px4-dev-nuttx-bionic, \
-		px4-dev-nuttx-focal, px4-dev-nuttx-jammy, px4-dev-nuttx-clang, px4-dev-raspi, \
+		px4-dev-nuttx-focal, px4-dev-nuttx-jammy, px4-dev-nuttx-noble, px4-dev-nuttx-clang, px4-dev-raspi, \
 		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-dashing, \
 		px4-dev-ros2-eloquent, px4-dev-ros2-foxy, px4-dev-ros2-galactic, px4-dev-ros2-humble, \
-		px4-dev-ros2-iron, px4-dev-ros2-rolling, px4-dev-simulation-bionic, px4-dev-simulation-focal, \
+		px4-dev-ros2-iron, px4-dev-ros2-jazzy, px4-dev-ros2-kilted, px4-dev-ros2-rolling, \
+		px4-dev-simulation-bionic, px4-dev-simulation-focal, \
 		px4-docs
 
 all: px4-dev-armhf, px4-dev-base-archlinux, px4-dev-base-bionic, \
 		px4-dev-base-focal, px4-dev-base-jammy, px4-dev-clang, px4-dev-nuttx-bionic, \
-		px4-dev-nuttx-focal, px4-dev-nuttx-jammy, px4-dev-nuttx-clang, px4-dev-raspi, \
+		px4-dev-nuttx-focal, px4-dev-nuttx-jammy, px4-dev-nutts-noble, px4-dev-nuttx-clang, px4-dev-raspi, \
 		px4-dev-ros-melodic, px4-dev-ros-noetic, px4-dev-ros2-dashing,\
 		px4-dev-ros2-eloquent, px4-dev-ros2-foxy, px4-dev-ros2-galactic, px4-dev-ros2-humble, \
-		px4-dev-ros2-iron, px4-dev-ros2-rolling, px4-dev-simulation-bionic, px4-dev-simulation-focal, \
+		px4-dev-ros2-iron, px4-dev-ros2-jazzy, px4-dev-ros2-kilted, \
+		px4-dev-ros2-rolling, px4-dev-simulation-bionic, px4-dev-simulation-focal, \
 		px4-docs
 
 px4-dev-armhf:
@@ -27,10 +29,13 @@ px4-dev-base-bionic:
 	docker build -t px4io/px4-dev-base-bionic . -f Dockerfile_base-bionic
 
 px4-dev-base-focal:
-	docker build -t px4io/px4-dev-base-focal . -f Dockerfile_base-focal
+	docker build -t px4io/px4-dev-base-focal . -f Dockerfile_base-noble --build-arg="UBUNTU=20.04"
 
 px4-dev-base-jammy:
-	docker build -t px4io/px4-dev-base-jammy . -f Dockerfile_base-jammy
+	docker build -t px4io/px4-dev-base-jammy . -f Dockerfile_base-noble --build-arg="UBUNTU=22.04"
+
+px4-dev-base-noble:
+	docker build -t px4io/px4-dev-base-noble . -f Dockerfile_base-noble --build-arg="UBUNTU=24.04"
 
 px4-dev-clang: px4-dev-base-bionic
 	docker build -t px4io/px4-dev-clang . -f Dockerfile_clang
@@ -43,6 +48,9 @@ px4-dev-nuttx-focal: px4-dev-base-focal
 
 px4-dev-nuttx-jammy: px4-dev-base-jammy
 	docker build -t px4io/px4-dev-nuttx-jammy . -f Dockerfile_nuttx-jammy
+
+px4-dev-nuttx-noble: px4-dev-base-noble
+	docker build -t px4io/px4-dev-nuttx-noble . -f Dockerfile_nuttx-noble
 
 px4-dev-nuttx-clang: px4-dev-clang
 	docker build -t px4io/px4-dev-nuttx-clang . -f Dockerfile_nuttx_clang
@@ -68,14 +76,20 @@ px4-dev-ros2-foxy: px4-dev-ros-noetic
 px4-dev-ros2-humble: px4-dev-base-jammy
 	docker build -t px4io/px4-dev-ros2-humble -f Dockerfile_ros2 --build-arg="ROS_DISTRO=humble" --build-arg="BASE=px4io/px4-dev-base-jammy" .
 
+px4-dev-ros2-galactic: px4-dev-base-focal
+	docker build -t px4io/px4-dev-ros2-galactic -f Dockerfile_ros2 --build-arg="ROS_DISTRO=galactic" --build-arg="BASE=px4io/px4-dev-base-focal" .
+
 px4-dev-ros2-iron: px4-dev-base-jammy
 	docker build -t px4io/px4-dev-ros2-iron -f Dockerfile_ros2 --build-arg="ROS_DISTRO=iron" --build-arg="BASE=px4io/px4-dev-base-jammy" .
 
-px4-dev-ros2-rolling: px4-dev-base-jammy
-	docker build -t px4io/px4-dev-ros2-rolling -f Dockerfile_ros2 --build-arg="ROS_DISTRO=rolling" --build-arg="BASE=px4io/px4-dev-base-jammy" .
+px4-dev-ros2-jazzy: px4-dev-base-noble
+	docker build -t px4io/px4-dev-ros2-jazzy -f Dockerfile_ros2 --build-arg="ROS_DISTRO=jazzy" --build-arg="BASE=px4io/px4-dev-base-noble" .
 
-px4-dev-ros2-galactic: px4-dev-base-focal
-	docker build -t px4io/px4-dev-ros2-galactic -f Dockerfile_ros2 --build-arg="ROS_DISTRO=galactic" --build-arg="BASE=px4io/px4-dev-base-focal" .
+px4-dev-ros2-kilted: px4-dev-base-noble
+	docker build -t px4io/px4-dev-ros2-kilted -f Dockerfile_ros2 --build-arg="ROS_DISTRO=kilted" --build-arg="BASE=px4io/px4-dev-base-noble" .
+
+px4-dev-ros2-rolling: px4-dev-base-noble
+	docker build -t px4io/px4-dev-ros2-rolling -f Dockerfile_ros2 --build-arg="ROS_DISTRO=rolling" --build-arg="BASE=px4io/px4-dev-base-jammy" .
 
 px4-dev-simulation-bionic: px4-dev-base-bionic
 	docker build -t px4io/px4-dev-simulation-bionic . -f Dockerfile_simulation-bionic

@@ -16,9 +16,9 @@ ARG ROS_DISTRO=rolling
 
 # setup ros2 keys
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-
-# setup sources.list
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+RUN ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}') && \
+	curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" && \
+	apt-get install -y /tmp/ros2-apt-source.deb
 
 # install bootstrap tools
 RUN apt-get update \
@@ -42,19 +42,19 @@ RUN apt-get install --quiet --no-install-recommends -y \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 # Install Python 3 packages needed for testing
-RUN pip3 install -U \
-		argcomplete \
-		flake8 \
-		flake8-blind-except \
-		flake8-builtins \
-		flake8-class-newline \
-		flake8-comprehensions \
-		flake8-deprecated \
-		flake8-docstrings \
-		flake8-import-order \
-		flake8-quotes \
-		pytest-repeat \
-		pytest-rerunfailures
+RUN apt-get install --quiet --no-install-recommends -y \
+    python3-argcomplete \
+    python3-flake8 \
+    python3-flake8-blind-except \
+    python3-flake8-builtins \
+    python3-flake8-class-newline \
+    python3-flake8-comprehensions \
+    python3-flake8-deprecated \
+    python3-flake8-docstrings \
+    python3-flake8-import-order \
+    python3-flake8-quotes \
+    python3-pytest-repeat \
+    python3-pytest-rerunfailures
 
 # bootstrap rosdep
 RUN rosdep init && rosdep update
