@@ -1,9 +1,11 @@
 #
-# PX4 NuttX development environment in Ubuntu 20.04 Focal
+# PX4 NuttX development environment in Ubuntu 22.04 Jammy
+#
+# PR for base image author as px4io for replacing me.
 #
 
-FROM px4io/px4-dev-base-jammy:2024-05-18
-LABEL maintainer="Ramón Roche <rroche@linuxfoundation.org>"
+FROM i3salng/px4-dev-base-jammy:2026-01-27
+LABEL maintainer="Antoine Nguyen <antoine.nguyen@cnrs.fr>"
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
@@ -47,5 +49,7 @@ RUN git clone --depth 1 https://bitbucket.org/nuttx/tools.git /tmp/tools \
 
 # bloaty - https://github.com/google/bloaty
 RUN git clone --recursive https://github.com/google/bloaty.git /tmp/bloaty \
-	&& cd /tmp/bloaty && cmake -GNinja . && ninja -j $(nproc) bloaty && cp bloaty /usr/local/bin/ \
+	&& cd /tmp/bloaty && cmake -B bloaty -G Ninja -S . \
+    && ninja -C bloaty -j $(nproc) bloaty \
+    && cp bloaty/bloaty /usr/local/bin/ \
 	&& rm -rf /tmp/*
